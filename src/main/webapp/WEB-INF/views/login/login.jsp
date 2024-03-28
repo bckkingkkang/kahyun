@@ -22,7 +22,7 @@
     </div>
     <div>
         <button type="submit">계정 찾기</button>
-        <button type="submit">로그인하기</button>
+        <button type="submit" onclick="location.href='signup'">로그인하기</button>
     </div>
     <div>
         <a href="signup">회원가입</a>
