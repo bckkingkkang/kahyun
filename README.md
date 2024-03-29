@@ -30,7 +30,7 @@
    
    
    
-   
+ ```  
    CREATE TABLE kahyun.board
    (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
    title varchar(50) NOT NULL comment '제목',
@@ -40,6 +40,22 @@
    update_dt datetime NULL comment '수정일',
    status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
    `view` int(10) NOT NULL DEFAULT 0 comment '조회 수',
+  
+   PRIMARY KEY (seq)
+   ) ENGINE=INNODB DEFAULT charset=utf8
+```
+
+```
+      CREATE TABLE kahyun.users
+   (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
+   username varchar(50) NOT NULL comment '이름',
+   user_id varchar(50) NOT NULL comment '아이디',
+   nickname varchar(50) NOT NULL,
+   password varchar(100) NOT NULL comment '비밀번호',
+   reg_date datetime NULL comment '수정일',
+   status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
+   auth enum('USER','ADMIN') NOT NULL DEFAULT 'USER' comment '권한',
+```
   
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
