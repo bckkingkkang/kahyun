@@ -17,4 +17,11 @@
         WHERE username = #{username} AND nickname = #{nickname}
     </select>
 
+    <select id="checkId">
+        SELECT
+            count(user_id)
+        FROM users
+        WHERE user_id = #{user_id}
+    </select>
+
 </mapper>

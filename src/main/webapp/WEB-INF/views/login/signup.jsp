@@ -18,7 +18,8 @@
             </tr>
             <tr>
                 <td><label for="user_id">아이디</label></td>
-                <td><input type="text" id="user_id"></td>
+                <td><input type="text" id="user_id_check"> <button type="button" id="idCheckBtn">중복확인</button></td>
+                <td><input type="text" id="user_id" style="display:none" readonly></td>
             </tr>
             <tr>
                 <td><label for="password">비밀번호</label>
@@ -28,6 +29,7 @@
                 <td><label for="password_check">비밀번호 확인</label>
                 <td><input type="password" id="password_check"></td>
             </tr>
+            <%-- 비밀번호 확인 문구 추가 --%>
             <tr>
                 <td><label for="nickname">닉네임</label></td>
                 <td><input type="text" id="nickname"></td>
@@ -58,13 +60,23 @@
         $dom.signupBtn = $("#signupBtn");
         $dom.username = $("#username").val();
         $dom.user_id = $("#user_id").val();
+        $dom.user_id_check = $("#user_id_check").val();
         $dom.password = $("#password").val();
         $dom.password_check = $("#password_check").val();
         $dom.nickname = $("#nickname").val();
         $dom.auth = $("#auth").val();
+        $dom.idCheckBtn = $("#idCheckBtn");
 
         $dom.signupBtn.on('click', function () {
             console.log($dom);
+            if($("#user_id").val()=="") {
+                alert("아이디 중복 체크를 진행해주세요");
+                return;
+            }
+            if($("#user_id_check").val()=="") {
+                alert("아이디를 입력해주세요");
+                return;
+            }
             if(confirm("가입하시겠습니까")) {
                 $.ajax({
                     url:"signup_ajax",
@@ -82,6 +94,31 @@
                     }
                 })
             }
+        })
+
+        $dom.idCheckBtn.on('click', function() {
+            $.ajax({
+                url:"check_id_ajax",
+                type : "post",
+                data : {
+                    user_id : $("#user_id_check").val()
+                },
+                success : function(count) {
+                    if(count == 0) {
+                        if($("#user_id_check").val() == "") {
+                            alert("아이디를 입력 후 진행해주세요");
+                            return;
+                        }
+                        alert("사용 가능한 아이디입니다.");
+                        $("#user_id").val($("#user_id_check").val());
+                    } else {
+                        alert("사용 불가능한 아이디입니다.");
+                        $("#user_id").val("");
+                    }
+
+                }
+            })
+
         })
 
     })

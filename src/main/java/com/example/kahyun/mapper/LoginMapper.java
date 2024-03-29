@@ -11,4 +11,6 @@ public interface LoginMapper {
     int createUser(LoginVo loginVo);
 
     String searchId(LoginVo loginVo);
+
+    int checkId(LoginVo loginVo);
 }

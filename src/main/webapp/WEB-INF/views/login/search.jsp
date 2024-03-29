@@ -42,6 +42,10 @@
 
         /* 아이디 찾기 버튼 클릭 시 */
         $dom.searchBtn.on('click', function () {
+            if($("#username").val()=="" || $("#nickname").val()=="") {
+                alert("아이디 또는 닉네임을 입력하세요");
+                return;
+            }
                 $.ajax({
                     url:"search_id_ajax",
                     type : "post",

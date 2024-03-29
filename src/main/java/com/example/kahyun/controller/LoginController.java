@@ -43,29 +43,37 @@ public class LoginController {
         return "login/search";
     }
 
+    /* 회원가입 ajax */
     @ResponseBody
     @PostMapping("signup_ajax")
     public int create_ajax(LoginVo loginVo) {
-        System.out.println(loginVo);
+        // 비밀번호
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         loginVo.setPassword(bCryptPasswordEncoder.encode(loginVo.getPassword()));
 
         int result = loginMapper.createUser(loginVo);
-
         return result;
     }
 
+    /* 아이디 찾기 버튼 ajax */
     @ResponseBody
     @PostMapping("search_id_ajax")
     public String search_id_ajax(LoginVo loginVo) {
         String result = loginMapper.searchId(loginVo);
-
+        // 검색 결과가 없는 경우 null
         if("null".equals(result)) {
             result = "";
         }
         return result;
     }
 
+    /* 아이디 중복 체크 버튼 ajax */
+    @ResponseBody
+    @PostMapping("check_id_ajax")
+    public int check_id_ajax(LoginVo loginVo) {
+        int count = loginMapper.checkId(loginVo);
+        return count;
+    }
 
 
 
