@@ -20,13 +20,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf->csrf.disable())
+
 
                 /* HttpServletRequest를 사용하는 요청들에 대한 접근 설정 */
                 .authorizeHttpRequests(authorizeHttpRequest->authorizeHttpRequest
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers( "/login/**").permitAll()
                         .anyRequest().authenticated()
+                )
+                .formLogin(login->login
+                        .loginPage("/login/login").permitAll()
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/")
                 );
+
 
         return http.build();
     }
