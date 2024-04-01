@@ -4,6 +4,7 @@ import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
+import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +60,12 @@ public class BoardController {
         mav.setViewName("board/detail");
 
         return mav;
+    }
+
+    @ResponseBody
+    @PostMapping("create_comment_ajax")
+    public int create_comment_ajax() {
+       return 1;
     }
 
 

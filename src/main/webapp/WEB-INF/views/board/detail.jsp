@@ -22,23 +22,23 @@
     <table>
         <tr>
             <td style="width: 100px">제목</td>
-            <td id="title" style="width: 500px">${boardDetail.title}</td>
+            <td style="width: 500px">${boardDetail.title}</td>
         </tr>
         <tr>
             <td>작성자</td>
-            <td id="nickname">${boardDetail.nickname}</td>
+            <td>${boardDetail.nickname}</td>
         </tr>
         <tr>
             <td>작성일</td>
-            <td id="create_dt">${boardDetail.create_dt}</td>
+            <td>${boardDetail.create_dt}</td>
         </tr>
         <tr>
             <td>수정일</td>
-            <td id="update_dt">${boardDetail.update_dt}</td>
+            <td>${boardDetail.update_dt}</td>
         </tr>
         <tr>
             <td>내용</td>
-            <td id="content">${boardDetail.content}</td>
+            <td>${boardDetail.content}</td>
         </tr>
     </table>
     </div>
@@ -51,8 +51,8 @@
             <table>
                 <tr>
                     <td style="width: 100px">댓글</td>
-                    <td style="width: 300px"><textarea name="" id="" cols="30" rows="5"></textarea></td>
-                    <td style="width: 100px"><button>등록</button></td>
+                    <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
+                    <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
                 </tr>
             </table>
         </div>
@@ -89,7 +89,24 @@
 
 
 
-<script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    const $dom = {};
+
+    $(function () {
+
+        $dom.createBtn = $("#createBtn");
+
+        $dom.createBtn.on('click', function () {
+            /* 댓글 등록 */
+            $.ajax({
+                url : "create_comment_ajax",
+            })
+        })
+    })
+
+
+
 
 </script>
 </body>
