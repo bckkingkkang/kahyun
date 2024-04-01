@@ -12,4 +12,5 @@ public class BoardVo {
     private String update_dt;
     private String status;
     private String view;
+    private String user_seq;
 }

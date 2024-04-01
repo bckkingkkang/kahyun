@@ -9,7 +9,7 @@
 <h1>HOME</h1>
 
 <a href="/board/list">게시판</a>
-<a href="/login/login">로그인</a>
+<a href="/user/login">로그인</a>
 <script>
 
 </script>

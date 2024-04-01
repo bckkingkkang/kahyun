@@ -14,4 +14,9 @@
             (title, nickname, content, create_dt)
         VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME())
     </insert>
+
+    <!-- 게시글 상세 -->
+    <select id="getBoardDetail">
+        SELECT * FROM board WHERE seq = #{seq}
+    </select>
 </mapper>

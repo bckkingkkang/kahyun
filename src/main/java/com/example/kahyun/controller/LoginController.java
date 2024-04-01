@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("login/")
+@RequestMapping("user/")
 public class LoginController {
 
     private final LoginMapper loginMapper;
@@ -22,25 +22,25 @@ public class LoginController {
     /* 로그인 화면 */
     @RequestMapping("login")
     public String login() {
-        return "login/login";
+        return "user/login";
     }
 
     /* 회원가입 화면 */
     @RequestMapping("signup")
     public String signup() {
-        return "login/signup";
+        return "user/signup";
     }
 
     /* 회원가입 완료 화면 */
     @RequestMapping("complete")
     public String complete() {
-        return "login/complete";
+        return "user/complete";
     }
 
     /* 계정 찾기 화면 */
     @RequestMapping("search")
     public String search() {
-        return "login/search";
+        return "user/search";
     }
 
     /* 회원가입 ajax */

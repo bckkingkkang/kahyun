@@ -54,7 +54,7 @@
                         nickname : $("#nickname").val(),
                     },
                     success : function(result) {
-                        console.log(result);
+                        console.log(resuㅁlt);
                         if(result == "") {
                             $("#user_id").val("해당 정보로 가입된 아이디가 없습니다.");
                             if(confirm("해당 정보로 가입된 아이디가 없습니다.\n회원가입으로 이동하시겠습니까?")) {

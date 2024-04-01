@@ -13,4 +13,6 @@ public interface BoardMapper {
 
     /* 게시판 글 쓰기 */
     int createBoard(BoardVo boardVo);
+
+    BoardVo getBoardDetail(BoardVo boardVo);
 }

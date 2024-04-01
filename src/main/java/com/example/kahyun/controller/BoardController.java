@@ -5,16 +5,22 @@ import com.example.kahyun.vo.BoardVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
+@RequiredArgsConstructor    // final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할
 @RequestMapping("board/")
 public class BoardController {
+
+    /*
+        스프링 의존성 주입 3가지
+        1. @Autowired 속성 : 속성에 @Autowired 어노테이션을 적용하여 객체를 주입
+        2. 생성자 : 생성자를 작성하여 객체를 주입
+        3. Setter : Setter 메소드를 작성하여 객체를 주입 (메소드에 @Autowired 어노테이션 적용이 필요)
+    */
 
     private final BoardMapper boardMapper;
 
@@ -37,6 +43,17 @@ public class BoardController {
     public String createBoardList() {
         return "board/create";
     }
+
+    /* 게시글 상세 화면 */
+    @RequestMapping("detail/{seq}")
+    public ModelAndView getBoard(BoardVo boardVo, ModelAndView mav) {
+        BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
+        mav.setViewName("board/detail");
+        mav.addObject("boardDetail", boardDetail);
+        return mav;
+    }
+
+
 
 
 }
