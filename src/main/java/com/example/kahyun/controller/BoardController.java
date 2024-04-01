@@ -1,7 +1,9 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.BoardMapper;
+import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.vo.BoardVo;
+import com.example.kahyun.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,7 @@ public class BoardController {
     */
 
     private final BoardMapper boardMapper;
+    private final CommentMapper commentMapper;
 
     /* 게시판 화면 */
     @RequestMapping("list")
@@ -45,11 +48,16 @@ public class BoardController {
     }
 
     /* 게시글 상세 화면 */
-    @RequestMapping("detail/{seq}")
-    public ModelAndView getBoard(BoardVo boardVo, ModelAndView mav) {
+    @GetMapping("detail/{seq}")
+    public ModelAndView getBoard(BoardVo boardVo, CommentVo commentVo, ModelAndView mav) {
         BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
-        mav.setViewName("board/detail");
+        List<CommentVo> boardComment = commentMapper.getComment(boardVo);
+
+        mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
+
+        mav.setViewName("board/detail");
+
         return mav;
     }
 

@@ -32,17 +32,17 @@ public class SecurityConfig {
                      스프링 시큐리티가 CSRF 토큰 값을 세션을 통해 발행하고 웹 페이지에서는 폼 전송 시에 해당 토큰을 함께
                      전송하여 실제 웹 페이지에서 작성된 데이터가 전달되는지를 검증하는 기술이다.
                 */
+                /*.csrf(AbstractHttpConfigurer::disable)*/
                 .csrf(AbstractHttpConfigurer::disable)
 
                 /* HttpServletRequest를 사용하는 요청들에 대한 접근 설정 */
                 .authorizeHttpRequests(requests->requests
                         .requestMatchers("/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(login->login
-                        .loginPage("/user/login").permitAll()
-
-                        .defaultSuccessUrl("/")
-                );
+        /*
+                .formLogin(login->login.loginPage("user/login").permitAll())*/
+                ;
 
 
         return http.build();
