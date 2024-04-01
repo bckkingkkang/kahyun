@@ -65,6 +65,20 @@ CREATE TABLE kahyun.users
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
 ```
+CREATE TABLE kahyun.comment
+   (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
+   nickname varchar(50) NOT NULL comment 'nickname',
+   user_seq int(10) NOT NULL comment 'user seq',
+   content varchar(100) NOT NULL comment '댓글 내용',
+   create_dt datetime NULL comment '등록일',
+   status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
+   board_seq int(10) NOT NULL comment '게시글 seq',
+  
+   PRIMARY KEY (seq)
+   ) ENGINE=INNODB DEFAULT charset=utf8
+```
+
+```
 INSERT INTO kahyun.board 
    (title, nickname, create_dt)
    values("제목2", "nickname2", current_time())
