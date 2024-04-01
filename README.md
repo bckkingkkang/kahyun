@@ -83,3 +83,9 @@ INSERT INTO kahyun.board
    (title, nickname, create_dt)
    values("제목2", "nickname2", current_time())
 ```
+
+```
+INSERT INTO kahyun.comment
+   (nickname, user_seq, content, create_dt, board_seq)
+   values ('test', 6, '1번글의 댓글 2', CURRENT_TIME(), 1)
+```
