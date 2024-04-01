@@ -6,6 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
 </head>
+<style>
+    table {
+        border: 2px solid; border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid; padding:10px 5px;
+    }
+</style>
 <body>
     <div>
         게시판
