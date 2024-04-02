@@ -29,6 +29,7 @@
                     <th>등록일시</th>
                     <th>수정일시</th>
                     <th>조회 수</th>
+                    <th>분류</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +41,11 @@
                     <th>${list.create_dt}</th>
                     <th>${list.update_dt}</th>
                     <th>${list.view}</th>
+                    <th><c:choose>
+                        <c:when test="${list.boardOption eq 'boardOption1'}">게시판1</c:when>
+                        <c:when test="${list.boardOption eq 'boardOption2'}">게시판2</c:when>
+                        <c:otherwise>그냥게시판</c:otherwise>
+                    </c:choose></th>
                 </tr>
             </c:forEach>
             </tbody>
@@ -50,6 +56,8 @@
     </div>
 
 </body>
-<script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
 </script>
 </html>

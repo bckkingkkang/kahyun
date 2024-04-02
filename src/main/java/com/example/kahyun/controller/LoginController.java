@@ -47,7 +47,16 @@ public class LoginController {
     @ResponseBody
     @PostMapping("signup_ajax")
     public int create_ajax(LoginVo loginVo) {
-        // 비밀번호
+        /*
+            비밀번호 암호화
+            ( BCrypt : 단방향 암호화를 위해 만들어진 해시 함수,
+            salt를 부여하여 여러 번 해싱 -> 같은 비밀번호를 암호화하더라도 해시 값은 매번 다른 값이 도출된다.)
+
+            해싱(Hash) : 각 사용자의 일반 텍스트 암호를 가져와 단반향 수학 함수를 통해 암호화를 실행하는 것
+            솔트(salt) : 해시함수를 돌리기 전에 원문에 임의의 문자열을 덧붙이는 것
+
+            사용자 비밀번호 -> salt 생성 -> Hashing -> 암호화된 비밀번호 DB에 저장
+        */
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         loginVo.setPassword(bCryptPasswordEncoder.encode(loginVo.getPassword()));
 

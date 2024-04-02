@@ -26,6 +26,14 @@
             <td style="width: 500px">${boardDetail.title}</td>
         </tr>
         <tr>
+            <td>게시판</td>
+            <td><c:choose>
+                <c:when test="${list.boardOption eq 'boardOption1'}">게시판1</c:when>
+                <c:when test="${list.boardOption eq 'boardOption2'}">게시판2</c:when>
+                <c:otherwise>그냥게시판</c:otherwise>
+            </c:choose></td>
+        </tr>
+        <tr>
             <td>작성자</td>
             <td>${boardDetail.nickname}</td>
         </tr>

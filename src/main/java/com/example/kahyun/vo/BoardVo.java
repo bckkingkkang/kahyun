@@ -14,4 +14,5 @@ public class BoardVo {
     private String status;
     private String view;
     private String user_seq;
+    private String boardOption;
 }

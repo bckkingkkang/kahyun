@@ -4,7 +4,6 @@ import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
-import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +36,10 @@ public class BoardController {
     /* 게시글 리스트 */
     @GetMapping("list")
     public String getBoardList(Model model, BoardVo boardVo) {
+        /*  Model 객체 사용
+            - Controller에서 생성한 데이터를 담아서 View로 전달할 때 사용하는 객체
+            - addAttribute("key", "value") 메소드를 사용하여 전달할 데이터 세팅
+        */
         List<BoardVo> list = boardMapper.getBoardList(boardVo);
         model.addAttribute("list", list);
         return "board/list";
@@ -51,11 +54,19 @@ public class BoardController {
     /* 게시글 상세 화면 */
     @GetMapping("detail/{seq}")
     public ModelAndView getBoard(BoardVo boardVo, ModelAndView mav) {
+        /*
+            * Model
+                - 메소드에 파라미터로 넣어주고 String 형태로 반환한다.
+                - model.addAttribute("변수이름", "값") : 전송할 데이터의 이름과 값 전송
+            * ModelAndView
+                - ModelAndView 객체를 생성해서 객체 형태로 변환한다.
+                - 화면에 출력할 데이터(Model)을 설정할 수 있고, 어떤 화면(View)로 넘어갈지 경로를 설정할 수 있다.
+                - Model + View, 값을 넣을 때는 addObject를 사용하고, 값을 보낼 View를 세팅할 때는 setViewName()을 사용
+        */
         BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
         List<CommentVo> boardComment = commentMapper.getComment(boardVo);
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
-
         mav.setViewName("board/detail");
 
         return mav;
@@ -65,6 +76,7 @@ public class BoardController {
     @ResponseBody
     @PostMapping("detail/create_comment_ajax")
     public int create_comment_ajax(CommentVo commentVo) {
+        /* security 설정 후 변경 */
         commentVo.setNickname("가현");
         commentVo.setUser_seq("5");
         int result = commentMapper.createComment(commentVo);
@@ -75,6 +87,7 @@ public class BoardController {
     @ResponseBody
     @PostMapping("create_board_ajax")
     public int create_board_ajax(BoardVo boardVo) {
+        /* security 설정 후 변경 */
         boardVo.setNickname("가현");
         boardVo.setUser_seq("1");
         return boardMapper.createBoard(boardVo);
