@@ -10,24 +10,24 @@
         로그인화면
         <a href="/">메인으로</a>
     </div>
-    <div>
-        <form action="">
-            <div>
-                <input type="text" id="id" name="id" placeholder="user id">
-            </div>
-            <div>
-                <input type="password" id="password" name="password" placeholder="user password">
-            </div>
-        </form>
-    </div>
-    <div>
-        <button type="submit" onclick="location.href='search'">계정 찾기</button>
-        <button type="submit" onclick="location.href='/'">로그인하기</button>
-    </div>
-    <div>
-        <a href="signup">회원가입</a>
-    </div>
 
+        <form action="/auth" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <div>
+            <div>
+                <input type="text" id="user_id" name="user_id" placeholder="user id">
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="user password" autoComplete="off">
+            </div>
+
+    </div>
+    <div>
+        <button type="button" onclick="location.href='search'">계정 찾기</button>
+        <button type="submit">로그인하기</button>
+        <button type="button" onclick="location.href='signup'">회원 가입</button>
+    </div>
+    </form>
 <script>
 
 </script>

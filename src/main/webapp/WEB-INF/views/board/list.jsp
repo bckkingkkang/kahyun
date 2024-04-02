@@ -16,7 +16,7 @@
 </style>
 <body>
     <div>
-        게시판
+        회원게시판
         <button type="button" id="writeBtn" onclick="location.href='/board/create'">글쓰기</button>
     </div>
     <div>

@@ -1,11 +1,17 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.LoginMapper;
+import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,11 +24,21 @@ import java.util.List;
 public class LoginController {
 
     private final LoginMapper loginMapper;
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     /* 로그인 화면 */
-    @RequestMapping("login")
+    /*@RequestMapping("login")
     public String login() {
         return "user/login";
+    }*/
+    @GetMapping("login")
+    public String login() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication instanceof AnonymousAuthenticationToken)
+            return "user/login";
+
+        return "main";
+
     }
 
     /* 회원가입 화면 */
@@ -57,7 +73,6 @@ public class LoginController {
 
             사용자 비밀번호 -> salt 생성 -> Hashing -> 암호화된 비밀번호 DB에 저장
         */
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         loginVo.setPassword(bCryptPasswordEncoder.encode(loginVo.getPassword()));
 
         int result = loginMapper.createUser(loginVo);

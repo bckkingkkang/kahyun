@@ -11,6 +11,7 @@
 </div>
 <div>
     <form action="">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <table>
             <tr>
                 <td><label for="username">이름</label></td>

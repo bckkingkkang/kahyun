@@ -1,6 +1,7 @@
 package com.example.kahyun.mapper;
 
 import com.example.kahyun.vo.LoginVo;
+import lombok.extern.java.Log;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface LoginMapper {
     String searchId(LoginVo loginVo);
 
     int checkId(LoginVo loginVo);
+    LoginVo selectUser(String id);
 }
