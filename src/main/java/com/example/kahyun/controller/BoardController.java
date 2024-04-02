@@ -97,7 +97,8 @@ public class BoardController {
     @ResponseBody
     @PostMapping("detail/delete_board_ajax")
     public int delete_board_ajax(BoardVo boardVo) {
-        return boardMapper.deleteBoard(boardVo);
+        int result = boardMapper.deleteBoard(boardVo);
+        return result;
     }
 
 

@@ -15,7 +15,13 @@
     }
 </style>
 <body>
-<h1>게시판 상세 화면</h1>
+<div>
+    <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
+    <button type="button" id="deleteBtn">삭제</button>
+</div>
+<div>
+    <h1>게시판 상세 화면</h1>
+</div>
 
 <div>
     <form action="">
@@ -51,10 +57,7 @@
         </tr>
     </table>
     </div>
-    <div>
-        <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-        <button type="button" id="deleteBtn">삭제</button>
-    </div>
+
     </form>
 
     <div>
@@ -140,9 +143,15 @@
                     data : {
                         'seq' : seq
                     },
-                    success : function() {
-                        alert("삭제되었습니다.");
-                        location.href = "/board/list";
+                    success : function(result) {
+                        if(result === 1) {
+                            alert("삭제되었습니다.");
+                            location.href = "/board/list";
+                        } else {
+                            alert("다시 시도해주세요");
+                            return;
+                        }
+
                     }
                 })
             }
