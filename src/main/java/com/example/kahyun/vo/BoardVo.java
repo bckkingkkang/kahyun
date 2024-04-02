@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class BoardVo {
     private String seq;
+    private String rownum;
     private String title;
     private String content;
     private String nickname;

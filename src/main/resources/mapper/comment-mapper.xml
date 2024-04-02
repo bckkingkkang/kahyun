@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kahyun.mapper.CommentMapper">
+
+    <!-- 게시글 상세에서 댓글 -->
+    <select id="getComment">
+        SELECT * FROM comment WHERE board_seq = #{seq}
+    </select>
+
+    <!-- 댓글 등록 -->
+    <insert id="createComment" parameterType="CommentVo">
+        INSERT INTO comment
+            (nickname, user_seq, content, create_dt, board_seq)
+        VALUES
+            (#{nickname}, #{user_seq}, #{content}, CURRENT_TIME(), #{seq})
+    </insert>
+
+</mapper>

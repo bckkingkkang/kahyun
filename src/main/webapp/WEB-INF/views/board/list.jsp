@@ -34,7 +34,7 @@
             <tbody>
             <c:forEach items="${list}" var="list">
                 <tr>
-                    <th>${list.seq}</th>
+                    <th>${list.rownum}</th>
                     <th><a href="detail/${list.seq}">${list.title}</a></th>
                     <th>${list.nickname}</th>
                     <th>${list.create_dt}</th>

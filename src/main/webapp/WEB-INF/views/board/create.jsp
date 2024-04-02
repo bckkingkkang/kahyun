@@ -12,19 +12,53 @@
     <table>
         <tr>
             <td>제목</td>
-            <td><input type="text" placeholder="제목을 입력해주세요"></td>
+            <td><input type="text" placeholder="제목을 입력해주세요" id="title"></td>
         </tr>
         <tr>
             <td>내용</td>
-            <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요"></textarea></td>
+            <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content"></textarea></td>
         </tr>
     </table>
 </form>
     <div>
-        <button type="submit">저장</button>
+        <button type="submit" id="createBtn">저장</button>
         <button type="button" onclick="if(confirm('작성을 취소하시겠습니까?')) {location.href='list'} else return;">목록</button>
     </div>
-<script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    const $dom = {};
+
+    $(function () {
+        $dom.createBtn = $("#createBtn");
+        /*$dom.title = $("#title").val();
+        $dom.content = $("#content").val();*/
+
+        $dom.createBtn.on('click', function() {
+            if($("#title").val() == "") {
+                alert("제목을 입력해주세요");
+                return;
+            }
+            if($("#content").val() == "") {
+                alert("내용을 입력해주세요");
+                return;
+            }
+            if(confirm("글을 저장하시겠습니까?")) {
+                $.ajax({
+                    url : "create_board_ajax",
+                    type : "post",
+                    data : {
+                        title : $("#title").val(),
+                        content : $("#content").val()
+                    },
+                    success : function () {
+                        location.href = "list";
+                    }
+                })
+            }
+        })
+    })
+
 
 </script>
 </body>

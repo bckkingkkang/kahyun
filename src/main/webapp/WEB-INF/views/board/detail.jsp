@@ -18,6 +18,7 @@
 <h1>게시판 상세 화면</h1>
 
 <div>
+    <form action="">
     <div>
     <table>
         <tr>
@@ -44,7 +45,9 @@
     </div>
     <div>
         <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
+        <button type="button" id="deleteBtn">삭제</button>
     </div>
+    </form>
 
     <div>
         <div>
@@ -92,16 +95,51 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
+    const seq = ${boardDetail.seq};
 
     $(function () {
-
         $dom.createBtn = $("#createBtn");
+        $dom.deleteBtn = $("#deleteBtn");
 
         $dom.createBtn.on('click', function () {
-            /* 댓글 등록 */
-            $.ajax({
-                url : "create_comment_ajax",
-            })
+            console.log($dom);
+            if(confirm("댓글을 등록하시겠습니까")) {
+                /* 댓글 등록 */
+                $.ajax({
+                    url : "create_comment_ajax",
+                    type : "post",
+                    data : {
+                        content : $("#content").val(),
+                        seq : seq
+                    },
+                    success : function(result) {
+                        if(result===1) {
+                            location.href = seq;
+                        } else {
+                            alert("다시 시도해주세요");
+                        }
+                    }
+                })
+            }
+
+        })
+
+        $dom.deleteBtn.on('click', function() {
+            if(confirm("삭제하시겠습니까")) {
+                $.ajax({
+                    url:"delete_board_ajax",
+                    type : "post",
+                    data : {
+                        'seq' : seq
+                    },
+                    success : function() {
+                        alert("삭제되었습니다.");
+                        location.href = "/board/list";
+                    }
+                })
+            }
+
+
         })
     })
 

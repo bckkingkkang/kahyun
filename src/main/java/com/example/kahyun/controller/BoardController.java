@@ -50,10 +50,9 @@ public class BoardController {
 
     /* 게시글 상세 화면 */
     @GetMapping("detail/{seq}")
-    public ModelAndView getBoard(BoardVo boardVo, CommentVo commentVo, ModelAndView mav) {
+    public ModelAndView getBoard(BoardVo boardVo, ModelAndView mav) {
         BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
         List<CommentVo> boardComment = commentMapper.getComment(boardVo);
-
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
 
@@ -62,10 +61,30 @@ public class BoardController {
         return mav;
     }
 
+    /* 댓글 등록 ajax */
     @ResponseBody
-    @PostMapping("create_comment_ajax")
-    public int create_comment_ajax() {
-       return 1;
+    @PostMapping("detail/create_comment_ajax")
+    public int create_comment_ajax(CommentVo commentVo) {
+        commentVo.setNickname("가현");
+        commentVo.setUser_seq("5");
+        int result = commentMapper.createComment(commentVo);
+        return result;
+    }
+
+    /* 게시글 저장 ajax */
+    @ResponseBody
+    @PostMapping("create_board_ajax")
+    public int create_board_ajax(BoardVo boardVo) {
+        boardVo.setNickname("가현");
+        boardVo.setUser_seq("1");
+        return boardMapper.createBoard(boardVo);
+    }
+
+    /* 게시글 삭제 ajax */
+    @ResponseBody
+    @PostMapping("detail/delete_board_ajax")
+    public int delete_board_ajax(BoardVo boardVo) {
+        return boardMapper.deleteBoard(boardVo);
     }
 
 
