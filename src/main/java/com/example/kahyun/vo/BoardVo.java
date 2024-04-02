@@ -15,4 +15,5 @@ public class BoardVo {
     private String view;
     private String user_seq;
     private String boardOption;
+    private String auth;
 }

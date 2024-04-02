@@ -66,17 +66,14 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/"),
                                 /*new AntPathRequestMatcher("/user/signup"),*/
                                 /* 로그인, 회원가입 관련 페이지는 로그인 없이 접근 */
-                                /*
-                                new AntPathRequestMatcher("/user/login"),
-                                new AntPathRequestMatcher("/user/search"),
-                                new AntPathRequestMatcher("/user/complete"),
-                                new AntPathRequestMatcher("/user/check_id_ajax"),
-                                new AntPathRequestMatcher("/user/signup_ajax"),
-                                new AntPathRequestMatcher("/user/search_id_ajax"),
-                                new AntPathRequestMatcher("/user/")*/
                                 new AntPathRequestMatcher("/user/**")
-
                         ).permitAll()
+
+                        /* 관리자 페이지는 관리자만 접근 가능 */
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/admin/**")
+                        ).hasAuthority("SYS_ADMIN")
+
                         .anyRequest().authenticated()
                 )
 

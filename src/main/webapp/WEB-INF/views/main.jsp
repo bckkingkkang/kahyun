@@ -23,6 +23,7 @@
 
 </div>
 <div>
+    <a href="/admin/admin">관리자 페이지</a>
     <a href="/board/list">회원게시판</a>
 
 

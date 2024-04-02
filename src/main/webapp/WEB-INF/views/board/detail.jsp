@@ -17,7 +17,7 @@
 <body>
 <div>
     <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-    <c:if test="${boardDetail.user_seq == userDetail.seq}">
+    <c:if test="${boardDetail.user_seq == userDetail.seq || userDetail.auth == 'ADMIN'}">
         <button type="button" id="deleteBtn">삭제</button>
     </c:if>
 
