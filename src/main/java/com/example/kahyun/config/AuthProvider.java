@@ -42,16 +42,12 @@ public class AuthProvider implements AuthenticationProvider {
                 roles.add(new SimpleGrantedAuthority("NOR_ADMIN"));
             }
 
-
-
             token = new UsernamePasswordAuthenticationToken(loginVo.getUser_id(), null, roles);
 
-            System.out.println(token);
-
-            /*loginVo.setPassword(null);*/
             return token;
         }
-        throw new BadCredentialsException("No such user or wrong password");
+
+        throw new BadCredentialsException("아이디나 비밀번호가 잘못됐음");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.kahyun.config;
 
 import jakarta.servlet.DispatcherType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +12,16 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.DispatcherTypeRequestMatcher;
 
 @EnableWebSecurity  // 모든 URL 요청이 스프링 시큐리티의 제어를 받는다.
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private FailureHandler failureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,10 +74,14 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/user/**")
                         ).permitAll()
 
-                        /* 관리자 페이지는 관리자만 접근 가능 */
+                        /*
+                            hasAuthority : 특정 권한을 가지고 있는 경우에만 접근 허가
+                            hasAuthority : 에러 권한 중 하나만 만족해도 접근 허용
+                            access : 특정 조건을 기반으로 접근을 제한
+                        */
                         .requestMatchers(
                                 new AntPathRequestMatcher("/admin/**")
-                        ).hasAuthority("SYS_ADMIN")
+                        ).hasAuthority("SYS_ADMIN") // 관리자 페이지는 관리자만 접근 가능
 
                         .anyRequest().authenticated()
                 )
@@ -81,11 +90,26 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/user/login")
                         .loginProcessingUrl("/auth")
+                        // username : user_id, password : password
                         .usernameParameter("user_id")
                         .passwordParameter("password")
                         // 로그인 성공 시 defaultSuccessUrl 페이지로 이동
                         .defaultSuccessUrl("/")
-                        // username : user_id, password : password
+
+                        /*
+                            로그인 실패 핸들러 failureHandler
+                            : 실패한 인증 시도를 처리하는데 사용, 일반적으로 사용자를 인증 페이지로 리디렉션한다.
+                             예외 유형에 따라 구현
+
+                             예외 종류
+                             - BadCredentialsException : 비밀번호 불일치
+                             - UsernameNotFoundException : 계정 없음
+                             - AccountialsExpiredExcepion : 비밀번호 만료
+                             - DisabledException : 계정 비활성화
+                             - LockedException : 계정 잠김
+                        */
+                        .failureHandler(failureHandler)
+
 
                 )
 
@@ -96,4 +120,6 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+
 }
