@@ -17,8 +17,13 @@
 
 **5. spring security 적용**
    - 로그인 / 로그아웃 기능 적용
-   - url 패턴별 권한 적용 예시) -> 권한 : NOR_ADMIN, SYS_ADMIN -> 1번 URL : NOR_ADMIN/SYS_ADMIN, 2번 URL : SYS_ADMIN 권한 적용 -> A계정이 로그인 시 NOR_ADMIN 권한 을 부여, 1번 URL에 접속 가능 / 2번 URL은 접속 안되도록 처리
-
+   - url 패턴별 권한 적용 예시)
+```
+-> 권한 : NOR_ADMIN, SYS_ADMIN
+   1번 URL : NOR_ADMIN/SYS_ADMIN,
+   2번 URL : SYS_ADMIN 권한 적용
+ A계정이 로그인 시 NOR_ADMIN 권한 부여 => 1번 URL에 접속 가능 / 2번 URL은 접속 안되도록 처리
+```
 **6. security에 session 관리 적용**
    - 중복 로그인 가능으로 구현
    - 중복 로그인 방지로 구현
