@@ -35,15 +35,7 @@
                 <td><label for="nickname">닉네임</label></td>
                 <td><input type="text" id="nickname"></td>
             </tr>
-            <%--<tr>
-                <td>권한</td>
-                <td>
-                    <select name="auth" id="auth">
-                        <option value="USER" default>사용자</option>
-                        <option value="ADMIN">관리자</option>
-                    </select>
-                </td>
-            </tr>--%>
+
         </table>
         <button type="button" id="signupBtn">회원가입</button>
     </form>

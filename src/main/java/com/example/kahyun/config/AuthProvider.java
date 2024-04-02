@@ -35,9 +35,19 @@ public class AuthProvider implements AuthenticationProvider {
 
         if(loginVo != null && passwordEncoder.matches(password, loginVo.getPassword())) {
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("USER"));
+
+            if(loginVo.getAuth().equals("ADMIN")) {
+                roles.add(new SimpleGrantedAuthority("SYS_ADMIN"));
+            } else {
+                roles.add(new SimpleGrantedAuthority("NOR_ADMIN"));
+            }
+
+
 
             token = new UsernamePasswordAuthenticationToken(loginVo.getUser_id(), null, roles);
+
+            System.out.println(token);
+
             /*loginVo.setPassword(null);*/
             return token;
         }

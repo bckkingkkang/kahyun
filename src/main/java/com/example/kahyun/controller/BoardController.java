@@ -2,9 +2,13 @@ package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
+import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
+import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +20,9 @@ import java.util.List;
 @RequiredArgsConstructor    // final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할
 @RequestMapping("board/")
 public class BoardController {
+
+    @Autowired
+    private UserService userService;
 
     /*
         스프링 의존성 주입 3가지
@@ -65,9 +72,15 @@ public class BoardController {
         */
         BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
         List<CommentVo> boardComment = commentMapper.getComment(boardVo);
+        String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LoginVo user = userService.selectUser(user_id);
+
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
+
+        mav.addObject("userDetail", user);
         mav.setViewName("board/detail");
+        System.out.println(mav);
 
         return mav;
     }
@@ -76,9 +89,11 @@ public class BoardController {
     @ResponseBody
     @PostMapping("detail/create_comment_ajax")
     public int create_comment_ajax(CommentVo commentVo) {
+        String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LoginVo loginVo = userService.selectUser(user_id);
         /* security 설정 후 변경 */
-        commentVo.setNickname("가현");
-        commentVo.setUser_seq("5");
+        commentVo.setNickname(loginVo.getNickname());
+        commentVo.setUser_seq(loginVo.getSeq());
         int result = commentMapper.createComment(commentVo);
         return result;
     }
@@ -87,9 +102,12 @@ public class BoardController {
     @ResponseBody
     @PostMapping("create_board_ajax")
     public int create_board_ajax(BoardVo boardVo) {
+        String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LoginVo loginVo = userService.selectUser(user_id);
+
         /* security 설정 후 변경 */
-        boardVo.setNickname("가현");
-        boardVo.setUser_seq("1");
+        boardVo.setNickname(loginVo.getNickname());
+        boardVo.setUser_seq(loginVo.getSeq());
         return boardMapper.createBoard(boardVo);
     }
 

@@ -7,15 +7,30 @@
 </head>
 <body>
 <h1>HOME</h1>
+<div>
+        <form action="/logout" method="post">
+            <button type="button" onclick="location.href='/user/login'" id="loginBtn">로그인</button>
 
-<a href="/board/list">회원게시판</a>
-<a href="/user/login">로그인</a>
-<form action="/logout" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <button type="submit">로그아웃</button>
-</form>
-<script>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <button type="submit" id="logoutBtn">로그아웃</button>
+        </form>
 
+</div>
+<div>
+    <h2>${user.user_id} 님 로그인 중입니다</h2>
+    <h4>nickname : ${user.nickname}
+        <br>권한 : ${user.auth}</h4>
+
+</div>
+<div>
+    <a href="/board/list">회원게시판</a>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    const $dom = {};
 </script>
 </body>
 </html>
