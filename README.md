@@ -1,5 +1,16 @@
-**1. 요구사항**
-   - spring framework 사용
+## check_list
+- [ ] **Filter삽입**
+> 1. html 태그 
+> 2. multipart/form-data
+> 3. json
+- [ ] **AOP를 활용한 URL별 권한 체크**
+- [ ] **resources 파일 환경 분리**
+- [ ] security 로그인 성공 핸들러
+- [ ] 주석 체크
+
+---------------------
+## 요구사항
+**1. spring framework 사용**
    - 리스트/상세 페이지
 
 **2. db 연동**
@@ -39,7 +50,8 @@
    
    
    
-   
+---------------------   
+## mySQL
    
  ```  
 CREATE TABLE kahyun.board
