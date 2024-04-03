@@ -46,7 +46,7 @@ public class FailureHandler extends SimpleUrlAuthenticationFailureHandler {
             errorMessage = "알 수 없는 이유";
         }
         errorMessage = URLEncoder.encode(errorMessage, "UTF-8");
-        출처: https://dev-coco.tistory.com/126 [슬기로운 개발생활:티스토리]
+
         setDefaultFailureUrl("/user/login?error=true&exception="+errorMessage);
         super.onAuthenticationFailure(request, response, exception);
     }
