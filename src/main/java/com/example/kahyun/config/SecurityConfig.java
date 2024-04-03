@@ -16,7 +16,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.method.HandlerMethod;
 
 @EnableWebSecurity  // 모든 URL 요청이 스프링 시큐리티의 제어를 받는다.
 @Configuration
@@ -126,8 +128,6 @@ public class SecurityConfig {
                         */
                         .failureHandler(failureHandler)
 
-
-
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -176,12 +176,12 @@ public class SecurityConfig {
                         .maxSessionsPreventsLogin(false)
                         .expiredUrl("/")
 
+
                 );
-
         return http.build();
-
-
     }
+
+
 
 
 }

@@ -79,6 +79,7 @@ public class LoginController {
         loginVo.setPassword(bCryptPasswordEncoder.encode(loginVo.getPassword()));
 
         int result = loginMapper.createUser(loginVo);
+
         return result;
     }
 
