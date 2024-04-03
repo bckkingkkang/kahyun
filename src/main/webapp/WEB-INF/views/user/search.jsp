@@ -8,6 +8,8 @@
 <body>
 계정찾기
 <div>
+    <form action="">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <div>
         이름을 입력하세요
         <label for="username"></label>
@@ -30,6 +32,7 @@
         <a href="signup">회원가입</a>
         <a href="/">메인으로</a>
     </div>
+    </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">

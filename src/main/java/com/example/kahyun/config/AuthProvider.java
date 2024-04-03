@@ -22,26 +22,37 @@ public class AuthProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
 
+    /*
+        Spring Security의 인증 방식 : Credential 기반 인증 : 사용자명과 비밀번호를 이용한 방식
+        - principal : 아이디
+        - credential : 비밀번호
+    */
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // UserDetailsService의 loadByUsernam 을 이용하지 않고 DB의 user 정보를 가져옴
-        // 로그인 버튼을 눌렀을 때 POST로 전송되는 user_id, password를 이용하여 사용자 인증
+        // UserDetailsService의 loadByUsername 을 이용하지 않고 DB의 user 정보를 가져옴
+        // login.jsp 페이지에서 로그인 버튼을 눌렀을 때 POST로 전송되는 user_id, password를 이용하여 사용자 인증
         String user_id = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
         PasswordEncoder passwordEncoder = userService.passwordEncoder();
         UsernamePasswordAuthenticationToken token;
+
+        /* 입력받은 user_id로 회원 정보 SELECT */
         LoginVo loginVo = userService.selectUser(user_id);
 
+        /* 조회된 회원정보가 있고 비밀번호가 matches  */
         if(loginVo != null && passwordEncoder.matches(password, loginVo.getPassword())) {
             List<GrantedAuthority> roles = new ArrayList<>();
 
+            /* users 권한이 ADMIN인 경우 SYS_ADMIN 권한 부여 */
             if(loginVo.getAuth().equals("ADMIN")) {
                 roles.add(new SimpleGrantedAuthority("SYS_ADMIN"));
             } else {
                 roles.add(new SimpleGrantedAuthority("NOR_ADMIN"));
             }
 
+            // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
             token = new UsernamePasswordAuthenticationToken(loginVo.getUser_id(), null, roles);
 
             return token;

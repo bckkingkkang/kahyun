@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,8 +25,13 @@ public class MainCrontroller {
         String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LoginVo loginVo = userService.selectUser(user_id);
         model.addAttribute("user", loginVo);
-        System.out.println(SecurityContextHolder.getContext());
-        System.out.println(loginVo);
+        String isLogin;
+        if(loginVo != null) {
+            isLogin = "true";
+        } else {
+            isLogin = "false";
+        }
+        model.addAttribute("isLogin",isLogin);
         return "main";
     }
 
