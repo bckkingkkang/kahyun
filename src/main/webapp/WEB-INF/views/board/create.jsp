@@ -9,6 +9,7 @@
 <div>글쓰기화면</div>
 
 <form action="">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <table>
         <tr>
             <td>제목</td>

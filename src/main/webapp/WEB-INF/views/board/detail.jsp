@@ -66,9 +66,12 @@
         <div>
             <table>
                 <tr>
+                    <form action="">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <td style="width: 100px">댓글</td>
                     <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
                     <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
+                    </form>
                 </tr>
             </table>
         </div>

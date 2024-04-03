@@ -1,5 +1,8 @@
 package com.example.kahyun.config;
 
+import com.example.kahyun.handler.AccessDeniedHandler;
+import com.example.kahyun.handler.AuthenticationEntryPoint;
+import com.example.kahyun.handler.FailureHandler;
 import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -8,13 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.DispatcherTypeRequestMatcher;
 
 @EnableWebSecurity  // 모든 URL 요청이 스프링 시큐리티의 제어를 받는다.
 @Configuration
@@ -22,6 +22,12 @@ public class SecurityConfig {
 
     @Autowired
     private FailureHandler failureHandler;
+
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -31,6 +37,7 @@ public class SecurityConfig {
     /*
         인증(Authenticate) : 보호된 리소스에 접근한 대상에 대해 이 유저가 누구인지, 애플리케이션의 작업을 수행해도 되는 주체인지 확인하는 과정 (로그인)
         권한(Authorize) : 인증된 사용자가 어떤 것을 할 수 있는지를 의미
+        인가(Authorization) : 인증된 사용자가 요청된 자원에 접근가능한지를 결정하는 절차
 
         Authentication은 접근하는 주체의 정보와 권한을 담은 인터페이스로 SecurityContext에 저장된다.
         SecurityContext : Authentication을 보관하며 해당 객체를 꺼내올 수 있다.
@@ -63,6 +70,17 @@ public class SecurityConfig {
                 */
                 // 로컬에서 확인을 위해 csrf 비활성화
                 .csrf(csrf -> csrf.disable())
+                /*
+                    CSRF Token을 설정해주지 않으면 jsp에서 보내는 POST 요청을 전부 막는다. (로그인, 회원가입 기능 동작하지 않음 -> 인증 과정 진행 불가)
+                    -> JSP에서 POST 요청을 보낼 때 CSRF Token에 값을 넣어 함께 보내고 Spring security가 token 값을 확인하여 CSRF 공격 판단
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                */
+
+                // 403 -> alert 표시, 메인으로 이동
+                .exceptionHandling(handler->handler.accessDeniedHandler(accessDeniedHandler))
+
+                // 401 -> alert 표시, 메인으로 이동
+                .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))
 
                 /* HttpServletRequest를 사용하는 요청들에 대한 접근 설정 */
                 .authorizeHttpRequests(requests -> requests
@@ -89,7 +107,7 @@ public class SecurityConfig {
                 // 로그인 페이지 커스터마이징
                 .formLogin(login -> login
                         .loginPage("/user/login")
-                        .loginProcessingUrl("/auth")
+                        .loginProcessingUrl("/user/loginForm")
                         // username : user_id, password : password
                         .usernameParameter("user_id")
                         .passwordParameter("password")
@@ -111,14 +129,16 @@ public class SecurityConfig {
                         .failureHandler(failureHandler)
 
 
-                )
 
+                )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                 );
 
         return http.build();
+
+
     }
 
 
