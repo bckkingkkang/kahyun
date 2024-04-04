@@ -19,4 +19,6 @@ public interface BoardMapper {
 
     /* 게시글 상세보기 */
     BoardVo getBoardDetail(BoardVo boardVo);
+
+    int upView(BoardVo boardVo);
 }

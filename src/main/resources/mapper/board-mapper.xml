@@ -30,4 +30,8 @@
     <select id="getBoardDetail">
         SELECT * FROM board WHERE seq = #{seq}
     </select>
+
+    <update id="upView">
+        update board set view = view+1 where seq = #{seq}
+    </update>
 </mapper>

@@ -2,6 +2,7 @@ package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
+import com.example.kahyun.service.BoardService;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
@@ -23,6 +24,9 @@ public class BoardController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardService boardService;
 
     /*
         스프링 의존성 주입 3가지
@@ -49,7 +53,6 @@ public class BoardController {
         */
         List<BoardVo> list = boardMapper.getBoardList(boardVo);
         model.addAttribute("list", list);
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         return "board/list";
     }
@@ -77,12 +80,13 @@ public class BoardController {
         String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LoginVo user = userService.selectUser(user_id);
 
+        boardService.upView(boardVo);
+
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
 
         mav.addObject("userDetail", user);
         mav.setViewName("board/detail");
-        System.out.println(mav);
 
         return mav;
     }
