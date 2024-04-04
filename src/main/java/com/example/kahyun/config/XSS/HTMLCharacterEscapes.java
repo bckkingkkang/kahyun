@@ -20,7 +20,7 @@ public class HTMLCharacterEscapes extends CharacterEscapes {
     private final CharSequenceTranslator translator;
 
     public HTMLCharacterEscapes() {
-        // 1. XSS 방지 처리할 특수 문자 지정
+        // XSS 방지 특수 문자 지정
         asciiEscapes = CharacterEscapes.standardAsciiEscapesForJSON();
         asciiEscapes['<'] = CharacterEscapes.ESCAPE_CUSTOM;
         asciiEscapes['>'] = CharacterEscapes.ESCAPE_CUSTOM;

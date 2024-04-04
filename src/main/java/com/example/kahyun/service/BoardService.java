@@ -1,9 +1,16 @@
 package com.example.kahyun.service;
 
+import com.example.kahyun.mapper.BoardMapper;
+import com.example.kahyun.vo.BoardVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BoardService {
+
+    @Autowired
+    private BoardMapper boardMapper;
+
     /*
         서비스가 필요한 이유
 
@@ -15,4 +22,8 @@ public class BoardService {
         : 서비스를 통해서만 데이버테이스에 접근하도록 구현하는 것이 보안 상 안전하다.
         해킹을 통해 컨트롤러를 제어할 수 있게 되더라도 리포지토리에 직접 접근할 수는 없게 된다.
     */
+
+    public void upView(BoardVo boardVo) {
+        boardMapper.upView(boardVo);
+    }
 }
