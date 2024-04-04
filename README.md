@@ -45,10 +45,12 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 >> .csrf(csrf -> csrf.disable())
 
 > 403 -> alert 표시 후 메인으로 이동   
->   * exceptionHandling(handler->handler.accessDeniedHandler(accessDeniedHandler))
+>   * exceptionHandling(handler->handler.accessDeniedHandler(accessDeniedHandler))   
+>   * ```implements AccessDeniedHandler ```
 
 > 401 -> alert 표시 후 메인으로 이동   
->   * .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))
+>   * .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))   
+>   * ```implements AuthenticationEntryPoint```
 
 ### 로그인 페이지 커스터마이징
 ```java
@@ -114,9 +116,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
    - invalidSessionUrl()
         - 세션이 유효하지 않을 때 이동할 페이지
 
-
-
-
+-----------------------------------------
 ## AuthenticationProvier
 spring security의 인증 방식 : credential 기반 인증 (사용자명과 비밀번호를 이용한 방식)
    - principal : 아이디
@@ -147,7 +147,33 @@ AuthenticationProvider를 상속한 AuthProvider 클래스
 * **destroy**
 > 필터 객체가 삭제될 때 호출되는 메소드로 자원 해제 기능을 구현한다.
 
+---------------------------------
 
+## Model / ModelAndView
+* Model 객체   
+  * Controller에서 생성한 데이터를 담아서 View로 전달할 때 사용하는 객체 (메소드에 파라미터로 넣어주고 String 형태로 반환한다.)
+  * addAttribute("변수 이름", "값") 메소드를 사용하여 전달할 데이터 세팅
+* ModelAndView
+  * ModelAndView 객체를 생성해서 객체 형태로 변환한다.
+  * 화면에 출력할 데이터(Model)을 설정할 수 있고, 어떤 화면(View)으로 넘어갈지 경로를 설정할 수 있다.
+  * Model + View 값을 넣을 때는 addObject를 사용하고, 값을 보낼 View를 세팅할 때는 setViewName()을 사용한다.
+
+---------------------
+## BCrypt
+* 단방향 암호화를 위해 만들어진 해시 함수
+* salt를 부여하여 여러 번 해싱하므로 같은 비밀번호를 암호화하더라도 해시 값은 매번 다른 값이 도출된다.
+> Hash (해싱) : 각 사용자의 일반 텍스트 암호를 가져와 단방향 수학 함수를 통해 암호화를 실행하는 것   
+> Salt (솔트) : 해시 함수를 돌리기 전에 원문에 임의의 문자열을 덧붙이는 것   
+``` 사용자 비밀번호 -> salt 생성 -> hashing -> 암호화된 비밀번호 DB에 저장```
+
+---------------------
+### 서비스가 필요한 이유
+1. 모듈화
+   - 서비스를 만들어두면 컨트롤러에서는 해당 서비스를 호출하여 사용
+   - 서비스를 만들지 않고 컨트롤러에서 구현한 경우 해당 기능을 필요로 하는 모든 컨트롤러가 동일한 기능을 중복으로 구현해야 한다.
+2. 보안
+   - 서비스를 통해서만 데이터베이스에 접근하도록 구현하는 것이 보안 상 안전하다.
+   - 해킹을 통해 컨트롤러를 제어할 수 있게 되더라도 리포지토리에 직접 접근할 수는 없게 된다.
 
 ---------------------
 
