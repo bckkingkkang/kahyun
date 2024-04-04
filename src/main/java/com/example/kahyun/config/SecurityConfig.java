@@ -177,7 +177,8 @@ public class SecurityConfig {
                         .expiredUrl("/")
 
 
-                );
+                )
+        ;
         return http.build();
     }
 
