@@ -1,4 +1,4 @@
-package com.example.kahyun.config.filter;
+package com.example.kahyun.config.XSS.Filter;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
