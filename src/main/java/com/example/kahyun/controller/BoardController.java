@@ -3,9 +3,12 @@ package com.example.kahyun.controller;
 import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.service.BoardService;
+import com.example.kahyun.service.FileService;
 import com.example.kahyun.service.UserService;
+import com.example.kahyun.utils.FileUtils;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
+import com.example.kahyun.vo.FileVo;
 import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,10 @@ public class BoardController {
 
     @Autowired
     private BoardService boardService;
+
+    private final FileService fileService;
+
+    private final FileUtils fileUtils;
 
     /*
         스프링 의존성 주입 3가지
@@ -115,6 +122,11 @@ public class BoardController {
         boardVo.setNickname(loginVo.getNickname());
         boardVo.setUser_seq(loginVo.getSeq());
         return boardMapper.createBoard(boardVo);
+    }
+    @PostMapping("create")
+    public void saveFile(final BoardVo boardVo) {
+        List<FileVo> files = fileUtils.uploadFiles(boardVo.getFiles());
+        fileService.saveFiles(boardVo.getSeq(), files);
     }
 
     /* 게시글 삭제 ajax */
