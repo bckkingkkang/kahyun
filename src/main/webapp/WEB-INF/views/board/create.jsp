@@ -8,7 +8,7 @@
 <body>
 <div>글쓰기화면</div>
 
-<form action="">
+<form action="" enctype="multipart/form-data" id="saveForm" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <table>
         <tr>
@@ -28,6 +28,17 @@
             <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content"></textarea></td>
         </tr>
     </table>
+    <div class="file_list">
+        <div>
+            <div class="file_input">
+                <input type="text" readonly />
+                <label> 첨부파일
+                    <input type="file" name="files" />
+                </label>
+            </div>
+
+        </div>
+    </div>
 </form>
     <div>
         <button type="submit" id="createBtn">저장</button>
@@ -42,6 +53,7 @@
         $dom.createBtn = $("#createBtn");
         /*$dom.title = $("#title").val();
         $dom.content = $("#content").val();*/
+
 
         $dom.createBtn.on('click', function() {
             if($("#title").val() == "") {
@@ -67,7 +79,12 @@
                 })
             }
         })
+
+
     })
+
+
+
 
 
 </script>
