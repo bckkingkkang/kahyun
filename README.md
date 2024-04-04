@@ -95,6 +95,21 @@ CREATE TABLE kahyun.comment
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
+```
+ CREATE TABLE kahyun.file
+   (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
+   board_seq int(10) NOT NULL comment '게시글 seq',
+   original_name varchar(50) NOT NULL comment '업로드 파일 원본 이름',
+   save_name varchar(50) NOT NULL comment '저장 파일 이름',
+   `size` varchar(500) NOT NULL comment '파일 크기',
+   delete_yn enum('N','Y') NOT NULL comment '파일 삭제 여부',
+   create_dt datetime NOT NULL comment '파일 생성 일시',
+   delete_dt datetime NULL comment '파일 삭제 일시',
+  
+   PRIMARY KEY (seq)
+   ) ENGINE=INNODB DEFAULT charset=utf8 
+```
+
 
 ```
 INSERT INTO kahyun.board 
