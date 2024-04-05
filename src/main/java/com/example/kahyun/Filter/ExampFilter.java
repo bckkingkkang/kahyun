@@ -1,4 +1,4 @@
-package com.example.kahyun.config.XSS.Filter;
+package com.example.kahyun.Filter;
 
 import jakarta.servlet.*;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.io.IOException;
 
 @Configuration
-public class ExampFilter implements Filter {
+public class ExampFilter /*implements Filter*/ {
 
     /*
         Filter로 구현할 수 있는 기능
@@ -18,10 +18,10 @@ public class ExampFilter implements Filter {
         - 응답 헤더의 수정과 조정 기능
     */
 
-    public void init(FilterConfig config) {
-        /*  필터 객체가 생성될 때 호출되는 메소드
+    /*public void init(FilterConfig config) {
+          필터 객체가 생성될 때 호출되는 메소드
             웹 서버가 시작될 때 한 번만 생성된 다음 계속 사용되므로 init()메소드는 서버가 시작될 때 한 번만 호출된다.
-            초기화 기능 구현  */
+            초기화 기능 구현
         System.out.println("init() 호출");
     }
 
@@ -36,5 +36,5 @@ public class ExampFilter implements Filter {
     public void destroy() {
         // 필터 객체가 삭제될 때 호출되는 메소드로 자원 해제 기능을 구현한다.
         System.out.println("destroy() 호출");
-    }
+    }*/
 }

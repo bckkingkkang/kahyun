@@ -171,6 +171,15 @@
 
 
 	<build>
+		<defaultGoal>package</defaultGoal>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/resources-${env}</directory>
+			</resource>
+		</resources>
 		<finalName>kahyun</finalName>
 		<plugins>
 			<plugin>
