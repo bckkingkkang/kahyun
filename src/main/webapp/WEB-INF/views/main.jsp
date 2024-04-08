@@ -7,7 +7,7 @@
     <title>HOME</title>
 </head>
 <body>
-<h1>HOME</h1>
+<h1>home</h1>
 <div>
         <form action="/logout" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -37,13 +37,15 @@
 <div>
     <a href="/admin/admin">관리자 페이지</a>
     <a href="/board/list">회원게시판</a>
-
-
+    <a href="/user/mypage">마이페이지</a>
 </div>
+
+
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-    const $dom = {};
 </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 package com.example.kahyun;
 
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -10,7 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @EnableAspectJAutoProxy	// Spring AOP 활성화
 @SpringBootApplication
-public class KahyunApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
+public class KahyunApplication /*extends SpringBootServletInitializer implements WebApplicationInitializer*/ {
 
 	/*
 		jar
@@ -33,7 +34,7 @@ public class KahyunApplication extends SpringBootServletInitializer implements W
 		SpringApplication.run(KahyunApplication.class, args);
 	}
 
-	@Override
+	/*@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(KahyunApplication.class);
 	}
@@ -41,6 +42,6 @@ public class KahyunApplication extends SpringBootServletInitializer implements W
 	@Override
 	protected WebApplicationContext run(SpringApplication application) {
 		return super.run(application);
-	}
+	}*/
 
 }
