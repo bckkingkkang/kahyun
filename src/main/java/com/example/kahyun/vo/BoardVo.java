@@ -20,6 +20,4 @@ public class BoardVo {
     private String user_seq;
     private String boardOption;
     private String auth;
-
-    private List<MultipartFile> files = new ArrayList<>();
 }

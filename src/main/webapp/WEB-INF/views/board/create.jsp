@@ -18,9 +18,9 @@
         <tr>
             <td>게시판</td>
             <td><select name="" id="boardOption">
-                <option value="boardOption3" default>그냥게시판</option>
-                <option value="boardOption1">게시판1</option>
-                <option value="boardOption2">게시판2</option>
+                <option value="boardOption1" default>그냥게시판</option>
+                <option value="boardOption2">게시판1</option>
+                <option value="boardOption3">게시판2</option>
             </select></td>
         </tr>
         <tr>

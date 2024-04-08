@@ -12,7 +12,6 @@
         <mapper resource="mapper/board-mapper.xml"/>
         <mapper resource="mapper/login-mapper.xml"/>
         <mapper resource="mapper/comment-mapper.xml"/>
-        <mapper resource="mapper/file-mapper.xml"/>
     </mappers>
 
 </configuration>

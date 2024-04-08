@@ -1,6 +1,5 @@
 package com.example.kahyun.config;
 
-import com.example.kahyun.mapper.LoginMapper;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;

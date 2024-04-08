@@ -25,6 +25,7 @@
         검색 결과 :
         <label for="user_id"></label>
         <input type="text" id="user_id" readonly>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <button id="copyBtn" hidden>아이디 복사하기</button>
     </div>
     <div>
