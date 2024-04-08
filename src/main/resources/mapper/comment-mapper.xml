@@ -4,8 +4,11 @@
 <mapper namespace="com.example.kahyun.mapper.CommentMapper">
 
     <!-- 게시글 상세에서 댓글 -->
-    <select id="getComment">
-        SELECT * FROM comment WHERE board_seq = #{seq}
+    <select id="getComment" parameterType="boardVo">
+        SELECT *
+        FROM comment
+        WHERE board_seq = #{seq}
+            AND status = 'N'
     </select>
 
     <!-- 댓글 등록 -->

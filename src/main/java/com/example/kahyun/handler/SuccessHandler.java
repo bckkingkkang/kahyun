@@ -15,16 +15,6 @@ import java.io.IOException;
 @Component
 public class SuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        HttpSession session = request.getSession();
-
-        /*if(session != null) {
-            response.setContentType("text/html; charset=utf-8");
-            PrintWriter out = response.getWriter();
-
-            String htmlcode = "<script>" + "alert('로그인되었습니다.');" + "</script>";
-            out.print(htmlcode);
-            out.flush();
-        }*/
 
     }
 

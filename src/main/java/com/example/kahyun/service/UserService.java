@@ -2,7 +2,6 @@ package com.example.kahyun.service;
 
 import com.example.kahyun.mapper.LoginMapper;
 import com.example.kahyun.vo.LoginVo;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +14,6 @@ public class UserService {
     private LoginMapper loginMapper;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
 
     public PasswordEncoder passwordEncoder() {
         return this.passwordEncoder;

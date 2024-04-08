@@ -20,5 +20,6 @@ public interface BoardMapper {
     /* 게시글 상세보기 */
     BoardVo getBoardDetail(BoardVo boardVo);
 
+    /* 게시글 누를 때마다 조회수 증가 */
     int upView(BoardVo boardVo);
 }
