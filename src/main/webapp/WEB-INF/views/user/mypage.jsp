@@ -14,6 +14,7 @@
 <body>
 이름 : ${userInfo.username}
 닉네임 : ${userInfo.nickname}
+가입일 : ${userInfo.reg_date}
 
 <a href="/">메인으로</a>
 </body>
