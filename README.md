@@ -262,6 +262,8 @@ CREATE TABLE kahyun.board
   
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
+
+user_seq, boardOption 추가
 ```
 
 ```mysql
