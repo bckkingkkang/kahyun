@@ -53,7 +53,6 @@ public class BoardController {
         */
         List<BoardVo> list = boardMapper.getBoardList(boardVo);
         model.addAttribute("list", list);
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         return "board/list";
     }
 

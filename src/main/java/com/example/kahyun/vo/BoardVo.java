@@ -1,10 +1,6 @@
 package com.example.kahyun.vo;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class BoardVo {

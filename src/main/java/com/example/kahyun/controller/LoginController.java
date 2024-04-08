@@ -89,7 +89,6 @@ public class LoginController {
     public String search_id_ajax(LoginVo loginVo) {
         String result = loginMapper.searchId(loginVo);
         // 검색 결과가 없는 경우 null
-        System.out.println(result);
         if(null == (result)) {
             result = "";
         }
