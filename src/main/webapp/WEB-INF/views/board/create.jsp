@@ -28,17 +28,6 @@
             <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content"></textarea></td>
         </tr>
     </table>
-    <div class="file_list">
-        <div>
-            <div class="file_input">
-                <input type="text" readonly />
-                <label> 첨부파일
-                    <input type="file" name="files" />
-                </label>
-            </div>
-
-        </div>
-    </div>
 </form>
     <div>
         <button type="submit" id="createBtn">저장</button>
