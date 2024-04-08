@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+
     @Autowired
     private LoginMapper loginMapper;
+
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public PasswordEncoder passwordEncoder() {
         return this.passwordEncoder;
     }

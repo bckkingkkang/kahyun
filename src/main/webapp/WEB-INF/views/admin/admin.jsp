@@ -8,7 +8,11 @@
 <body>
 <h1>admin</h1>
 
+    <h3>회원 리스트</h3>
 
+<div>
+    <a href="/">메인으로</a>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};

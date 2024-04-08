@@ -10,21 +10,21 @@
             (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_DATE())
     </insert>
 
-    <select id="searchId" parameterType="LoginVo">
+    <select id="searchId" parameterType="LoginVo" resultType="String">
         SELECT
             user_id
         FROM users
         WHERE username = #{username} AND nickname = #{nickname}
     </select>
 
-    <select id="checkId">
+    <select id="checkId" parameterType="LoginVo" resultType="int">
         SELECT
             count(user_id)
         FROM users
         WHERE user_id = #{user_id}
     </select>
 
-    <select id="selectUser">
+    <select id="selectUser" parameterType="String" resultType="LoginVo">
         select * from users where user_id = #{user_id}
     </select>
 

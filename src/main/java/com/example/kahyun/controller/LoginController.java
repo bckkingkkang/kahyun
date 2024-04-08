@@ -4,8 +4,6 @@ import com.example.kahyun.mapper.LoginMapper;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,21 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("user/")
 public class LoginController {
 
     private final LoginMapper loginMapper;
+    private final UserService userService;
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     /* 로그인 화면 */
-    /*@RequestMapping("login")
-    public String login() {
-        return "user/login";
-    }*/
     @GetMapping("login")
     public String login(@RequestParam(value="error", required = false)String error,
                         @RequestParam(value="exception", required = false)String exception, Model model) {
@@ -60,6 +53,15 @@ public class LoginController {
     @RequestMapping("search")
     public String search() {
         return "user/search";
+    }
+
+    /* 마이페이지 */
+    @RequestMapping("mypage")
+    public ModelAndView mypage(ModelAndView mav) {
+        String user_id = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mav.addObject("userInfo",userService.selectUser(user_id));
+        mav.setViewName("user/mypage");
+        return mav;
     }
 
     /* 회원가입 ajax */

@@ -7,19 +7,27 @@
     <title>HOME</title>
 </head>
 <body>
-<h1>HOME</h1>
+<h1>home</h1>
 <div>
-        <form action="/logout" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <c:choose>
-                <c:when test="${isLogin eq 'true'}">
-                    <button type="submit" id="logoutBtn">로그아웃</button>
-                </c:when>
-                <c:otherwise>
-                    <button type="button" onclick="location.href='/user/login'" id="loginBtn">로그인</button>
-                </c:otherwise>
-            </c:choose>
-        </form>
+    <form action="/logout" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        <c:choose>
+            <c:when test="${isLogin eq 'true'}">
+                <a href="/board/list">회원게시판</a>
+                <a href="/user/mypage">마이페이지</a>
+                <c:if test="${user.auth == 'ADMIN'}">
+                    <a href="/admin/admin">관리자 페이지</a>
+                </c:if>
+                <a href="/logout">로그아웃</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/user/login" id="loginBtn">로그인</a>
+            </c:otherwise>
+        </c:choose>
+    </form>
+</div>
+<div>
+
 </div>
 <div>
     <c:choose>
@@ -34,16 +42,14 @@
     </c:choose>
 
 </div>
-<div>
-    <a href="/admin/admin">관리자 페이지</a>
-    <a href="/board/list">회원게시판</a>
 
 
-</div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-    const $dom = {};
 </script>
 </body>
+
 </html>

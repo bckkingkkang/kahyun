@@ -2,15 +2,11 @@ package com.example.kahyun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.WebApplicationContext;
 
 @EnableAspectJAutoProxy	// Spring AOP 활성화
 @SpringBootApplication
-public class KahyunApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
+public class KahyunApplication {
 
 	/*
 		jar
@@ -33,14 +29,5 @@ public class KahyunApplication extends SpringBootServletInitializer implements W
 		SpringApplication.run(KahyunApplication.class, args);
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(KahyunApplication.class);
-	}
-
-	@Override
-	protected WebApplicationContext run(SpringApplication application) {
-		return super.run(application);
-	}
 
 }
