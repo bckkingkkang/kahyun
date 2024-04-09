@@ -130,8 +130,13 @@ public class SecurityConfig {
 
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutUrl("/logout")   // 로그아웃 처리 URL
+                        .logoutSuccessUrl("/")  // 로그아웃 성공 후 이동 페이지
+                        .deleteCookies("JSESSIONID") // 로그아웃 후 쿠키 삭제
+                        // 로그아웃 핸들러
+                        /*.addLogoutHandler(logoutHandler())*/
+                        // 로그아웃 성공 후 핸들러
+                        /*.logoutSuccessHandler(logoutSuccessHandler())*/
                 )
 
                 .sessionManagement(session -> session
@@ -174,7 +179,7 @@ public class SecurityConfig {
                         */
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false)
-                        .expiredUrl("/")
+                        .expiredUrl("/user/login")
 
 
                 )

@@ -7,23 +7,29 @@
     <title>HOME</title>
 </head>
 <body>
-<h1>home</h1>
 <div>
     <form action="/logout" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <c:choose>
-            <c:when test="${isLogin eq 'true'}">
-                <a href="/board/list">회원게시판</a>
-                <a href="/user/mypage">마이페이지</a>
-                <c:if test="${user.auth == 'ADMIN'}">
-                    <a href="/admin/admin">관리자 페이지</a>
-                </c:if>
-                <a href="/logout">로그아웃</a>
-            </c:when>
-            <c:otherwise>
-                <a href="/user/login" id="loginBtn">로그인</a>
-            </c:otherwise>
-        </c:choose>
+        <div>
+            <nav>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <ul>
+                    <li><a href="/">메인</a></li>
+                    <c:choose>
+                        <c:when test="${isLogin eq 'true'}">
+                            <li><a href="/board/list">회원게시판</a></li>
+                            <li><a href="/user/mypage">마이페이지</a></li>
+                            <c:if test="${user.auth == 'ADMIN'}">
+                                <li><a href="/admin/admin">관리자 페이지</a></li>
+                            </c:if>
+                            <li><a href="/logout">로그아웃</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/user/login" id="loginBtn">로그인</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </nav>
+        </div>
     </form>
 </div>
 <div>
@@ -32,9 +38,7 @@
 <div>
     <c:choose>
         <c:when test="${isLogin eq 'true'}">
-            <h2>${user.user_id} 님 로그인 중입니다</h2>
-            <h4>nickname : ${user.nickname}
-            <br>권한 : ${user.auth}</h4>
+            <h2>${user.auth} 권한, ${user.nickname} 님 로그인 중입니다</h2>
         </c:when>
         <c:otherwise>
             <h3>로그인 후 게시판 이용 가능</h3>
