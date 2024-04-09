@@ -11,6 +11,6 @@
     <title>글쓰기</title>
 </head>
 <body>
-
+    글쓰기화면
 </body>
 </html>

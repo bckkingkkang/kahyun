@@ -12,5 +12,8 @@
 </head>
 <body>
     특별회원 게시판입니다.
+
+    <a href="/">메인으로</a>
+    <a href="/special_board/create">글쓰기</a>
 </body>
 </html>
