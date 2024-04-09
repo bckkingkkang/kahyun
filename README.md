@@ -4,10 +4,10 @@
 > 2. [ ] multipart/form-data
 > 3. [ ] json
 - [ ] **AOP를 활용한 URL별 권한 체크**
-- [ ] **resources 파일 환경 분리**
+- [x] **resources 파일 환경 분리**
 - [ ] security 로그인 성공 핸들러
-- [ ] 주석 체크
-- [ ] 배포
+- [x] 주석 체크
+- [x] 배포
 
 ### 수정사항
 - [ ] null 처리
