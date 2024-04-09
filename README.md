@@ -223,7 +223,14 @@ AuthenticationProvider를 상속한 AuthProvider 클래스
    - 해킹을 통해 컨트롤러를 제어할 수 있게 되더라도 리포지토리에 직접 접근할 수는 없게 된다.
 
 ---------------------
+## Multipart
+: HTTP에서 request는 header와 body 부분으로 나누어져 있다. header의 content-type은 body에 대한 데이터를 정의한다. 서버는 content-type의 값을 보고 body를 알맞은 형태로 해석한다.
+multipart란 이 요청 헤더 content-type의 한 종류로서 웹 클라이언트가 요청을 보낼 때, HTTP 요청의 바디 부분을 여러 부분으로 나누어서 보내는 방식이다.   
+> 두 종류의 데이터가 하나의 HTTP Request Body에 들어가야 하는 경우 하나의 Body에서 두 종류의 데이터를 구분해서 넣어주는 방법이 multipart 타입이다.       
+> Body에서 데이터를 구분해야 하기 때문에 요청파라미터를 url 뒤에 문자열로 추가하는 GET 방식으로는 파일을 보낼 수 없다.
+>   > POST 방식에서만 사용 가능     
 
+---------------------
 ## 요구사항
 **1. spring framework 사용**
    - 리스트/상세 페이지
