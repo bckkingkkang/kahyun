@@ -19,7 +19,7 @@
 - [ ] SecurityConfig 로그아웃 부분 추가
 - [ ] SecurityConfig sessionManagement 에서 동시 세션 관리(중복 로그인) -> 테스트하고 수정
 - [x] mapper.xml 에서 *로 select 해오는 부분 구체적으로 변경, parameterType, resultType 추가
-- [ ] mybatis-config.xml 사용 X
+- [x] mybatis-config.xml 사용 X
 - [x] 불필요한 주석, import 제거
 - [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
 - [ ] Controller에서 요청방식(requestMapping, GetMapping, ...) 검토 및 수정
