@@ -44,6 +44,7 @@ public class BoardController {
         return "board/list";
     }
 
+
     /* 게시글 리스트 */
     @GetMapping("list")
     public String getBoardList(Model model, BoardVo boardVo) {

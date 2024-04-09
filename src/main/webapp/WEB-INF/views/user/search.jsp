@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>계정 찾기</title>
 </head>
 <body>
 계정찾기

@@ -37,6 +37,11 @@ public class LoginController {
        return "main";
     }
 
+    @RequestMapping("logout")
+    public String logout() {
+        return "user/logout";
+    }
+
     /* 회원가입 화면 */
     @RequestMapping("signup")
     public String signup() {

@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>게시글 작성</title>
 </head>
 <body>
 <div>글쓰기화면</div>

@@ -79,7 +79,7 @@ public class SecurityConfig {
                     -> JSP에서 POST 요청을 보낼 때 CSRF Token에 값을 넣어 함께 보내고 Spring security가 token 값을 확인하여 CSRF 공격 판단
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 */
-                .csrf(csrf -> csrf.disable())   // 로컬에서 확인을 위해 csrf 비활성화
+                .csrf(csrf -> csrf.disable())  // 로컬에서 확인을 위해 csrf 비활성화
 
                 // 403 -> alert 표시, 메인으로 이동
                 .exceptionHandling(handler->handler.accessDeniedHandler(accessDeniedHandler))
@@ -97,12 +97,16 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/user/**")
                         ).permitAll()
                         /*  hasAuthority : 특정 권한을 가지고 있는 경우에만 접근 허가
-                            hasAuthority : 에러 권한 중 하나만 만족해도 접근 허용
+                            hasAnyAuthority : 에러 권한 중 하나만 만족해도 접근 허용
                             access : 특정 조건을 기반으로 접근을 제한             */
                         .requestMatchers(
                                 new AntPathRequestMatcher("/admin/**")
                         // 관리자 페이지는 관리자만 접근 가능
                         ).hasAuthority("SYS_ADMIN")
+
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/special_board/**")
+                        ).hasAnyAuthority("SYS_ADMIN", "VIP")
 
                         // 그 외 요청 접근 X
                         .anyRequest().authenticated()
@@ -131,8 +135,8 @@ public class SecurityConfig {
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")   // 로그아웃 처리 URL
-                        .logoutSuccessUrl("/")  // 로그아웃 성공 후 이동 페이지
-                        .deleteCookies("JSESSIONID") // 로그아웃 후 쿠키 삭제
+                        .logoutSuccessUrl("/user/logout")  // 로그아웃 성공 후 이동 페이지
+                        /*.deleteCookies("JSESSIONID")*/ // 로그아웃 후 쿠키 삭제
                         // 로그아웃 핸들러
                         /*.addLogoutHandler(logoutHandler())*/
                         // 로그아웃 성공 후 핸들러
@@ -178,8 +182,9 @@ public class SecurityConfig {
                                 : 세션이 유효하지 않을 때 이동할 페이지
                         */
                         .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false)
-                        .expiredUrl("/user/login")
+                        .maxSessionsPreventsLogin(true)
+                        .expiredUrl("/user/logout")  // 세션 만료 시 "/user/logout" 으로 이동
+
 
 
                 )

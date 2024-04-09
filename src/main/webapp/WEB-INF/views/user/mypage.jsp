@@ -9,8 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>마이페이지</title>
 </head>
+
 <body>
 이름 : ${userInfo.username}
 닉네임 : ${userInfo.nickname}
