@@ -4,7 +4,8 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+
+    <title>로그인</title>
 </head>
 <body>
     <div>

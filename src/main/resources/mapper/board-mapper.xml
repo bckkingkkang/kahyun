@@ -12,6 +12,7 @@
             nickname,
             create_dt,
             update_dt,
+            view,
             ROW_NUMBER() over(ORDER BY seq) AS rownum
         FROM board
         WHERE status = 'N'

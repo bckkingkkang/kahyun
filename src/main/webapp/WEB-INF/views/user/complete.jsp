@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>회원가입 완료</title>
 </head>
 <body>
 회원가입완료

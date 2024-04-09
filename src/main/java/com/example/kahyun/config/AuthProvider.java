@@ -47,8 +47,12 @@ public class AuthProvider implements AuthenticationProvider {
             /* users 권한이 ADMIN인 경우 SYS_ADMIN 권한 부여 */
             if(loginVo.getAuth().equals("ADMIN")) {
                 roles.add(new SimpleGrantedAuthority("SYS_ADMIN"));
-            } else {
+            } else if(loginVo.getAuth().equals("VIP")) {
+                roles.add(new SimpleGrantedAuthority("VIP"));
+            } else if(loginVo.getAuth().equals("USER")){
                 roles.add(new SimpleGrantedAuthority("NOR_ADMIN"));
+            } else {
+                roles.add(new SimpleGrantedAuthority("ANONYMOUS"));
             }
 
             // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token

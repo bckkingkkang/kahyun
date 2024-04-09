@@ -18,7 +18,7 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = response.getWriter();
 
-            String htmlcode = "<script>" + "alert('권한이 없습니다.(관리자만 이용가능)');" + "location.href='/'</script>";
+            String htmlcode = "<script>" + "alert('권한이 없습니다.');" + "location.href='/'</script>";
             out.print(htmlcode);
             out.flush();
     }
