@@ -144,6 +144,25 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
    - invalidSessionUrl()
         - 세션이 유효하지 않을 때 이동할 페이지
 
+### 선언적 방식 - URL 단위 API
+|메소드|동작|
+|:---:|:---:|
+| authenticated() | 인증된 사용자의 접근을 허용 |
+| fullyAuthenticated() | 인증된 사용자의 접근을 허용, remeberMe 인증 제외 |
+| permitAll() | 무조건 접근을 허용 |
+| denyAll() | 무조건 접을을 허용하지 않음 |
+| anonymous() | 익명사용자의 접근을 허용 |
+| rememberMe() | 기억하기를 통해 인증된 사용자의 접근을 허용 |
+| access(String) | 주어진 SpEL 표현식의 평가 결과가 true면 접근을 허용 |
+| hasRole(String) | 사용자가 주어진 역할이 있다면 접근을 허용 |
+| hasAuthority(String) | 사용자가 주어진 권한이 있다면 접근을 허용 |
+| hasAnyRole(String...) | 사용자가 권한을 하나라도 가지고 있는 경우 접근을 허용 |
+| hasAnyAuthority(String...) | 사용자가 주어진 권한 중 어떤 것이라도 있다면 접근을 허용 |
+| hasIpAddress(String) | 주어진 IP로부터 요청이 왔다면 접근을 허용 |
+
+
+
+
 -----------------------------------------
 ## AuthenticationProvier
 spring security의 인증 방식 : credential 기반 인증 (사용자명과 비밀번호를 이용한 방식)
