@@ -13,7 +13,7 @@
         <a href="/">메인으로</a>
     </div>
         <form action="/user/loginForm" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
             <div>
             <div>
                 <input type="text" id="user_id" name="user_id" placeholder="user id">

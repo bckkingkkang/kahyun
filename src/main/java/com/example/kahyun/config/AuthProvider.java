@@ -21,6 +21,7 @@ public class AuthProvider implements AuthenticationProvider {
     @Autowired
     private UserService userService;
 
+
     /*
         Spring Security의 인증 방식 : Credential 기반 인증 : 사용자명과 비밀번호를 이용한 방식
         - principal : 아이디
@@ -45,11 +46,11 @@ public class AuthProvider implements AuthenticationProvider {
             List<GrantedAuthority> roles = new ArrayList<>();
 
             /* users 권한이 ADMIN인 경우 SYS_ADMIN 권한 부여 */
-            if(loginVo.getAuth().equals("ADMIN")) {
+            if("ADMIN".equals(loginVo.getAuth())) {
                 roles.add(new SimpleGrantedAuthority("SYS_ADMIN"));
-            } else if(loginVo.getAuth().equals("VIP")) {
+            } else if("VIP".equals(loginVo.getAuth())) {
                 roles.add(new SimpleGrantedAuthority("VIP"));
-            } else if(loginVo.getAuth().equals("USER")){
+            } else if("USER".equals(loginVo.getAuth())){
                 roles.add(new SimpleGrantedAuthority("NOR_ADMIN"));
             } else {
                 roles.add(new SimpleGrantedAuthority("ANONYMOUS"));
@@ -57,6 +58,8 @@ public class AuthProvider implements AuthenticationProvider {
 
             // 인증된 user 정보를 담아 SecurityContextHolder에 저장되는 token
             token = new UsernamePasswordAuthenticationToken(loginVo.getUser_id(), null, roles);
+
+            System.out.println(token);
 
             return token;
         }
