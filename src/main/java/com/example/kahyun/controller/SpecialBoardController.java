@@ -15,4 +15,11 @@ public class SpecialBoardController {
 
         return "special_board/list";
     }
+
+    /* 게시판 화면 */
+    @RequestMapping("create")
+    public String create() {
+
+        return "special_board/create";
+    }
 }

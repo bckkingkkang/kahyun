@@ -141,6 +141,10 @@ public class SecurityConfig {
                         /*.addLogoutHandler(logoutHandler())*/
                         // 로그아웃 성공 후 핸들러
                         /*.logoutSuccessHandler(logoutSuccessHandler())*/
+                        // 로그아웃 시 쿠키 제거
+                        .deleteCookies("JSESSIONID")
+                        // 로그아웃 시 세션 정보를 제거할 지의 여부, 기본값은 True -> 세션 정보를 제거한다.
+                        .invalidateHttpSession(true)
                 )
 
                 .sessionManagement(session -> session
