@@ -10,7 +10,7 @@
 - [x] 배포
 
 ### 수정사항
-- [ ] null 처리
+- [x] null 처리
 - [ ] Controller 부분 user_id로 getPrincipal() 가져오는 부분 수정
 - [ ] jsp 페이지 내 _csrf token input -> header
 - [ ] successHandler 추가, failureHandler 수정
