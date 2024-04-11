@@ -63,8 +63,8 @@ public class LoginController {
     /* 마이페이지 */
     @RequestMapping("mypage")
     public ModelAndView mypage(ModelAndView mav) {
-        String user_id = (String)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        mav.addObject("userInfo",userService.selectUser(user_id));
+        mav.addObject("userInfo"
+                ,userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         mav.setViewName("user/mypage");
         return mav;
     }
@@ -105,8 +105,8 @@ public class LoginController {
     /* 아이디 중복 체크 버튼 ajax */
     @ResponseBody
     @PostMapping("check_id_ajax")
-    public int check_id_ajax(LoginVo loginVo) {
-        int count = loginMapper.checkId(loginVo);
+    public int check_id_ajax(String user_id) {
+        int count = loginMapper.checkId(user_id);
         return count;
     }
 

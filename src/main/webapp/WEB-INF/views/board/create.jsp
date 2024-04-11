@@ -3,13 +3,15 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%--<meta name="_csrf" content="${_csrf.token}">
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>--%>
     <title>게시글 작성</title>
 </head>
 <body>
 <div>글쓰기화면</div>
 
-<form action="" enctype="multipart/form-data" id="saveForm" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<form action="" id="saveForm" method="post">
+    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
     <table>
         <tr>
             <td>제목</td>

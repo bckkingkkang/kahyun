@@ -13,7 +13,7 @@ public interface LoginMapper {
     String searchId(LoginVo loginVo);
 
     /* 아이디 중복체크 */
-    int checkId(LoginVo loginVo);
+    int checkId(String user_id);
 
     /* id로 user 정보 select */
     LoginVo selectUser(String id);

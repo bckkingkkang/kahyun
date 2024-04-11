@@ -26,7 +26,7 @@
     </insert>
 
     <!-- 게시글 삭제 -->
-    <update id="deleteBoard" parameterType="BoardVo">
+    <update id="deleteBoard" parameterType="String">
         UPDATE board
         SET status = 'D'
         WHERE seq = #{seq}

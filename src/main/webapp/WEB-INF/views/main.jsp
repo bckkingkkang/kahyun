@@ -11,7 +11,7 @@
     <form action="/logout" method="post">
         <div>
             <nav>
-            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 <ul>
                     <li><a href="/">메인</a></li>
                     <c:choose>

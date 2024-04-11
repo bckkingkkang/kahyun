@@ -15,7 +15,7 @@ public interface BoardMapper {
     int createBoard(BoardVo boardVo);
 
     /* 게시글 삭제 */
-    int deleteBoard(BoardVo boardVo);
+    int deleteBoard(String seq);
 
     /* 게시글 상세보기 */
     BoardVo getBoardDetail(BoardVo boardVo);

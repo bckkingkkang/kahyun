@@ -11,6 +11,13 @@
     <title>글쓰기</title>
 </head>
 <body>
-    글쓰기화면
+    <h2>글 쓰기 화면</h2>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="file" multiple="multiple">
+        <button>등록</button>
+    </form>
+
+    <a href="list">목록으로</a>
 </body>
 </html>
