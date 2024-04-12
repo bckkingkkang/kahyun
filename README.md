@@ -23,6 +23,9 @@
 - [x] 불필요한 주석, import 제거
 - [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
 - [ ] Controller에서 요청방식(requestMapping, GetMapping, ...) 검토 및 수정
+- [ ] header 추가
+- [ ] 프로필 이미지 추가
+- [ ] 회원가입 시 메일 인증 추가
 
 ---------------------
 
