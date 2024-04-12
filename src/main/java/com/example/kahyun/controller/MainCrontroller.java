@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,9 +33,19 @@ public class MainCrontroller {
         return "main";
     }
 
-    @RequestMapping("/hello")
-    public String helloTest() {
-        return "hello";
+    @RequestMapping("/template/header")
+    public String header(Model model) {
+        /*LoginVo loginVo = userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("user", loginVo);
+        String isLogin;
+        if(loginVo != null) {
+            isLogin = "true";
+        } else {
+            isLogin = "false";
+        }
+        model.addAttribute("isLogin",isLogin);*/
+        return "template/header";
     }
+
 
 }

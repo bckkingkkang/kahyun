@@ -6,11 +6,10 @@
     <title>회원가입 완료</title>
 </head>
 <body>
-회원가입완료
+<jsp:include page="template/header"></jsp:include>
+<h2>회원가입 완료</h2>
 
 <a href="login">로그인</a>
-<a href="/">메인으로</a>
-
 <script>
 
 </script>

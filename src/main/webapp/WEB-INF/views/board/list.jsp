@@ -15,9 +15,9 @@
     }
 </style>
 <body>
+<jsp:include page="/template/header"></jsp:include>
     <div>
-        회원게시판
-        <button type="button" id="writeBtn" onclick="location.href='/board/create'">글쓰기</button>
+        <h2>회원게시판</h2>
     </div>
     <div>
         <table>
@@ -52,7 +52,8 @@
         </table>
     </div>
     <div>
-        <a href="/">메인으로</a>
+        <%--<a href="/">메인으로</a>--%>
+        <a href="/board/create">글쓰기</a>
     </div>
 
 </body>

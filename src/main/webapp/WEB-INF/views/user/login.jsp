@@ -4,13 +4,12 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <title>로그인</title>
 </head>
 <body>
+<jsp:include page="/template/header"></jsp:include>
     <div>
-        로그인화면
-        <a href="/">메인으로</a>
+        <h2>로그인 화면</h2>
     </div>
         <form action="/user/loginForm" method="post">
             <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>

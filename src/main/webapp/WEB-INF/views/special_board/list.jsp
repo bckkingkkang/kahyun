@@ -11,9 +11,10 @@
     <title>특별회원 전용</title>
 </head>
 <body>
-    특별회원 게시판입니다.
+<jsp:include page="/template/header"></jsp:include>
+    <h2>특별회원 게시판입니다.</h2>
 
-    <a href="/">메인으로</a>
+    <%--<a href="/">메인으로</a>--%>
     <a href="/special_board/create">글쓰기</a>
 </body>
 </html>

@@ -7,7 +7,8 @@
     <title>main</title>
 </head>
 <body>
-<div>
+<jsp:include page="/template/header"></jsp:include>
+<%--<div>
     <form action="/logout" method="post">
         <div>
             <nav>
@@ -32,19 +33,16 @@
             </nav>
         </div>
     </form>
-</div>
+</div>--%>
 <div>
-
-</div>
-<div>
-    <c:choose>
+    <%--<c:choose>
         <c:when test="${isLogin eq 'true'}">
             <h2>${user.auth} 권한, ${user.nickname} 님 로그인 중입니다</h2>
         </c:when>
         <c:otherwise>
             <h3>로그인 후 게시판 이용 가능</h3>
         </c:otherwise>
-    </c:choose>
+    </c:choose>--%>
 
 </div>
 

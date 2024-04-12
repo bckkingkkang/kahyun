@@ -6,6 +6,7 @@
     <title>계정 찾기</title>
 </head>
 <body>
+<jsp:include page="/template/header"></jsp:include>
 계정찾기
 <div>
     <form action="">

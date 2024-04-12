@@ -12,6 +12,7 @@
     <title>로그아웃</title>
 </head>
 <body>
+<jsp:include page="/template/header"></jsp:include>
     로그아웃되었습니다.
 
     <a href="/">메인으로</a>

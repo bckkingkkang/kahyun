@@ -6,6 +6,7 @@
     <title>회원가입</title>
 </head>
 <body>
+<jsp:include page="/template/header"></jsp:include>
 <div>
     회원가입 화면
 </div>

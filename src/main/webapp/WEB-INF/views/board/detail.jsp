@@ -15,13 +15,7 @@
     }
 </style>
 <body>
-<div>
-    <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-    <c:if test="${boardDetail.user_seq == userDetail.seq || userDetail.auth == 'ADMIN'}">
-        <button type="button" id="deleteBtn">삭제</button>
-    </c:if>
-
-</div>
+<jsp:include page="/template/header"></jsp:include>
 <div>
     <h1>게시판 상세 화면</h1>
 </div>
@@ -59,28 +53,34 @@
         </tr>
     </table>
     </div>
-
     </form>
 
     <div>
-        <div>
-            <table>
-                <tr>
-                    <form action="">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <td style="width: 100px">댓글</td>
-                    <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
-                    <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
-                    </form>
-                </tr>
-            </table>
-        </div>
+        <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
+        <c:if test="${boardDetail.user_seq == userDetail.seq || userDetail.auth == 'ADMIN'}">
+            <button type="button" id="deleteBtn">삭제</button>
+        </c:if>
+
     </div>
-
-
+</div>
+<div>
     <div>
         <div>
             <h3>댓글</h3>
+        </div>
+        <div>
+            <div>
+                <table>
+                    <tr>
+                        <form action="">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                            <td style="width: 100px">댓글</td>
+                            <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
+                            <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div>
             <c:forEach items="${boardComment}" var="boardComment">
@@ -105,8 +105,6 @@
     </div>
 
 </div>
-
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">

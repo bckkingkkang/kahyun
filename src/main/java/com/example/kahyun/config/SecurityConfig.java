@@ -82,10 +82,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())  // 로컬에서 확인을 위해 csrf 비활성화
 
                 // 403 -> alert 표시, 메인으로 이동
-                .exceptionHandling(handler->handler.accessDeniedHandler(accessDeniedHandler))
+                /*.exceptionHandling(handler -> handler.accessDeniedHandler(accessDeniedHandler))
 
                 // 401 -> alert 표시, 메인으로 이동
-                .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))
+                .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))*/
 
                 /* HttpServletRequest를 사용하는 요청들에 대한 접근 설정 */
                 .authorizeHttpRequests(requests -> requests
@@ -94,7 +94,9 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/"),
                                 /*new AntPathRequestMatcher("/user/signup"),*/
                                 /* 로그인, 회원가입 관련 페이지는 로그인 없이 접근 /user/** */
-                                new AntPathRequestMatcher("/user/**")
+                                new AntPathRequestMatcher("/user/**"),
+                                new AntPathRequestMatcher("/template/header"),
+                                new AntPathRequestMatcher("/template/**")
                         ).permitAll()
                         /*  hasAuthority : 특정 권한을 가지고 있는 경우에만 접근 허가
                             hasAnyAuthority : 에러 권한 중 하나만 만족해도 접근 허용
@@ -143,6 +145,7 @@ public class SecurityConfig {
                         /*.logoutSuccessHandler(logoutSuccessHandler())*/
                         // 로그아웃 시 쿠키 제거
                         .deleteCookies("JSESSIONID")
+                        .clearAuthentication(true)
                         // 로그아웃 시 세션 정보를 제거할 지의 여부, 기본값은 True -> 세션 정보를 제거한다.
                         .invalidateHttpSession(true)
                 )

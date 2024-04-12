@@ -11,6 +11,7 @@
     <title>글쓰기</title>
 </head>
 <body>
+<jsp:include page="/template/header"></jsp:include>
     <h2>글 쓰기 화면</h2>
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -18,6 +19,6 @@
         <button>등록</button>
     </form>
 
-    <a href="list">목록으로</a>
+    <%--<a href="list">목록으로</a>--%>
 </body>
 </html>

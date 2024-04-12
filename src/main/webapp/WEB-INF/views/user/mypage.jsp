@@ -11,12 +11,13 @@
 <head>
     <title>마이페이지</title>
 </head>
+<jsp:include page="/template/header"></jsp:include>
 
 <body>
 이름 : ${userInfo.username}
 닉네임 : ${userInfo.nickname}
 가입일 : ${userInfo.reg_date}
 
-<a href="/">메인으로</a>
+<%--<a href="/">메인으로</a>--%>
 </body>
 </html>
