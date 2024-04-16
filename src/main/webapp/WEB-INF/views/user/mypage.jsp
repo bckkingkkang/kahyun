@@ -12,11 +12,34 @@
     <title>마이페이지</title>
 </head>
 <jsp:include page="/header/header"></jsp:include>
-
+<style>
+    table {
+        border: 2px solid; border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid; padding:10px 5px;
+    }
+</style>
 <body>
-이름 : ${userInfo.username}
-닉네임 : ${userInfo.nickname}
-가입일 : ${userInfo.reg_date}
+<h2>마이페이지</h2>
+<table>
+    <tr>
+        <td>이름</td>
+        <td>${userInfo.username}</td>
+    </tr>
+    <tr>
+        <td>아이디</td>
+        <td>${userInfo.user_id}</td>
+    </tr>
+    <tr>
+        <td>닉네임</td>
+        <td>${userInfo.nickname}</td>
+    </tr>
+    <tr>
+        <td>가입일자</td>
+        <td>${userInfo.reg_date}</td>
+    </tr>
+</table>
 
 <%--<a href="/">메인으로</a>--%>
 </body>
