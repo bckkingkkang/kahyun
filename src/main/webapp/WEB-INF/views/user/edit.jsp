@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>마이페이지</title>
+    <title>내 정보 수정</title>
 </head>
 <jsp:include page="/header/header"></jsp:include>
 <style>
@@ -22,7 +22,7 @@
 </style>
 <body>
 <div>
-    <h1>마이페이지</h1>
+    <h1>내 정보 수정</h1>
 </div>
 <div>
     <form action="" enctype="multipart/form-data">
@@ -30,11 +30,11 @@
             <h3>프로필 이미지</h3>
             <table>
                 <tr>
-                    <td style="width: 1200px">
+                    <td style="width: 120px">
                         <label for="input_image">이미지 선택</label>
                     </td>
                     <td style="width: 300px">
-                        <input type="file" id="input_image">
+                        <input type="file" id="input_image" accept="image/*">
                     </td>
                 </tr>
             </table>
@@ -48,22 +48,22 @@
                 </tr>
                 <tr>
                     <td>아이디</td>
-                    <td>${userInfo.user_id}</td>
+                    <td><input type="text" value="${userInfo.user_id}"></td>
                 </tr>
                 <tr>
                     <td>닉네임</td>
-                    <td>${userInfo.nickname}</td>
+                    <td><input type="text" value="${userInfo.nickname}"></td>
                 </tr>
                 <tr>
-                    <td>가입일자</td>
-                    <td>${userInfo.reg_date}</td>
+                    <td>비밀번호 변경</td>
+                    <td><input type="text" value=""></td>
                 </tr>
             </table>
         </div>
     </form>
 </div>
 <div>
-    <a href="edit">수정하기</a>
+    <button>수정하기</button>
 </div>
 </body>
 </html>

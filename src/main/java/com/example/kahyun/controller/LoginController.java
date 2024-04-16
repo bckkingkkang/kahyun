@@ -69,6 +69,14 @@ public class LoginController {
         return mav;
     }
 
+    @RequestMapping("edit")
+    public ModelAndView edit(ModelAndView mav) {
+        mav.addObject("userInfo"
+                ,userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        mav.setViewName("user/edit");
+        return mav;
+    }
+
     /* 회원가입 ajax */
     @ResponseBody
     @PostMapping("signup_ajax")

@@ -154,6 +154,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 
 
 	</dependencies>
