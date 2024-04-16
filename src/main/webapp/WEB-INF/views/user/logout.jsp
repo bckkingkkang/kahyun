@@ -8,14 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
     <title>로그아웃</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
     로그아웃되었습니다.
 
-    <a href="/">메인으로</a>
+    <a href="main">메인으로</a>
     <a href="/user/login">로그인하기</a>
 </body>
 </html>

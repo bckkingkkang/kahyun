@@ -15,9 +15,12 @@
     }
 </style>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
 <div>
     <h1>게시판 상세 화면</h1>
+    <c:if test="${boardDetail.status == 'D'}">
+        <h3>삭제된 게시글입니다.</h3>
+    </c:if>
 </div>
 <div>
     <form action="">
@@ -57,7 +60,7 @@
 
     <div>
         <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-        <c:if test="${boardDetail.user_seq == userDetail.seq || userDetail.auth == 'ADMIN'}">
+        <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
             <button type="button" id="deleteBtn">삭제</button>
         </c:if>
 

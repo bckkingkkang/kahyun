@@ -7,7 +7,10 @@
     <title>main</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="header/header.jsp"></jsp:include>
+<h2>메인화면</h2>
+메인화면입니당
+asdf
 <%--<div>
     <form action="/logout" method="post">
         <div>
@@ -34,7 +37,7 @@
         </div>
     </form>
 </div>--%>
-<div>
+
     <%--<c:choose>
         <c:when test="${isLogin eq 'true'}">
             <h2>${user.auth} 권한, ${user.nickname} 님 로그인 중입니다</h2>
@@ -44,14 +47,6 @@
         </c:otherwise>
     </c:choose>--%>
 
-</div>
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
 </script>
 </body>
 

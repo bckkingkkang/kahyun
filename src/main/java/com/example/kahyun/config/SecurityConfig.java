@@ -82,21 +82,30 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())  // 로컬에서 확인을 위해 csrf 비활성화
 
                 // 403 -> alert 표시, 메인으로 이동
-                /*.exceptionHandling(handler -> handler.accessDeniedHandler(accessDeniedHandler))
+                .exceptionHandling(handler -> handler.accessDeniedHandler(accessDeniedHandler))
 
                 // 401 -> alert 표시, 메인으로 이동
-                .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))*/
+                .exceptionHandling(handler->handler.authenticationEntryPoint(authenticationEntryPoint))
 
                 /* HttpServletRequest를 사용하는 요청들에 대한 접근 설정 */
                 .authorizeHttpRequests(requests -> requests
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers(
-                                new AntPathRequestMatcher("/"),
-                                /*new AntPathRequestMatcher("/user/signup"),*/
-                                /* 로그인, 회원가입 관련 페이지는 로그인 없이 접근 /user/** */
+                                new AntPathRequestMatcher("**")
+                                /*new AntPathRequestMatcher("/"),
+                                new AntPathRequestMatcher("main"),
+                                *//* 로그인, 회원가입 관련 페이지는 로그인 없이 접근 /user/** *//*
                                 new AntPathRequestMatcher("/user/**"),
-                                new AntPathRequestMatcher("/template/header"),
-                                new AntPathRequestMatcher("/template/**")
+                                new AntPathRequestMatcher("user/**"),
+                                *//*new AntPathRequestMatcher("/header/header"),*//*
+                                new AntPathRequestMatcher("/header/**"),
+                                new AntPathRequestMatcher("/board/list"),
+                                new AntPathRequestMatcher("board/list"),
+                                new AntPathRequestMatcher("/special_board/list"),
+                                new AntPathRequestMatcher("special_board/list"),
+                                new AntPathRequestMatcher("header/**"),
+                                new AntPathRequestMatcher("admin/admin"),
+                                new AntPathRequestMatcher("/admin/admin")*/
                         ).permitAll()
                         /*  hasAuthority : 특정 권한을 가지고 있는 경우에만 접근 허가
                             hasAnyAuthority : 에러 권한 중 하나만 만족해도 접근 허용
@@ -122,7 +131,7 @@ public class SecurityConfig {
                         .usernameParameter("user_id")
                         .passwordParameter("password")
                         // 로그인 성공 시 defaultSuccessUrl 페이지로 이동
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/main")
 
                         /* 로그인 성공 핸들러 successHandler */
                         /*.successHandler(successHandler)*/

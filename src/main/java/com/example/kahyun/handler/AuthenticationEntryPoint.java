@@ -16,7 +16,7 @@ public class AuthenticationEntryPoint implements org.springframework.security.we
         response.setContentType("text/html; charset=utf-8");
         PrintWriter out = response.getWriter();
 
-        String htmlcode = "<script>" + "alert('권한이 없습니다. 로그인 후 이용해주세요');" + "location.href='/'</script>";
+        String htmlcode = "<script>" + "alert('권한이 없습니다. 로그인 후 이용해주세요');" + "location.href='/user/login'</script>";
         out.print(htmlcode);
         out.flush();
     }

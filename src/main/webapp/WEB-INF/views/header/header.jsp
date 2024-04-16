@@ -43,7 +43,7 @@
         <nav>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             <ul>
-                <li><a href="/">메인</a></li>
+                <li><a href="/main">메인</a></li>
                 <%--<c:choose>
                     <c:when test="${isLogin eq 'true'}">--%>
                         <li><a href="/board/list">회원게시판</a></li>

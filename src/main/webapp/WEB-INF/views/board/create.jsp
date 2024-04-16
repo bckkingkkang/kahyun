@@ -7,7 +7,7 @@
     <title>게시글 작성</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
 <div>
 <h2>글쓰기화면</h2>
 </div>

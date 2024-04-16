@@ -11,7 +11,7 @@
     <title>특별회원 전용</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
     <h2>특별회원 게시판입니다.</h2>
 
     <%--<a href="/">메인으로</a>--%>

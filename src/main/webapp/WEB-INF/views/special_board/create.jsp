@@ -11,7 +11,7 @@
     <title>글쓰기</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
     <h2>글 쓰기 화면</h2>
 
     <form action="" method="post" enctype="multipart/form-data">

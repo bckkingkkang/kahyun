@@ -23,7 +23,7 @@ public class LoginController {
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     /* 로그인 화면 */
-    @GetMapping("login")
+    @RequestMapping("login")
     public String login(@RequestParam(value="error", required = false)String error,
                         @RequestParam(value="exception", required = false)String exception, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

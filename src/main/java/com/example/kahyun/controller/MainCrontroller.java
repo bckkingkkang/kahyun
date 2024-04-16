@@ -19,6 +19,11 @@ public class MainCrontroller {
     private UserService userService;
 
     @RequestMapping("/")
+    public String Test() {
+        return "main";
+    }
+
+    @RequestMapping("/main")
     public String HomeTest(Model model) {
         String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LoginVo loginVo = userService.selectUser(user_id);
@@ -33,7 +38,7 @@ public class MainCrontroller {
         return "main";
     }
 
-    @RequestMapping("/template/header")
+    @RequestMapping("/header/header")
     public String header(Model model) {
         /*LoginVo loginVo = userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("user", loginVo);
@@ -44,7 +49,7 @@ public class MainCrontroller {
             isLogin = "false";
         }
         model.addAttribute("isLogin",isLogin);*/
-        return "template/header";
+        return "header/header";
     }
 
 

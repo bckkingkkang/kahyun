@@ -7,13 +7,13 @@
     <title>로그인</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
     <div>
         <h2>로그인 화면</h2>
     </div>
+    <div>
         <form action="/user/loginForm" method="post">
             <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
-            <div>
             <div>
                 <input type="text" id="user_id" name="user_id" placeholder="user id">
             </div>
@@ -25,18 +25,14 @@
                         <script> alert("${exception}"); location.href="/";</script>
                     </c:if>
                 </div>
-
+                <div>
+                    <button type="button" onclick="location.href='search'">계정 찾기</button>
+                    <button type="submit">로그인하기</button>
+                    <button type="button" onclick="location.href='signup'">회원 가입</button>
+                </div>
+        </form>
     </div>
-
-    <div>
-        <button type="button" onclick="location.href='search'">계정 찾기</button>
-        <button type="submit">로그인하기</button>
-        <button type="button" onclick="location.href='signup'">회원 가입</button>
-    </div>
-    </form>
-
 <script>
-
 </script>
 </body>
 </html>

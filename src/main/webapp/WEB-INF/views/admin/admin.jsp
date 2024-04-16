@@ -6,14 +6,11 @@
     <title>admin</title>
 </head>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
 <h2>admin</h2>
 
-    <h3>회원 리스트</h3>
-
-<%--<div>
-    <a href="/">메인으로</a>
-</div>--%>
+    <h3><a href="user_list">회원 리스트 바로가기</a></h3>
+    <h3><a href="admin_list">관리자 리스트 바로가기</a></h3>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">

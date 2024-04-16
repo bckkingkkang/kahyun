@@ -11,7 +11,7 @@
 <head>
     <title>마이페이지</title>
 </head>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
 
 <body>
 이름 : ${userInfo.username}

@@ -12,6 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginVo implements UserDetails {
+    private String rownum;
     private String seq;
     private String username;
     private String user_id;

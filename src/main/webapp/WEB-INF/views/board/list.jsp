@@ -15,7 +15,7 @@
     }
 </style>
 <body>
-<jsp:include page="/template/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
     <div>
         <h2>회원게시판</h2>
     </div>
