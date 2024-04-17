@@ -288,6 +288,8 @@ CREATE TABLE kahyun.board
    update_dt datetime NULL comment '수정일',
    status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
    `view` int(10) NOT NULL DEFAULT 0 comment '조회 수',
+   user_seq int(10) NOT NULL comment '작성자 번호',
+   boardOption enum('boardOption1', 'boardOption2','boardOption3) NOT NULL DEFAULT 'boardOption1', 
   
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
@@ -305,6 +307,7 @@ CREATE TABLE kahyun.users
    reg_date datetime NULL comment '수정일',
    status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
    auth enum('USER','ADMIN') NOT NULL DEFAULT 'USER' comment '권한',
+   email varchar(50) NOT NULL comment '이메일',
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
