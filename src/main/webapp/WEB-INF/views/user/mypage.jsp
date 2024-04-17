@@ -30,17 +30,18 @@
             <h3>프로필 이미지</h3>
             <table>
                 <tr>
-                    <td style="width: 1200px">
-                        <label for="input_image">이미지 선택</label>
+                    <td style="width: 120px">
+                        <%--<label for="input_image">이미지 선택</label>--%>
+                        프로필 이미지
                     </td>
                     <td style="width: 300px">
-                        <input type="file" id="input_image">
+
                     </td>
                 </tr>
             </table>
         </div>
         <div>
-            <h3>내 정보 수정</h3>
+            <h3>내 정보</h3>
             <table>
                 <tr>
                     <td style="width: 120px">이름</td>
@@ -53,6 +54,10 @@
                 <tr>
                     <td>닉네임</td>
                     <td>${userInfo.nickname}</td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td>${userInfo.email}</td>
                 </tr>
                 <tr>
                     <td>가입일자</td>

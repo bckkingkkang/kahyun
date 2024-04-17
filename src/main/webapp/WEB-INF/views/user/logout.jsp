@@ -14,7 +14,7 @@
 <jsp:include page="/header/header"></jsp:include>
     로그아웃되었습니다.
 
-    <a href="main">메인으로</a>
+    <a href="/main">메인으로</a>
     <a href="/user/login">로그인하기</a>
 </body>
 </html>

@@ -21,6 +21,7 @@ public class LoginVo implements UserDetails {
     private String reg_date;
     private String status;
     private String auth;
+    private String email;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
