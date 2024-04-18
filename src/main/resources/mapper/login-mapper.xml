@@ -5,9 +5,9 @@
 
     <insert id="createUser" parameterType="LoginVo">
         INSERT INTO users
-            (username, user_id, nickname, password, reg_date)
+            (username, user_id, nickname, password, reg_date, email)
         VALUES
-            (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_DATE())
+            (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_DATE(), #{email})
     </insert>
 
     <select id="searchId" parameterType="LoginVo" resultType="String">

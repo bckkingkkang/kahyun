@@ -6,7 +6,7 @@
     <title>회원가입 완료</title>
 </head>
 <body>
-<jsp:include page="header/header"></jsp:include>
+<jsp:include page="/header/header"></jsp:include>
 <h2>회원가입 완료</h2>
 
 <a href="login">로그인</a>

@@ -8,7 +8,7 @@
 <body>
 <jsp:include page="/header/header"></jsp:include>
 <div>
-    회원가입 화면
+    <h2>회원가입</h2>
 </div>
 <div>
     <form action="">
@@ -17,6 +17,15 @@
             <tr>
                 <td><label for="username">이름</label></td>
                 <td><input type="text" id="username"></td>
+            </tr>
+            <tr>
+                <td><label for="email">이메일</label></td>
+                <td><input type="text" id="email"> <button type="button" id="sendBtn" name="sendBtn">인증번호 발송</button></td>
+            </tr>
+            <tr>
+                <td><label for="number">인증번호</label></td>
+                <td><input type="text" name="number" id="number" placeholder="인증번호 입력"> <button type="button" name="confirmBtn" id="confirmBtn">이메일 인증</button></td>
+                <input type="text" name="number" id="numberOk" hidden>
             </tr>
             <tr>
                 <td><label for="user_id">아이디</label></td>
@@ -31,7 +40,6 @@
                 <td><label for="password_check">비밀번호 확인</label>
                 <td><input type="password" id="password_check"></td>
             </tr>
-            <%-- 비밀번호 확인 문구 추가 --%>
             <tr>
                 <td><label for="nickname">닉네임</label></td>
                 <td><input type="text" id="nickname"></td>
@@ -49,26 +57,40 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
+    let num = "";
 
     $(function () {
         $dom.signupBtn = $("#signupBtn");
         $dom.username = $("#username").val();
         $dom.user_id = $("#user_id").val();
+        $dom.email = $("#email").val();
         $dom.user_id_check = $("#user_id_check").val();
         $dom.password = $("#password").val();
         $dom.password_check = $("#password_check").val();
         $dom.nickname = $("#nickname").val();
         $dom.auth = $("#auth").val();
         $dom.idCheckBtn = $("#idCheckBtn");
+        $dom.sendBtn = $("#sendBtn");
+        $dom.confirmBtn = $("#confirmBtn");
+
+
 
         $dom.signupBtn.on('click', function () {
             console.log($dom);
+            if($("#numberOk").val() != "ok") {
+                alert("이메일 인증을 진행해주세요");
+                return;
+            }
             if($("#user_id").val()=="") {
                 alert("아이디 중복 체크를 진행해주세요");
                 return;
             }
             if($("#user_id_check").val()=="") {
                 alert("아이디를 입력해주세요");
+                return;
+            }
+            if($("#password").val() != $("#password_check").val()) {
+                alert("비밀번호가 일치하지 않습니다.");
                 return;
             }
             if(confirm("가입하시겠습니까")) {
@@ -82,6 +104,7 @@
                         password_check : $("#password_check").val(),
                         nickname : $("#nickname").val(),
                         auth : $("#auth").val(),
+                        email : $("#email").val()
                     },
                     success : function() {
                         location.href="complete";
@@ -113,6 +136,35 @@
                 }
             })
 
+        })
+
+
+        $dom.sendBtn.on('click', function() {
+             $.ajax({
+                 url:"/mail",
+                 type:"post",
+                 data:{ mail : $("#email").val()
+                 },
+                 success : function(data) {
+                     alert("인증번호가 발송되었습니다.");
+                     console.log(data);
+                     num = data;
+                 }
+             })
+        })
+
+        $dom.confirmBtn.on('click', function() {
+            const number1 = $("#number").val();
+
+            if(number1 == num) {
+                alert("인증되었습니다.");
+                document.getElementById("number").readOnly = true;
+                $("#numberOk").val("ok");
+                document.getElementById("number").type = "password";
+                document.getElementById("confirmBtn").hidden = true;
+            } else {
+                alert("인증번호가 일치하지 않습니다.");
+            }
         })
 
     })
