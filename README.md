@@ -11,21 +11,21 @@
 
 ### 수정사항
 - [x] null 처리
-- [ ] Controller 부분 user_id로 getPrincipal() 가져오는 부분 수정
-- [ ] jsp 페이지 내 _csrf token input -> header
-- [ ] successHandler 추가, failureHandler 수정
-- [ ] AccessDeniedHandler, AuthenticationEntryPointHandler 다른 방향으로 생각 -> 수정
 - [x] 아이디 찾기 버튼 클릭 시 "null" 로 받아오는 부분 수정
 - [x] SecurityConfig 로그아웃 부분 추가
 - [x] SecurityConfig sessionManagement 에서 동시 세션 관리(중복 로그인) -> 테스트하고 수정
 - [x] mapper.xml 에서 *로 select 해오는 부분 구체적으로 변경, parameterType, resultType 추가
 - [x] mybatis-config.xml 사용 X
 - [x] 불필요한 주석, import 제거
+- [x] header 추가
+- [x] 회원가입 시 메일 인증 추가
+- [ ] 프로필 이미지 추가
 - [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
 - [ ] Controller에서 요청방식(requestMapping, GetMapping, ...) 검토 및 수정
-- [x] header 추가
-- [ ] 프로필 이미지 추가
-- [ ] 회원가입 시 메일 인증 추가
+- [ ] Controller 부분 user_id로 getPrincipal() 가져오는 부분 수정
+- [ ] jsp 페이지 내 _csrf token input -> header
+- [ ] successHandler 추가, failureHandler 수정
+- [ ] AccessDeniedHandler, AuthenticationEntryPointHandler 다른 방향으로 생각 -> 수정
 
 ---------------------
 
