@@ -7,7 +7,7 @@
         INSERT INTO users
             (username, user_id, nickname, password, reg_date, email)
         VALUES
-            (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_DATE(), #{email})
+            (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_TIME(), #{email})
     </insert>
 
     <select id="searchId" parameterType="LoginVo" resultType="String">
