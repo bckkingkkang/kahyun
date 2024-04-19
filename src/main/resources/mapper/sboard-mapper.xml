@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kahyun.mapper.SBoardMapper">
+
+    <!-- 저장 -->
+    <!--<insert id="saveFile">
+        INSERT INTO file
+        s_board_seq ,orgName, savedName, size, create_dt
+        VALUES
+        <foreach collection="list" separator=", " item="file">
+            (#{s_board_seq}, #{orgName}, #{savedName}, #{size}, CURRENT_TIME())
+        </foreach>
+    </insert>-->
+
+    <insert id="createsBoard">
+        INSERT INTO s_board
+            (title, nickname, content, create_dt, user_seq)
+        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq})
+    </insert>
+
+</mapper>
