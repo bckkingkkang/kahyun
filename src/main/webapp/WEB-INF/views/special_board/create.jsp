@@ -25,8 +25,9 @@
 <jsp:include page="/header/header"></jsp:include>
     <h2>글 쓰기 화면</h2>
 
-<table>
-<form id="saveForm" enctype="multipart/form-data">
+
+<form id="saveForm" method="post" enctype="multipart/form-data">
+    <table>
         <tr>
             <td>제목</td>
             <td><label for="title"></label>
@@ -40,24 +41,23 @@
             <td>파일</td>
             <td>
                 <div class="file_list">
-                    <input type="hidden" id="removeFileIds" name="removeFileIds" />
                     <div>
                         <div class="file_input">
                             <input type="text" readonly />
                             <label>
-                                <input type="file" name="files" id="selectFile" />
+                                <input type="file" name="files" multiple="multiple" id="files"/>
                             </label>
-                            <button type="button" id="removeFileBtn"><span>삭제</span></button>
-                            <button type="button" id="addFileBtn"><span>파일 추가</span></button>
+                            <button type="button" id="removeFileBtn">삭제</button>
+                            <button type="button" id="addFileBtn">파일 추가</button>
                         </div>
                     </div>
                 </div>
             </td>
         </tr>
         </tbody>
-</form>
 </table>
-<button type="button" id="saveBtn" class="btns btn_st3 btn_mid">저장</button>
+<button type="button" id="saveBtn">저장</button>
+</form>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -70,47 +70,27 @@
         $dom.addFileBtn = $("#addFileBtn");
         $dom.removeFileBtn = $("#removeFileBtn");
         $dom.selectFile = $("#selectFile");
-        $dom.removeFileIds = $("#removeFileIds");
         $dom.saveBtn = $("#saveBtn");
 
-        // 게시글 저장
         $dom.saveBtn.on('click', function() {
-            if(confirm("자료를 등록하시겠습니까?")) {
+            console.log($("#title").val());
+            console.log($("#content").val());
+            console.log($("#files"));
+            if(confirm()) {
                 $.ajax({
-                    url : "create_sboard",
-                    type : "post",
-                    data : {
-                        title : $("#title").val(),
-                        content : $("#content").val()
+                    url: "create_sboard_detail",
+                    type: "post",
+                    data: {
+                        title: $("#title").val(),
+                        content: $("#content").val(),
+                        files : $("#files").val()
                     },
-                    success : function() {
-                        location.href = "list";
+                    success: function () {
+
                     }
                 })
-
-                const form = document.getElementById('saveForm');
-                const fields = [form.title, form.writer, form.content];
-                const fieldNames = ['제목', '이름', '내용'];
-
-                for (let i = 0, len = fields.length; i < len; i++) {
-                    isValid(fields[i], fieldNames[i]);
-                }
-
-                new URLSearchParams(location.search).forEach((value, key) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = value;
-                    form.append(input);
-                })
-
-                document.getElementById('saveBtn').disabled = true;
-                form.action = [[ ${post == null} ]] ? '/post/save.do' : '/post/update.do';
-                form.submit();
             }
-
-        });
-
+        })
 
         // 파일 추가 버튼 클릭 시 function
         $dom.addFileBtn.on('click', function() {
@@ -126,29 +106,6 @@
             document.querySelector('.file_list').appendChild(fileDiv);
         })
 
-        // 파일 선택
-        $dom.selectFile.on('click', function(element, id) {
-            const file = element.files[0];
-            const filename = element.closest('.file_input').firstElementChild;
-
-            // 파일 선택 창에서 취소 버튼이 클릭된 경우
-            if(!file) {
-                filename.value = '';
-                return false;
-            }
-
-            // 파일 크기가 10MB를 초과하는 경우
-            const fileSize = Math.floor(file.size / 1024 / 1024);
-            if(fileSize > 10) {
-                alert('10MB 이하의 파일만 업로드 가능합니다.');
-                filename.value = '';
-                element.value = '';
-                return false;
-            }
-
-            // 파일명 지정
-            filename.value = file.name;
-        })
 
 
     })

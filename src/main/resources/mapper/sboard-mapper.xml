@@ -15,8 +15,8 @@
 
     <insert id="createsBoard">
         INSERT INTO s_board
-            (title, nickname, content, create_dt, user_seq)
-        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq})
+            (title, nickname, content, create_dt, user_seq, files)
+        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{files})
     </insert>
 
 </mapper>
