@@ -3,7 +3,12 @@ package com.example.kahyun.service;
 import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.vo.BoardVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Service
 public class BoardService {
@@ -26,4 +31,7 @@ public class BoardService {
     public void upView(BoardVo boardVo) {
         boardMapper.upView(boardVo);
     }
+
+
+
 }
