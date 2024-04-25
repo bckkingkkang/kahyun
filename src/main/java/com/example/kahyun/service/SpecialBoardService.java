@@ -2,7 +2,7 @@ package com.example.kahyun.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -13,7 +13,7 @@ public class SpecialBoardService {
     @Value("${file.dir}")
     private String fileDir;
 
-    public void create_sboard(@RequestParam MultipartFile files)throws Exception {
+    public String create_sboard(MultipartFile files)throws Exception {
         String fullPath = "";
         if(!files.isEmpty()) {
             fullPath = fileDir + files.getOriginalFilename();
@@ -21,5 +21,6 @@ public class SpecialBoardService {
 
             System.out.println(fullPath);
         }
+        return fullPath;
     }
 }

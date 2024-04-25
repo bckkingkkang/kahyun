@@ -26,16 +26,16 @@
     <h2>글 쓰기 화면</h2>
 
 
-<form id="saveForm" method="post" enctype="multipart/form-data">
+<form id="fileUploadFormMulti" action="/special_board/list" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>제목</td>
             <td><label for="title"></label>
-                <input type="text" id="title"></td>
+                <input type="text" id="title" name="title"></td>
         </tr>
         <tr>
             <td>내용</td>
-            <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content"></textarea></td>
+            <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content" name="content"></textarea></td>
         </tr>
         <tr>
             <td>파일</td>
@@ -45,7 +45,7 @@
                         <div class="file_input">
                             <input type="text" readonly />
                             <label>
-                                <input type="file" name="files" multiple="multiple" id="files"/>
+                                <input type="file" name="uploadFileMulti" multiple="multiple" id="uploadFileMulti"/>
                             </label>
                             <button type="button" id="removeFileBtn">삭제</button>
                             <button type="button" id="addFileBtn">파일 추가</button>
@@ -56,7 +56,7 @@
         </tr>
         </tbody>
 </table>
-<button type="button" id="saveBtn">저장</button>
+<button type="submit" id="saveBtn">저장</button>
 </form>
 
 </body>
@@ -72,25 +72,18 @@
         $dom.selectFile = $("#selectFile");
         $dom.saveBtn = $("#saveBtn");
 
-        $dom.saveBtn.on('click', function() {
-            console.log($("#title").val());
-            console.log($("#content").val());
-            console.log($("#files"));
-            if(confirm()) {
+        /*$dom.saveBtn.on('click', function() {
+            if(confirm('글을 저장')) {
                 $.ajax({
-                    url: "create_sboard_detail",
-                    type: "post",
-                    data: {
-                        title: $("#title").val(),
-                        content: $("#content").val(),
-                        files : $("#files").val()
-                    },
-                    success: function () {
-
+                    url : "/special_board/fileUploadMultiple",
+                    type : "post",
+                    enctype : "multipart/form-data",
+                    success : function () {
+                        location.href = "list"
                     }
                 })
             }
-        })
+        })*/
 
         // 파일 추가 버튼 클릭 시 function
         $dom.addFileBtn.on('click', function() {
@@ -99,7 +92,7 @@
             <div class="file_input">
                 <input type="text" readonly />
                 <label>
-                    <input type="file" name="files" id="selectFileBtn" />
+                    <input type="file" name="uploadFileMulti" multiple="multiple" id="uploadFileMulti"/>
                 </label>
                 <button type="button" id="removeFileBtn"><span>삭제</span></button>
         `;
