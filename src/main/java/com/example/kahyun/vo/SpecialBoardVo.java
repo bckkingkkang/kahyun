@@ -16,5 +16,5 @@ public class SpecialBoardVo {
     private String status;
     private String view;
     private String user_seq;
-    private String files;
+    private MultipartFile files;
 }
