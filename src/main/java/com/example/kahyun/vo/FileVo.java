@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class FileVo {
+    private int rownum;
     private String seq;
     private String orgName;
     private String savedName;
@@ -14,12 +15,6 @@ public class FileVo {
     private String delete_yn;
     private String create_dt;
 
-    @Builder
-    public FileVo(String orgName, String savedName, String size) {
-        this.orgName = orgName;
-        this.savedName = savedName;
-        this.size = size;
-    }
-
-    public void setS_board_seq(String s_board_seq) {this.s_board_seq = s_board_seq;}
+    private String nickname;
+    private String title;
 }

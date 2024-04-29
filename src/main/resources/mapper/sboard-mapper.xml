@@ -3,20 +3,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kahyun.mapper.SBoardMapper">
 
-    <!-- 저장 -->
-    <!--<insert id="saveFile">
-        INSERT INTO file
-        s_board_seq ,orgName, savedName, size, create_dt
-        VALUES
-        <foreach collection="list" separator=", " item="file">
-            (#{s_board_seq}, #{orgName}, #{savedName}, #{size}, CURRENT_TIME())
-        </foreach>
-    </insert>-->
-
     <insert id="createsBoard">
         INSERT INTO s_board
-            (title, nickname, content, create_dt, user_seq, files)
-        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{files})
+            (title, nickname, content, create_dt, user_seq, file)
+        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{file})
     </insert>
+
+    <insert id="createFile">
+        INSERT INTO file
+            (orgName, savedName, savedPath, create_dt, size)
+        VALUES
+            (
+             #{orgName},
+             #{savedName},
+             #{savedPath},
+             CURRENT_TIME()
+            )
+    </insert>
+
+    <select id="getSBoardList">
+        SELECT * ,
+               ROW_NUMBER() over(ORDER BY seq) AS rownum
+        FROM s_board
+    </select>
+
+    <select id="getFileList">
+        SELECT
+            * ,
+            ROW_NUMBER() over(ORDER BY file.seq) AS rownum,
+            sb.*
+        FROM file file
+        INNER JOIN kahyun.s_board sb ON file.savedName = sb.file
+    </select>
+
+    <select id="getDetailBoard">
+        select *
+        FROM s_board
+        WHERE seq = #{seq}
+    </select>
+
+    <select id="getDetailFile">
+        select *
+        FROM file
+        WHERE savedName = #{savedName}
+    </select>
 
 </mapper>

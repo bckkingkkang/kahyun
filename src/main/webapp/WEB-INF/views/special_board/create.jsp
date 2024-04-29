@@ -26,7 +26,7 @@
     <h2>글 쓰기 화면</h2>
 
 
-<form id="fileUploadFormMulti" action="/special_board/list" method="post" enctype="multipart/form-data">
+<form id="fileUploadFormMulti" action="/special_board/fileForm" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>제목</td>
