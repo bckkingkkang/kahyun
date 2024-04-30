@@ -4,6 +4,7 @@ import com.example.kahyun.mapper.SBoardMapper;
 import com.example.kahyun.service.BoardService;
 import com.example.kahyun.service.SpecialBoardService;
 import com.example.kahyun.service.UserService;
+import com.example.kahyun.vo.FileVo;
 import com.example.kahyun.vo.SpecialBoardVo;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,12 +43,29 @@ public class SpecialBoardController {
 
     /* 게시판 화면 */
     @RequestMapping("special_board/list")
-    public ModelAndView list() {
-        ModelAndView mav = new ModelAndView();
+    public ModelAndView list(ModelAndView mav) {
+
         File path = new File(fileDir);
         String[] fileList = path.list();
-        mav.addObject("fileList", fileList);
+        /*mav.addObject("fileList", fileList);*/
+        mav.addObject("fileList", sboardMapper.getFileList());
+        mav.addObject("sboardList", sboardMapper.getSBoardList());
         mav.setViewName("special_board/list");
+
+        return mav;
+    }
+
+    /* 게시글 상세 */
+    @GetMapping("special_board/detail/{seq}")
+    public ModelAndView getDetail(SpecialBoardVo specialBoardVo, FileVo fileVo, ModelAndView mav) {
+
+        SpecialBoardVo getDetailBoard = sboardMapper.getDetailBoard(specialBoardVo.getSeq());
+        FileVo getDetailFile = sboardMapper.getDetailFile(getDetailBoard.getFile());
+        mav.addObject("getDetailBoard", getDetailBoard);
+        mav.addObject("getDetailFile", getDetailFile);
+        System.out.println(getDetailBoard);
+        System.out.println(getDetailFile);
+        mav.setViewName("special_board/detail");
 
         return mav;
     }
@@ -76,12 +94,11 @@ public class SpecialBoardController {
 
     /* 파일 저장 */
     @RequestMapping("special_board/fileForm")
-    public ModelAndView fileUploadMultiple(@RequestParam("uploadFileMulti")ArrayList<MultipartFile> files, ModelAndView mav, String title, String content) throws Exception {
+    public ModelAndView fileUploadMultiple(@RequestParam("uploadFileMulti")ArrayList<MultipartFile> files,
+                                           ModelAndView mav, String title, String content, SpecialBoardVo specialBoardVo, FileVo fileVo) throws Exception {
         String savedFileName = "";
         // 파일 저장 경로 설정
         String uploadPath = fileDir;
-        System.out.println("title" + title);
-        System.out.println("content" + content);
 
         // 여러 개의 원본 파일을 저장할 리스트 생성
         ArrayList<String> originalFileNameList = new ArrayList<String>();
@@ -97,19 +114,25 @@ public class SpecialBoardController {
             File file1 = new File(uploadPath + savedFileName);
             // 서버로 전송
             file.transferTo(file1);
+            fileVo.setSize(String.valueOf(file.getSize()));
         }
-        mav.addObject("originalFileNameList", originalFileNameList);
-        mav.setViewName("special_board/list");
-        return mav;
-    }
 
-    /*@ResponseBody
-    @PostMapping("special_board/create_sboard_detail")
-    public int create_sboard_detail(SpecialBoardVo specialBoardVo) {
+        fileVo.setOrgName(originalFileNameList.get(0));
+        fileVo.setSavedName(savedFileName);
+        fileVo.setSavedPath(fileDir);
+        sboardMapper.createFile(fileVo);
 
+        specialBoardVo.setTitle(title);
+        specialBoardVo.setContent(content);
         specialBoardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
         specialBoardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        specialBoardVo.setFile(savedFileName);
+        sboardMapper.createsBoard(specialBoardVo);
 
-        return sboardMapper.createsBoard(specialBoardVo);}*/
+        mav.addObject("originalFileNameList", originalFileNameList);
+        mav.setView(new RedirectView("/special_board/list"));
+
+        return mav;
+    }
 
 }
