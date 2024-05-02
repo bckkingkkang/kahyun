@@ -1,66 +1,56 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 고가현
-  Date: 2024-04-12
-  Time: 오후 4:18
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>header</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<style>
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-
-    /* Change the link color to #111 (black) on hover */
-    li a:hover {
-        background-color: #111;
-    }
-</style>
-
-<form action="/logout" method="post">
-    <div>
-        <nav>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            <ul>
-                <li><a href="/main">메인</a></li>
-                <%--<c:choose>
-                    <c:when test="${isLogin eq 'true'}">--%>
-                        <li><a href="/board/list">회원게시판</a></li>
-                        <li><a href="/special_board/list">특별회원 게시판</a></li>
-                        <li><a href="/user/mypage">마이페이지</a></li>
-                        <c:if test="${user.auth == 'ADMIN'}">
-                            <li><a href="/admin/admin">관리자 페이지</a></li>
-                        </c:if>
-                        <li><a type="submit" href="/logout">로그아웃</a></li>
-                   <%-- </c:when>
-                    <c:otherwise>--%>
-                        <li><a href="/user/login" id="loginBtn">로그인</a></li>
-                    <%--</c:otherwise>
-                </c:choose>--%>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/">KAHYUN</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/board/list">Community</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/special_board/list">Download</a></li>
             </ul>
-        </nav>
+            <form action="/logout" mehtod="post" class="d-flex">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/mypage">Mypage</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout" type="submit">Logout</a></li>
+                    <%--<li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/admin">Admin</a></li>--%>
+                </ul>
+            </form>
+            <form>
+                <button class="btn" type="button">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+        </div>
     </div>
-</form>
+</nav>
+
+<!-- Footer-->
+<%--<footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+</footer>--%>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="/js/scripts.js"></script>
 </body>
 </html>

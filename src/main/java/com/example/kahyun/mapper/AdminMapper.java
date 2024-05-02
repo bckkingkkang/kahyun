@@ -2,6 +2,7 @@ package com.example.kahyun.mapper;
 
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.LoginVo;
+import com.example.kahyun.vo.SpecialBoardVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,9 @@ public interface AdminMapper {
 
     /* 특정 회원 게시글 리스트 */
     List<BoardVo> getUserBoard(String seq);
+
+    List<SpecialBoardVo> getAdminSBoardList();
+
+    int changeOpen(String seq);
+    int changePrivate(String seq);
 }

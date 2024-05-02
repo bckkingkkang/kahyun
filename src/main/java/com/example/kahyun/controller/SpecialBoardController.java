@@ -84,6 +84,8 @@ public class SpecialBoardController {
         FileCopyUtils.copy(fis, os);
         fis.close();
         os.close();
+        System.out.println(file);
+        sboardMapper.downloadCount(file);
     }
 
     /* 게시판 글쓰기 */

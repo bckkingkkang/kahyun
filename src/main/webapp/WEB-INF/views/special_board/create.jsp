@@ -38,6 +38,12 @@
             <td><textarea cols="30" rows="10" placeholder="내용을 입력해주세요" id="content" name="content"></textarea></td>
         </tr>
         <tr>
+            <td>가격</td>
+            <td><label for="price"></label>
+                <input type="number" min="1000" step="1000" id="price" name="price"> 원
+            </td>
+        </tr>
+        <tr>
             <td>파일</td>
             <td>
                 <div class="file_list">
@@ -59,7 +65,8 @@
 <button type="submit" id="saveBtn">저장</button>
 </form>
 
-</body>
+<jsp:include page="/header/footer"></jsp:include>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
@@ -105,4 +112,5 @@
 
 
 </script>
+</body>
 </html>

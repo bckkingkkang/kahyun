@@ -53,7 +53,7 @@
     <a href="login">로그인</a>
     <a href="/">메인으로</a>
 </div>
-
+<jsp:include page="/header/footer"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};

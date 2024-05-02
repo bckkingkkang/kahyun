@@ -6,18 +6,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>게시글 상세</title>
 </head>
-<style>
+<%--<style>
     table {
         border: 2px solid; border-collapse: collapse;
     }
     th, td {
         border: 1px solid; padding:10px 5px;
     }
-</style>
+</style>--%>
 <body>
 <jsp:include page="/header/header"></jsp:include>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Community</h1>
+            <p class="lead fw-normal text-white-50 mb-0">회원 게시판</p>
+        </div>
+    </div>
+</header>
+
 <div>
-    <h1>게시판 상세 화면</h1>
+
     <c:if test="${boardDetail.status == 'D'}">
         <h3>삭제된 게시글입니다.</h3>
     </c:if>
@@ -25,10 +34,10 @@
 <div>
     <form action="">
     <div>
-    <table>
+    <table class="table">
         <tr>
-            <td style="width: 100px">제목</td>
-            <td style="width: 500px">${boardDetail.title}</td>
+            <td>제목</td>
+            <td>${boardDetail.title}</td>
         </tr>
         <tr>
             <td>게시판</td>
@@ -59,39 +68,59 @@
     </form>
 
     <div>
-        <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-        <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
-            <button type="button" id="deleteBtn">삭제</button>
-        </c:if>
-
+        <table>
+            <tr>
+                <div>
+                    <%--<button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>--%>
+                    <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a></div></td>
+                </div>
+                <div>
+                    <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
+                        <%--<button type="button" id="deleteBtn">삭제</button>--%>
+                        <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a></div></td>
+                    </c:if>
+                </div>
+            </tr>
+        </table>
     </div>
 </div>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">댓글</p>
+        </div>
+    </div>
+</header>
 <div>
     <div>
         <div>
-            <h3>댓글</h3>
-        </div>
-        <div>
             <div>
-                <table>
+                <table class="table">
                     <tr>
                         <form action="">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                            <td style="width: 100px">댓글</td>
-                            <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
-                            <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
+                            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
+                            <td>댓글</td>
+                            <td>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="content" placeholder="댓글 남기기">
+                                    <label for="content">댓글</label>
+                                </div>
+                            </td>
+                            <%--<td><button type="button" id="createBtn" class="accordion-button">등록</button></td>--%>
+                            <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="createBtn">등록</a></div></td>
                         </form>
                     </tr>
                 </table>
+                <br>
             </div>
         </div>
         <div>
             <c:forEach items="${boardComment}" var="boardComment">
                 <div>
-                    <table>
+                    <table class="table">
                     <tr>
-                        <td style="width: 100px">내용</td>
-                        <td style="width: 500px">${boardComment.content}</td>
+                        <td<%-- style="width: 100px"--%>>내용</td>
+                        <td<%-- style="width: 500px"--%>>${boardComment.content}</td>
                     </tr>
                     <tr>
                         <td>작성자</td>
@@ -108,7 +137,7 @@
     </div>
 
 </div>
-
+<jsp:include page="/header/footer"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
@@ -120,17 +149,17 @@
 
         $dom.createBtn.on('click', function () {
             console.log($dom);
-            if(confirm("댓글을 등록하시겠습니까")) {
+            if (confirm("댓글을 등록하시겠습니까")) {
                 /* 댓글 등록 */
                 $.ajax({
-                    url : "create_comment_ajax",
-                    type : "post",
-                    data : {
-                        content : $("#content").val(),
-                        seq : seq
+                    url: "create_comment_ajax",
+                    type: "post",
+                    data: {
+                        content: $("#content").val(),
+                        seq: seq
                     },
-                    success : function(result) {
-                        if(result===1) {
+                    success: function (result) {
+                        if (result === 1) {
                             location.href = seq;
                         } else {
                             alert("다시 시도해주세요");
@@ -141,16 +170,16 @@
 
         })
 
-        $dom.deleteBtn.on('click', function() {
-            if(confirm("삭제하시겠습니까")) {
+        $dom.deleteBtn.on('click', function () {
+            if (confirm("삭제하시겠습니까")) {
                 $.ajax({
-                    url:"delete_board_ajax",
-                    type : "post",
-                    data : {
-                        'seq' : seq
+                    url: "delete_board_ajax",
+                    type: "post",
+                    data: {
+                        'seq': seq
                     },
-                    success : function(result) {
-                        if(result === 1) {
+                    success: function (result) {
+                        if (result === 1) {
                             alert("삭제되었습니다.");
                             location.href = "/board/list";
                         } else {
@@ -165,9 +194,6 @@
 
         })
     })
-
-
-
 
 </script>
 </body>

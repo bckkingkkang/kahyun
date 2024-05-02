@@ -4,13 +4,11 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>로그인</title>
+
 </head>
 <body>
 <jsp:include page="/header/header"></jsp:include>
-    <div>
-        <h2>로그인 화면</h2>
-    </div>
+
     <div>
         <form action="/user/loginForm" method="post">
             <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
@@ -32,7 +30,10 @@
                 </div>
         </form>
     </div>
-<script>
-</script>
+<jsp:include page="/header/footer"></jsp:include>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 </body>
 </html>

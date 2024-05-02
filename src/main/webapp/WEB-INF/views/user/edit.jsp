@@ -65,5 +65,7 @@
 <div>
     <button>수정하기</button>
 </div>
+
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

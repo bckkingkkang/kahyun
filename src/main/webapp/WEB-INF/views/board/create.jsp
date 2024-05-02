@@ -44,31 +44,33 @@
     $(function () {
         $dom.createBtn = $("#createBtn");
 
-        $dom.createBtn.on('click', function() {
-            if($("#title").val() == "") {
+        $dom.createBtn.on('click', function () {
+            if ($("#title").val() == "") {
                 alert("제목을 입력해주세요");
                 return;
             }
-            if($("#content").val() == "") {
+            if ($("#content").val() == "") {
                 alert("내용을 입력해주세요");
                 return;
             }
-            if(confirm("글을 저장하시겠습니까?")) {
+            if (confirm("글을 저장하시겠습니까?")) {
                 $.ajax({
-                    url : "create_board_ajax",
-                    type : "post",
-                    data : {
-                        title : $("#title").val(),
-                        content : $("#content").val(),
-                        boardOption : $("#boardOption").val()
+                    url: "create_board_ajax",
+                    type: "post",
+                    data: {
+                        title: $("#title").val(),
+                        content: $("#content").val(),
+                        boardOption: $("#boardOption").val()
                     },
-                    success : function () {
+                    success: function () {
                         location.href = "list";
                     }
                 })
             }
         })
     })
+
+    <jsp:include page="/header/footer"></jsp:include>
 </script>
 </body>
 </html>

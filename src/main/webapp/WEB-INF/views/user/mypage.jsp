@@ -69,6 +69,9 @@
 </div>
 <div>
     <a href="edit">수정하기</a>
+    <a  href="/admin/admin">관리자페이지</a>
 </div>
+
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>
