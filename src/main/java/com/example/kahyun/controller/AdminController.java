@@ -11,9 +11,7 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
@@ -67,14 +65,16 @@ public class AdminController {
         return "admin/accept_list";
     }
 
-    @RequestMapping("/changeOpen/{seq}")
-    public void changeOpen(String seq) throws IOException {
-        adminMapper.changeOpen(seq);
+    @ResponseBody
+    @PostMapping("admin/changeOpen")
+    public int changeOpen(String seq) {
+        return adminMapper.changePublic(seq);
     }
 
-    @RequestMapping("/changePrivate/{seq}")
-    public void changePrivate(String seq) throws IOException {
-        adminMapper.changePrivate(seq);
+    @ResponseBody
+    @PostMapping("admin/changePrivate")
+    public int changePrivate(String seq) {
+        return adminMapper.changePrivate(seq);
     }
 }
 

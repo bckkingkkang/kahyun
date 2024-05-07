@@ -21,55 +21,64 @@
     }
 </style>
 <body>
-<div>
-    <h1>마이페이지</h1>
-</div>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3 class="display-4 fw-bolder">마이페이지</h3>
+            <p class="lead fw-normal text-black-50 mb-0">내 정보</p>
+        </div>
+    </div>
+</header>
 <div>
     <form action="" enctype="multipart/form-data">
         <div>
-            <h3>프로필 이미지</h3>
-            <table>
+            <%--<div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center"><h4>내 정보</h4></div>
+                </div>
+            </div>--%>
+            <table class="table text-center">
                 <tr>
-                    <td style="width: 120px">
-                        <%--<label for="input_image">이미지 선택</label>--%>
-                        프로필 이미지
-                    </td>
-                    <td style="width: 300px">
-
+                    <td rowspan="7" width="35%">
+                        <img src="/image/갸라도스2.jpg" alt="" style="width:300px;height: 300px;border-radius: 70%; overflow: hidden;">
                     </td>
                 </tr>
-            </table>
-        </div>
-        <div>
-            <h3>내 정보</h3>
-            <table>
                 <tr>
-                    <td style="width: 120px">이름</td>
-                    <td style="width: 300px">${userInfo.username}</td>
+                    <th width="35">이름</th>
+                    <td width="30">${userInfo.username}</td>
                 </tr>
                 <tr>
-                    <td>아이디</td>
+                    <th>아이디</th>
                     <td>${userInfo.user_id}</td>
                 </tr>
                 <tr>
-                    <td>닉네임</td>
+                    <th>닉네임</th>
                     <td>${userInfo.nickname}</td>
                 </tr>
                 <tr>
-                    <td>이메일</td>
+                    <th>이메일</th>
                     <td>${userInfo.email}</td>
                 </tr>
                 <tr>
-                    <td>가입일자</td>
+                    <th>가입일자</th>
                     <td>${userInfo.reg_date}</td>
+                </tr>
+                <tr>
+                    <th>보유 캐시</th>
+                    <th></th>
                 </tr>
             </table>
         </div>
     </form>
 </div>
-<div>
-    <a href="edit">수정하기</a>
-    <a  href="/admin/admin">관리자페이지</a>
+
+<div class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="edit">수정하기</a>
+        <a class="btn btn-outline-dark mt-auto" href="/admin/admin">관리자 페이지</a>
+        <%--<a class="btn btn-outline-dark mt-auto" href="/admin/admin">관리자 페이지</a>--%>
+        </div>
+    </div>
 </div>
 
 <jsp:include page="/header/footer"></jsp:include>

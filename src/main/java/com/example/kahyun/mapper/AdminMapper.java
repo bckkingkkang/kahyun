@@ -21,6 +21,6 @@ public interface AdminMapper {
 
     List<SpecialBoardVo> getAdminSBoardList();
 
-    int changeOpen(String seq);
+    int changePublic(String seq);
     int changePrivate(String seq);
 }

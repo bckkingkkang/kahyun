@@ -61,7 +61,7 @@
 
     </select>
 
-    <update id="changeOpen">
+    <update id="changePublic">
         update s_board
         set accept_yn = 'Y'
         WHERE seq = #{seq}
