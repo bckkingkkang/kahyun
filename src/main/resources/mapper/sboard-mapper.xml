@@ -5,13 +5,13 @@
 
     <insert id="createsBoard">
         INSERT INTO s_board
-            (title, nickname, content, create_dt, user_seq, file)
-        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{file})
+            (title, nickname, content, create_dt, user_seq, file, price)
+        VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{file}, #{price})
     </insert>
 
     <insert id="createFile">
         INSERT INTO file
-            (orgName, savedName, savedPath, create_dt, size)
+            (orgName, savedName, savedPath, create_dt)
         VALUES
             (
              #{orgName},
@@ -25,6 +25,7 @@
         SELECT * ,
                ROW_NUMBER() over(ORDER BY seq) AS rownum
         FROM s_board
+        WHERE status='N'
     </select>
 
     <select id="getFileList">
@@ -47,5 +48,16 @@
         FROM file
         WHERE savedName = #{savedName}
     </select>
+
+    <select id="getMainSpecialBoard">
+        select *
+        FROM s_board
+        WHERE accept_yn = 'Y'
+    </select>
+
+    <update id="downloadCount">
+        update s_board set download_count = download_count+1 where file = #{file}
+
+    </update>
 
 </mapper>

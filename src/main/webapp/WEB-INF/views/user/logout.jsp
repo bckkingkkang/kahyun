@@ -16,5 +16,7 @@
 
     <a href="/main">메인으로</a>
     <a href="/user/login">로그인하기</a>
+
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

@@ -6,108 +6,136 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>게시글 상세</title>
 </head>
-<style>
+<%--<style>
     table {
         border: 2px solid; border-collapse: collapse;
     }
     th, td {
         border: 1px solid; padding:10px 5px;
     }
-</style>
+</style>--%>
 <body>
 <jsp:include page="/header/header"></jsp:include>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Community</h1>
+            <p class="lead fw-normal text-white-50 mb-0">회원 게시판</p>
+        </div>
+    </div>
+</header>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3>${boardDetail.title}</h3>
+        </div>
+    </div>
+</header>
+
 <div>
-    <h1>게시판 상세 화면</h1>
+
     <c:if test="${boardDetail.status == 'D'}">
         <h3>삭제된 게시글입니다.</h3>
     </c:if>
 </div>
-<div>
+<div class="container">
     <form action="">
-    <div>
-    <table>
-        <tr>
-            <td style="width: 100px">제목</td>
-            <td style="width: 500px">${boardDetail.title}</td>
-        </tr>
-        <tr>
-            <td>게시판</td>
-            <td><c:choose>
-                <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
-                <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
-                <c:otherwise>그냥게시판</c:otherwise>
-            </c:choose></td>
-        </tr>
-        <tr>
-            <td>작성자</td>
-            <td>${boardDetail.nickname}</td>
-        </tr>
-        <tr>
-            <td>작성일</td>
-            <td>${boardDetail.create_dt}</td>
-        </tr>
-        <tr>
-            <td>수정일</td>
-            <td>${boardDetail.update_dt}</td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td>${boardDetail.content}</td>
-        </tr>
-    </table>
-    </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th class="text-center">게시판</th>
+                    <td><c:choose>
+                        <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
+                        <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
+                        <c:otherwise>그냥게시판</c:otherwise>
+                    </c:choose></td>
+                </tr>
+                <tr>
+                    <th class="text-center">작성자</th>
+                    <td>${boardDetail.nickname}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">작성일</th>
+                    <td>${boardDetail.create_dt}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">수정일</th>
+                    <td>${boardDetail.update_dt}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">내용</th>
+                    <td>${boardDetail.content}</td>
+                </tr>
+            </table>
+        </div>
     </form>
 
-    <div>
-        <button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>
-        <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
-            <button type="button" id="deleteBtn">삭제</button>
-        </c:if>
-
+    <div class="text-center">
+        <div>
+            <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
+            <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
+                <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
+                <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
+            </c:if>
+        </div>
     </div>
 </div>
-<div>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">댓글 등록</p>
+        </div>
+    </div>
+</header>
+<div class="container">
     <div>
         <div>
-            <h3>댓글</h3>
-        </div>
-        <div>
             <div>
-                <table>
-                    <tr>
-                        <form action="">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                            <td style="width: 100px">댓글</td>
-                            <td style="width: 300px"><textarea name="content" id="content" cols="30" rows="5"></textarea></td>
-                            <td style="width: 100px"><button type="button" id="createBtn">등록</button></td>
-                        </form>
-                    </tr>
-                </table>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="content" placeholder="댓글">
+                    <label for="content">댓글</label>
+                </div>
+                <div class="text-center">
+                    <div>
+                        <a class="btn btn-outline-dark mt-auto" id="createBtn">등록</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div>
-            <c:forEach items="${boardComment}" var="boardComment">
-                <div>
-                    <table>
+    </div>
+</div>
+
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">댓글</p>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div>
+        <c:forEach items="${boardComment}" var="boardComment">
+            <div>
+                <table class="table table-borderless">
                     <tr>
-                        <td style="width: 100px">내용</td>
-                        <td style="width: 500px">${boardComment.content}</td>
+                        <th class="text-center"<%-- style="width: 100px"--%>>내용</th>
+                        <td<%-- style="width: 500px"--%>>${boardComment.content}</td>
                     </tr>
                     <tr>
-                        <td>작성자</td>
+                        <th class="text-center">작성자</th>
                         <td>${boardComment.nickname}</td>
                     </tr>
                     <tr>
-                        <td>작성일</td>
+                        <th class="text-center">작성일</th>
                         <td>${boardComment.create_dt}</td>
                     </tr>
-                    </table>
-                </div>
-            </c:forEach>
-        </div>
+                </table>
+                <br>
+            </div>
+        </c:forEach>
     </div>
-
 </div>
+<jsp:include page="/header/footer"></jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -120,17 +148,17 @@
 
         $dom.createBtn.on('click', function () {
             console.log($dom);
-            if(confirm("댓글을 등록하시겠습니까")) {
+            if (confirm("댓글을 등록하시겠습니까")) {
                 /* 댓글 등록 */
                 $.ajax({
-                    url : "create_comment_ajax",
-                    type : "post",
-                    data : {
-                        content : $("#content").val(),
-                        seq : seq
+                    url: "create_comment_ajax",
+                    type: "post",
+                    data: {
+                        content: $("#content").val(),
+                        seq: seq
                     },
-                    success : function(result) {
-                        if(result===1) {
+                    success: function (result) {
+                        if (result === 1) {
                             location.href = seq;
                         } else {
                             alert("다시 시도해주세요");
@@ -141,16 +169,16 @@
 
         })
 
-        $dom.deleteBtn.on('click', function() {
-            if(confirm("삭제하시겠습니까")) {
+        $dom.deleteBtn.on('click', function () {
+            if (confirm("삭제하시겠습니까")) {
                 $.ajax({
-                    url:"delete_board_ajax",
-                    type : "post",
-                    data : {
-                        'seq' : seq
+                    url: "delete_board_ajax",
+                    type: "post",
+                    data: {
+                        'seq': seq
                     },
-                    success : function(result) {
-                        if(result === 1) {
+                    success: function (result) {
+                        if (result === 1) {
                             alert("삭제되었습니다.");
                             location.href = "/board/list";
                         } else {
@@ -165,9 +193,6 @@
 
         })
     })
-
-
-
 
 </script>
 </body>

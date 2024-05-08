@@ -49,4 +49,27 @@
         FROM users
         WHERE auth = 'ADMIN'
     </select>
+
+    <select id="getAdminSBoardList">
+        SELECT  sb.* ,
+                ROW_NUMBER() over(ORDER BY seq) AS rownum,
+                file.orgName,
+                users.user_id
+        FROM s_board sb
+        INNER JOIN file AS file on sb.file = file.savedName
+        INNER JOIN users AS users on sb.nickname = users.nickname
+
+    </select>
+
+    <update id="changePublic">
+        update s_board
+        set accept_yn = 'Y'
+        WHERE seq = #{seq}
+    </update>
+
+    <update id="changePrivate">
+        update s_board
+        set accept_yn = 'N'
+        WHERE seq = #{seq}
+    </update>
 </mapper>

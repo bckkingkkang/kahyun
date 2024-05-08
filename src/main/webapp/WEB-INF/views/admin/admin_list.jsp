@@ -45,6 +45,6 @@
 </table>
 
 <a href="admin">뒤로가기</a>
-
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

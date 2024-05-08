@@ -15,4 +15,6 @@ public interface SBoardMapper {
     List<FileVo> getFileList();
     SpecialBoardVo getDetailBoard(String seq);
     FileVo getDetailFile(String savedName);
+    List<SpecialBoardVo> getMainSpecialBoard();
+    int downloadCount(String file);
 }

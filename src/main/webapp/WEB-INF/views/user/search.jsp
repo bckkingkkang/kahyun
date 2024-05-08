@@ -83,5 +83,7 @@
         })
     })
 </script>
+
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

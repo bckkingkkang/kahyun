@@ -16,11 +16,25 @@
 </style>
 <body>
 <jsp:include page="/header/header"></jsp:include>
-    <div>
-        <h2>회원게시판</h2>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Community</h1>
+            <p class="lead fw-normal text-white-50 mb-0">회원 게시판</p>
+        </div>
     </div>
+</header>
+<div>
+    <p></p>
+</div>
+<div>
+    <p></p>
+    <div class="text-start"><a class="btn btn-outline-dark mt-auto" href="/board/create">등록</a></div>
+    <p></p>
+</div>
+
     <div>
-        <table>
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>No</th>
@@ -51,11 +65,8 @@
             </tbody>
         </table>
     </div>
-    <div>
-        <%--<a href="/">메인으로</a>--%>
-        <a href="/board/create">글쓰기</a>
-    </div>
 
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">

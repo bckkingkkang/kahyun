@@ -21,49 +21,61 @@
     }
 </style>
 <body>
-<div>
-    <h1>내 정보 수정</h1>
-</div>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3 class="display-4 fw-bolder">내 정보 수정</h3>
+        </div>
+    </div>
+</header>
 <div>
     <form action="" enctype="multipart/form-data">
         <div>
-            <h3>프로필 이미지</h3>
-            <table>
+            <table class="table text-center">
                 <tr>
-                    <td style="width: 120px">
-                        <label for="input_image">이미지 선택</label>
-                    </td>
-                    <td style="width: 300px">
-                        <input type="file" id="input_image" accept="image/*">
+                    <td rowspan="5" width="35%">
+                        <img src="/image/갸라도스2.jpg" alt="" style="width:300px;height: 300px;border-radius: 70%; overflow: hidden;">
                     </td>
                 </tr>
-            </table>
-        </div>
-        <div>
-            <h3>내 정보 수정</h3>
-            <table>
                 <tr>
-                    <td style="width: 120px">이름</td>
-                    <td style="width: 300px">${userInfo.username}</td>
+                    <th width="35">이름</th>
+                    <td width="30">${userInfo.username}</td>
                 </tr>
                 <tr>
-                    <td>아이디</td>
-                    <td><input type="text" value="${userInfo.user_id}"></td>
+                    <th>아이디</th>
+                    <td>${userInfo.user_id}</td>
                 </tr>
                 <tr>
-                    <td>닉네임</td>
+                    <th>닉네임</th>
                     <td><input type="text" value="${userInfo.nickname}"></td>
                 </tr>
                 <tr>
-                    <td>비밀번호 변경</td>
-                    <td><input type="text" value=""></td>
+                    <th>이메일</th>
+                    <td>${userInfo.email}</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">
+                        <input type="file" name="uploadProfileImage" multiple="multiple" id="uploadProfileImage"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td><a class="btn btn-outline-dark mt-auto">비밀번호 변경하기</a></td>
                 </tr>
             </table>
         </div>
     </form>
 </div>
-<div>
-    <button>수정하기</button>
+
+<div class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center">
+            <a class="btn btn-outline-dark mt-auto" href="mypage">뒤로 가기</a>
+            <a type="submit" class="btn btn-outline-dark mt-auto">수정하기</a>
+        </div>
+    </div>
 </div>
+
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

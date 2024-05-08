@@ -2,16 +2,22 @@ package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.AdminMapper;
 import com.example.kahyun.mapper.BoardMapper;
+import com.example.kahyun.mapper.SBoardMapper;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.LoginVo;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 @Controller
@@ -19,6 +25,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminMapper adminMapper;
+    private final SBoardMapper sBoardMapper;
 
     /* 관리자 페이지 */
     @RequestMapping("admin/admin")
@@ -49,6 +56,25 @@ public class AdminController {
     public String getAdmin(Model model) {
         model.addAttribute("list", adminMapper.getAdmin());
         return "admin/admin_list";
+    }
+
+    /* 관리자 리스트 */
+    @GetMapping("admin/accept_list")
+    public String getAccept(Model model) {
+        model.addAttribute("list", adminMapper.getAdminSBoardList());
+        return "admin/accept_list";
+    }
+
+    @ResponseBody
+    @PostMapping("admin/changeOpen")
+    public int changeOpen(String seq) {
+        return adminMapper.changePublic(seq);
+    }
+
+    @ResponseBody
+    @PostMapping("admin/changePrivate")
+    public int changePrivate(String seq) {
+        return adminMapper.changePrivate(seq);
     }
 }
 

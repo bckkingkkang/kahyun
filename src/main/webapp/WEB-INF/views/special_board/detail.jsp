@@ -17,7 +17,14 @@
 <body>
 <jsp:include page="/header/header"></jsp:include>
 <div>
-    <h1>특별회원(자료) 게시판 상세 화면</h1>
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Special Board</h1>
+                <p class="lead fw-normal text-white-50 mb-0">특별회원(자료) 게시판 상세</p>
+            </div>
+        </div>
+    </header>
     <c:if test="${getDetailBoard.status == 'D'}">
         <h3>삭제된 게시글입니다.</h3>
     </c:if>
@@ -25,10 +32,10 @@
 <div>
     <form action="">
         <div>
-            <table>
+            <table class="table">
                 <tr>
-                    <th style="width: 100px">제목</th>
-                    <td style="width: 500px">${getDetailBoard.title}</td>
+                    <th>제목</th>
+                    <th>${getDetailBoard.title}</th>
                 </tr>
                 <tr>
                     <th>작성자</th>
@@ -47,15 +54,20 @@
                     <td><a href="<c:url value='/fileDownload/${getDetailFile.savedName}' /> ">${getDetailFile.orgName}</a></td>
                 </tr>
                 <tr>
-                    <th>파일</th>
-                    <td><img src="${getDetailFile.savedPath}${getDetailFile.savedName}" alt=""></td>
+                    <th>가격</th>
+                    <th>${getDetailBoard.price} 원</th>
                 </tr>
+                <tr>
+                    <th>보기</th>
+                    <td><img src="/image/${getDetailFile.savedName}" alt=""></td>
+                </tr>
+
             </table>
         </div>
     </form>
 
 </div>
-
+<jsp:include page="/header/footer"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};

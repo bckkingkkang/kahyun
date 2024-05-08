@@ -22,6 +22,7 @@ public class LoginVo implements UserDetails {
     private String status;
     private String auth;
     private String email;
+    private int cash;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

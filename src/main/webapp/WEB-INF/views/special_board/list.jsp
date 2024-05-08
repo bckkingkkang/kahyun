@@ -25,17 +25,28 @@
 </style>
 <jsp:include page="/header/header"></jsp:include>
 
-<a href="/special_board/create">글쓰기</a>
 
-    <h2>특별회원(자료) 게시판</h2>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Special Board</h1>
+            <p class="lead fw-normal text-white-50 mb-0">특별회원(자료 등록) 게시판</p>
+        </div>
+    </div>
+</header>
+<div>
+    <p></p>
+    <a href="/special_board/create">글쓰기</a>
+</div>
     <div>
-        <table>
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>NO</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
+                    <th>승인여부</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,15 +56,17 @@
                     <td><a href="detail/${list.seq}">${list.title}</a></td>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
+                    <td>N or Y</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
 
-    <div>
+
+    <%--<div>
         <h2>자료만 보기</h2>
-        <table>
+        <table class="table table-hover">
             <thead>
             <tr>
                 <th>No</th>
@@ -73,7 +86,7 @@
             </c:forEach>
             </tbody>
         </table>
-    </div>
-
+    </div>--%>
+<jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

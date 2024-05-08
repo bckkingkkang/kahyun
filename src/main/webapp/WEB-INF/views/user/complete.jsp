@@ -9,6 +9,8 @@
 <jsp:include page="/header/header"></jsp:include>
 <h2>회원가입 완료</h2>
 
+
+<jsp:include page="/header/footer"></jsp:include>
 <a href="login">로그인</a>
 <script>
 
