@@ -24,6 +24,13 @@
         </div>
     </div>
 </header>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3>${boardDetail.title}</h3>
+        </div>
+    </div>
+</header>
 
 <div>
 
@@ -31,59 +38,73 @@
         <h3>삭제된 게시글입니다.</h3>
     </c:if>
 </div>
-<div>
+<div class="container">
     <form action="">
-    <div>
-    <table class="table">
-        <tr>
-            <td>제목</td>
-            <td>${boardDetail.title}</td>
-        </tr>
-        <tr>
-            <td>게시판</td>
-            <td><c:choose>
-                <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
-                <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
-                <c:otherwise>그냥게시판</c:otherwise>
-            </c:choose></td>
-        </tr>
-        <tr>
-            <td>작성자</td>
-            <td>${boardDetail.nickname}</td>
-        </tr>
-        <tr>
-            <td>작성일</td>
-            <td>${boardDetail.create_dt}</td>
-        </tr>
-        <tr>
-            <td>수정일</td>
-            <td>${boardDetail.update_dt}</td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td>${boardDetail.content}</td>
-        </tr>
-    </table>
-    </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th class="text-center">게시판</th>
+                    <td><c:choose>
+                        <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
+                        <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
+                        <c:otherwise>그냥게시판</c:otherwise>
+                    </c:choose></td>
+                </tr>
+                <tr>
+                    <th class="text-center">작성자</th>
+                    <td>${boardDetail.nickname}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">작성일</th>
+                    <td>${boardDetail.create_dt}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">수정일</th>
+                    <td>${boardDetail.update_dt}</td>
+                </tr>
+                <tr>
+                    <th class="text-center">내용</th>
+                    <td>${boardDetail.content}</td>
+                </tr>
+            </table>
+        </div>
     </form>
 
-    <div>
-        <table>
-            <tr>
-                <div>
-                    <%--<button type="button" onclick=location.href='/board/list' id="listBtn">목록</button>--%>
-                    <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a></div></td>
-                </div>
-                <div>
-                    <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
-                        <%--<button type="button" id="deleteBtn">삭제</button>--%>
-                        <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a></div></td>
-                    </c:if>
-                </div>
-            </tr>
-        </table>
+    <div class="text-center">
+        <div>
+            <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
+            <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
+                <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
+                <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
+            </c:if>
+        </div>
     </div>
 </div>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">댓글 등록</p>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div>
+        <div>
+            <div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="content" placeholder="댓글">
+                    <label for="content">댓글</label>
+                </div>
+                <div class="text-center">
+                    <div>
+                        <a class="btn btn-outline-dark mt-auto" id="createBtn">등록</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <header class="bg-white py-5">
     <div class="container px-2 px-lg-3 my-3">
         <div class="text-center text-black">
@@ -91,53 +112,31 @@
         </div>
     </div>
 </header>
-<div>
+<div class="container">
     <div>
-        <div>
+        <c:forEach items="${boardComment}" var="boardComment">
             <div>
-                <table class="table">
+                <table class="table table-borderless">
                     <tr>
-                        <form action="">
-                            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />--%>
-                            <td>댓글</td>
-                            <td>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="content" placeholder="댓글 남기기">
-                                    <label for="content">댓글</label>
-                                </div>
-                            </td>
-                            <%--<td><button type="button" id="createBtn" class="accordion-button">등록</button></td>--%>
-                            <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="createBtn">등록</a></div></td>
-                        </form>
+                        <th class="text-center"<%-- style="width: 100px"--%>>내용</th>
+                        <td<%-- style="width: 500px"--%>>${boardComment.content}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">작성자</th>
+                        <td>${boardComment.nickname}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">작성일</th>
+                        <td>${boardComment.create_dt}</td>
                     </tr>
                 </table>
                 <br>
             </div>
-        </div>
-        <div>
-            <c:forEach items="${boardComment}" var="boardComment">
-                <div>
-                    <table class="table">
-                    <tr>
-                        <td<%-- style="width: 100px"--%>>내용</td>
-                        <td<%-- style="width: 500px"--%>>${boardComment.content}</td>
-                    </tr>
-                    <tr>
-                        <td>작성자</td>
-                        <td>${boardComment.nickname}</td>
-                    </tr>
-                    <tr>
-                        <td>작성일</td>
-                        <td>${boardComment.create_dt}</td>
-                    </tr>
-                    </table>
-                </div>
-            </c:forEach>
-        </div>
+        </c:forEach>
     </div>
-
 </div>
 <jsp:include page="/header/footer"></jsp:include>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
