@@ -6,14 +6,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>게시판</title>
 </head>
-<style>
+<%--<style>
     table {
         border: 2px solid; border-collapse: collapse;
     }
     th, td {
         border: 1px solid; padding:10px 5px;
     }
-</style>
+</style>--%>
 <body>
 <jsp:include page="/header/header"></jsp:include>
 <header class="bg-dark py-5">
@@ -24,17 +24,14 @@
         </div>
     </div>
 </header>
-<div>
+<div class="container">
     <p></p>
-</div>
-<div>
-    <p></p>
-    <div class="text-start"><a class="btn btn-outline-dark mt-auto" href="/board/create">등록</a></div>
+    <div class="text-end"><a class="btn btn-outline-dark mt-auto" href="/board/create">등록</a></div>
     <p></p>
 </div>
 
-    <div>
-        <table class="table table-hover">
+    <div class="container">
+        <table class="table table-hover text-center">
             <thead>
                 <tr>
                     <th>No</th>
@@ -49,17 +46,17 @@
             <tbody>
             <c:forEach items="${list}" var="list">
                 <tr>
-                    <th>${list.rownum}</th>
+                    <td>${list.rownum}</td>
                     <th><a href="detail/${list.seq}">${list.title}</a></th>
-                    <th>${list.nickname}</th>
-                    <th>${list.create_dt}</th>
-                    <th>${list.update_dt}</th>
-                    <th>${list.view}</th>
-                    <th><c:choose>
+                    <td>${list.nickname}</td>
+                    <td>${list.create_dt}</td>
+                    <td>${list.update_dt}</td>
+                    <td>${list.view}</td>
+                    <td><c:choose>
                         <c:when test="${list.boardOption eq 'boardOption1'}">게시판1</c:when>
                         <c:when test="${list.boardOption eq 'boardOption2'}">게시판2</c:when>
                         <c:otherwise>그냥게시판</c:otherwise>
-                    </c:choose></th>
+                    </c:choose></td>
                 </tr>
             </c:forEach>
             </tbody>

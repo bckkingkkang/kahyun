@@ -13,7 +13,7 @@
     <title>특별회원 전용</title>
 </head>
 <body>
-<style>
+<%--<style>
     table {
         border: 2px solid; border-collapse: collapse;
         /*margin-left : auto;
@@ -22,7 +22,7 @@
     th, td {
         border: 1px solid; padding:10px 5px;
     }
-</style>
+</style>--%>
 <jsp:include page="/header/header"></jsp:include>
 
 
@@ -34,29 +34,32 @@
         </div>
     </div>
 </header>
-<div>
+<div class="container">
     <p></p>
-    <a href="/special_board/create">글쓰기</a>
+    <div class="text-end">
+        <a class="btn btn-outline-dark mt-auto" href="/special_board/create">등록</a>
+    </div>
+    <p></p>
 </div>
-    <div>
-        <table class="table table-hover">
+    <div class="container">
+        <table class="table table-hover text-center">
             <thead>
                 <tr>
                     <th>NO</th>
                     <th>제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
-                    <th>승인여부</th>
+                    <th>공개여부</th>
                 </tr>
             </thead>
             <tbody>
             <c:forEach items="${sboardList}" var="list">
                 <tr>
                     <td>${list.rownum}</td>
-                    <td><a href="detail/${list.seq}">${list.title}</a></td>
+                    <th><a href="detail/${list.seq}">${list.title}</a></th>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
-                    <td>N or Y</td>
+                    <td>${list.accept_yn == 'Y' ? '공개' : '비공개'}</td>
                 </tr>
             </c:forEach>
             </tbody>
