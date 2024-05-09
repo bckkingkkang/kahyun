@@ -17,6 +17,7 @@
             ROW_NUMBER() over(ORDER BY seq) AS rownum
         FROM board
         WHERE status = 'N'
+        ORDER BY create_dt DESC
     </select>
 
     <!-- 게시판 글 쓰기 -->

@@ -26,6 +26,7 @@
                ROW_NUMBER() over(ORDER BY seq) AS rownum
         FROM s_board
         WHERE status='N'
+        ORDER BY create_dt DESC
     </select>
 
     <select id="getFileList">
