@@ -14,7 +14,7 @@
             update_dt,
             boardOption,
             view,
-            ROW_NUMBER() over(ORDER BY seq) AS rownum
+            ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum
         FROM board
         WHERE status = 'N'
         ORDER BY create_dt DESC

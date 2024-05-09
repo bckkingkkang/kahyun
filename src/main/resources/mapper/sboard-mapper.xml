@@ -23,7 +23,7 @@
 
     <select id="getSBoardList">
         SELECT * ,
-               ROW_NUMBER() over(ORDER BY seq) AS rownum
+               ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum
         FROM s_board
         WHERE status='N'
         ORDER BY create_dt DESC
