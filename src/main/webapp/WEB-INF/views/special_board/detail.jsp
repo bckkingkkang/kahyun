@@ -75,7 +75,7 @@
                         </tr>
                         <tr>
                             <th class="text-center">보기</th>
-                            <td><img width="70%" src="/image/${getDetailFile.savedName}" alt=""></td>
+                            <td><img oncontextmenu="return false" width="70%" src="/image/${getDetailFile.savedName}" alt="" ${getDetailFile.accept_yn == 'Y' ? '' : "style='filter: grayscale(100%)'"}></td>
                         </tr>
                     </table>
                 </div>
