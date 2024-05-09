@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -71,7 +72,7 @@
                         </tr>
                         <tr>
                             <th class="text-center">가격</th>
-                            <th>${getDetailBoard.price} 원</th>
+                            <th><fmt:formatNumber value="${getDetailBoard.price}" /> 원</th>
                         </tr>
                         <tr>
                             <th class="text-center">보기</th>

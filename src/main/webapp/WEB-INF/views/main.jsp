@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -21,10 +22,10 @@
 </header>
 
 <section class="py-5">
+    <div class="text-center text-black-50">
+        <h3>높은 다운로드 순</h3>
+    </div>
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="text-center text-black-50">
-            <h3>높은 다운로드 순</h3>
-        </div>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <c:forEach items="${getMainSpecialBoardByDownload}" var="getMainSpecialBoardByDownload">
             <div class="col mb-5">
@@ -37,15 +38,22 @@
                         <div class="text-center">
                             <!-- Product name-->
                             <h5 class="fw-bolder">${getMainSpecialBoardByDownload.title}</h5>
-                            ${getMainSpecialBoardByDownload.price} 원
+                            <fmt:formatNumber value="${getMainSpecialBoardByDownload.price}"/> 원
                         </div>
                         <div class="text-center">
                             다운로드 수 : ${getMainSpecialBoardByDownload.download_count}
                         </div>
                     </div>
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div>
+                            <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByDownload.seq}">자세히 보기</a>
+                        </div>
+                    </div>
+                    <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div>
+                            <a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+                            <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByDownload.savedName}'/>"}>다운로드</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,12 +61,12 @@
         </div>
     </div>
 </section>
-
+<br>
 <section class="py-5">
+    <div class="text-center text-black-50">
+        <h3>최근 등록 순</h3>
+    </div>
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="text-center text-black-50">
-            <h3>최근 등록 순</h3>
-        </div>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <c:forEach items="${getMainSpecialBoardByCreate}" var="getMainSpecialBoardByCreate">
                 <div class="col mb-5">
@@ -68,15 +76,22 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">${getMainSpecialBoardByCreate.title}</h5>
-                                    ${getMainSpecialBoardByCreate.price} 원
+                                <fmt:formatNumber value="${getMainSpecialBoardByCreate.price}"/> 원
                             </div>
                             <div class="text-center">
                                 다운로드 수 : ${getMainSpecialBoardByCreate.download_count}
                             </div>
                         </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                        <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div>
+                                <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByCreate.seq}">자세히 보기</a>
+                            </div>
+                        </div>
+                        <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div>
+                                <a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+                                <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByCreate.savedName}'/>"}>다운로드</a>
+                            </div>
                         </div>
                     </div>
                 </div>

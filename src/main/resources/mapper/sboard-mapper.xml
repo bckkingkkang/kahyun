@@ -54,22 +54,26 @@
 
     <select id="getMainSpecialBoardByDownload">
         SELECT * FROM (
-        SELECT *,
-               ROW_NUMBER() over(ORDER BY download_count desc) AS rownum
-        FROM s_board
-        WHERE accept_yn = 'Y'
-        ORDER BY download_count desc) as sb
-        WHERE 4 > sb.rownum
+            select sb.*,
+            ROW_NUMBER() over(ORDER BY sb.create_dt desc) AS rownum,
+              file.savedName
+        FROM s_board AS sb
+        INNER JOIN file ON file.savedName = sb.file
+        WHERE sb.accept_yn = 'Y'
+        ORDER BY sb.download_count desc) as sb
+        WHERE 9 > sb.rownum
     </select>
 
     <select id="getMainSpecialBoardByCreate">
         SELECT * FROM (
-        select *,
-               ROW_NUMBER() over(ORDER BY create_dt desc) AS rownum
-        FROM s_board
-        WHERE accept_yn = 'Y'
-        ORDER BY create_dt desc) as sb
-        WHERE 4 > sb.rownum
+        select sb.*,
+               ROW_NUMBER() over(ORDER BY sb.create_dt desc) AS rownum,
+                file.savedName
+        FROM s_board AS sb
+        INNER JOIN file ON file.savedName = sb.file
+        WHERE sb.accept_yn = 'Y'
+        ORDER BY sb.create_dt desc) as sb
+        WHERE 9 > sb.rownum
     </select>
 
 
