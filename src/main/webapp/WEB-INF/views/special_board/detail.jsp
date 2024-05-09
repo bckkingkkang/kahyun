@@ -60,7 +60,14 @@
                         </tr>
                         <tr>
                             <th class="text-center">파일</th>
-                            <td><a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getDetailFile.savedName}' /> ">다운로드</a></td>
+                            <c:choose>
+                                <c:when test="${getDetailFile.accept_yn == 'Y' }">
+                                    <td><a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getDetailFile.savedName}'/>"}>다운로드</a></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a class="btn btn-outline-dark mt-auto disabled"}>다운로드</a></td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                         <tr>
                             <th class="text-center">가격</th>

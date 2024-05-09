@@ -28,8 +28,11 @@ public class MainCrontroller {
 
     @RequestMapping("/")
     public ModelAndView Test(ModelAndView model) {
-        List<SpecialBoardVo> getMainSpecialBoard = sboardMapper.getMainSpecialBoard();
-        model.addObject("getMainSpecialBoard",getMainSpecialBoard);
+        List<SpecialBoardVo> getMainSpecialBoardByDownload = sboardMapper.getMainSpecialBoardByDownload();
+        model.addObject("getMainSpecialBoardByDownload",getMainSpecialBoardByDownload);
+
+        List<SpecialBoardVo> getMainSpecialBoardByCreate = sboardMapper.getMainSpecialBoardByCreate();
+        model.addObject("getMainSpecialBoardByCreate",getMainSpecialBoardByCreate);
 
         model.setViewName("main");
 
@@ -49,8 +52,11 @@ public class MainCrontroller {
         }
         model.addObject("isLogin",isLogin);
 
-        List<SpecialBoardVo> getMainSpecialBoard = sboardMapper.getMainSpecialBoard();
-        model.addObject("getMainSpecialBoard",getMainSpecialBoard);
+        List<SpecialBoardVo> getMainSpecialBoardByDownload = sboardMapper.getMainSpecialBoardByDownload();
+        model.addObject("getMainSpecialBoardByDownload",getMainSpecialBoardByDownload);
+
+        List<SpecialBoardVo> getMainSpecialBoardByCreate = sboardMapper.getMainSpecialBoardByCreate();
+        model.addObject("getMainSpecialBoardByCreate",getMainSpecialBoardByCreate);
 
         model.setViewName("main");
 

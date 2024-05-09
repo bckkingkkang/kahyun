@@ -52,12 +52,13 @@
 
     <select id="getAdminSBoardList">
         SELECT  sb.* ,
-                ROW_NUMBER() over(ORDER BY seq) AS rownum,
+                ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum,
                 file.orgName,
                 users.user_id
         FROM s_board sb
         INNER JOIN file AS file on sb.file = file.savedName
         INNER JOIN users AS users on sb.nickname = users.nickname
+        ORDER BY create_dt DESC
 
     </select>
 

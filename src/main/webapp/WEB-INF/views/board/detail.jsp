@@ -20,7 +20,11 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Community</h1>
-            <p class="lead fw-normal text-white-50 mb-0">회원 게시판</p>
+            <p class="lead fw-normal text-white-50 mb-0">회원게시판 <c:choose>
+                <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
+                <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
+                <c:otherwise>그냥게시판</c:otherwise>
+            </c:choose></p>
         </div>
     </div>
 </header>
@@ -52,14 +56,14 @@
             <form action="">
                 <div>
                     <table class="table">
-                        <tr>
+                        <%--<tr>
                             <th class="text-center">게시판</th>
                             <td><c:choose>
                                 <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
                                 <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
                                 <c:otherwise>그냥게시판</c:otherwise>
                             </c:choose></td>
-                        </tr>
+                        </tr>--%>
                         <tr>
                             <th class="text-center">작성자</th>
                             <td>${boardDetail.nickname}</td>

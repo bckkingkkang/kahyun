@@ -17,4 +17,5 @@ public class FileVo {
 
     private String nickname;
     private String title;
+    private String accept_yn;
 }
