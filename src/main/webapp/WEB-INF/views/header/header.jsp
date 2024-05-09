@@ -1,3 +1,6 @@
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,21 +28,33 @@
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/board/list">Community</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/special_board/list">Download</a></li>
             </ul>
-            <form action="/logout" mehtod="post" class="d-flex">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/mypage">Mypage</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout" type="submit">Logout</a></li>
-                    <%--<li class="nav-item"><a class="nav-link active" aria-current="page" href="/admin/admin">Admin</a></li>--%>
-                </ul>
-            </form>
-            <form>
-                <button class="btn" type="button">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
+            <c:choose>
+                <c:when test="${isLogin == 'true'}">
+                    <form action="/logout" mehtod="post" class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <li class="nav-item"><span class="badge bg-dark text-white ms-1 rounded-pill"><fmt:formatNumber value="${user.cash}" /> 원</span></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/mypage">MyPage</a></li>
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/login">Login</a></li>
+                        </ul>
+                    </form>
+                    <form>
+                        <button class="btn" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Cart
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <form action="/logout" mehtod="post" class="d-flex">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                            <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/login">Login</a></li>
+                        </ul>
+                    </form>
+
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 </nav>

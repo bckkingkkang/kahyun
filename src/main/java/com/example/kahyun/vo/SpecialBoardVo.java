@@ -20,5 +20,6 @@ public class SpecialBoardVo {
     private String accept_yn;
     private int download_count;
     private String orgName;
+    private String savedName;
 
 }

@@ -6,7 +6,7 @@
     <!-- 회원 리스트 -->
     <select id="getUsers">
         SELECT
-            ROW_NUMBER() over(ORDER BY seq) AS rownum,
+            ROW_NUMBER() over(ORDER BY reg_date DESC) AS rownum,
             seq,
             username,
             user_id,
@@ -16,6 +16,7 @@
             auth
         FROM users
         WHERE auth != 'ADMIN'
+        ORDER BY reg_date DESC
     </select>
 
     <!-- 특정 회원 게시판 리스트 -->
@@ -52,12 +53,13 @@
 
     <select id="getAdminSBoardList">
         SELECT  sb.* ,
-                ROW_NUMBER() over(ORDER BY seq) AS rownum,
+                ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum,
                 file.orgName,
                 users.user_id
         FROM s_board sb
         INNER JOIN file AS file on sb.file = file.savedName
         INNER JOIN users AS users on sb.nickname = users.nickname
+        ORDER BY create_dt DESC
 
     </select>
 

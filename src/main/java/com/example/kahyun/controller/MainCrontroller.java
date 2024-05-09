@@ -28,8 +28,12 @@ public class MainCrontroller {
 
     @RequestMapping("/")
     public ModelAndView Test(ModelAndView model) {
-        List<SpecialBoardVo> getMainSpecialBoard = sboardMapper.getMainSpecialBoard();
-        model.addObject("getMainSpecialBoard",getMainSpecialBoard);
+
+        List<SpecialBoardVo> getMainSpecialBoardByDownload = sboardMapper.getMainSpecialBoardByDownload();
+        model.addObject("getMainSpecialBoardByDownload",getMainSpecialBoardByDownload);
+
+        List<SpecialBoardVo> getMainSpecialBoardByCreate = sboardMapper.getMainSpecialBoardByCreate();
+        model.addObject("getMainSpecialBoardByCreate",getMainSpecialBoardByCreate);
 
         model.setViewName("main");
 
@@ -38,7 +42,7 @@ public class MainCrontroller {
 
     @RequestMapping("/main")
     public ModelAndView HomeTest(ModelAndView model) {
-        String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       /* String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         LoginVo loginVo = userService.selectUser(user_id);
         model.addObject("user", loginVo);
         String isLogin;
@@ -47,10 +51,13 @@ public class MainCrontroller {
         } else {
             isLogin = "false";
         }
-        model.addObject("isLogin",isLogin);
+        model.addObject("isLogin",isLogin);*/
 
-        List<SpecialBoardVo> getMainSpecialBoard = sboardMapper.getMainSpecialBoard();
-        model.addObject("getMainSpecialBoard",getMainSpecialBoard);
+        List<SpecialBoardVo> getMainSpecialBoardByDownload = sboardMapper.getMainSpecialBoardByDownload();
+        model.addObject("getMainSpecialBoardByDownload",getMainSpecialBoardByDownload);
+
+        List<SpecialBoardVo> getMainSpecialBoardByCreate = sboardMapper.getMainSpecialBoardByCreate();
+        model.addObject("getMainSpecialBoardByCreate",getMainSpecialBoardByCreate);
 
         model.setViewName("main");
 
@@ -58,7 +65,7 @@ public class MainCrontroller {
     }
 
     @RequestMapping("/header/header")
-    public String header(Model model) {
+    public ModelAndView header(ModelAndView mav) {
         /*LoginVo loginVo = userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("user", loginVo);
         String isLogin;
@@ -67,8 +74,20 @@ public class MainCrontroller {
         } else {
             isLogin = "false";
         }
+
         model.addAttribute("isLogin",isLogin);*/
-        return "header/header";
+        String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        LoginVo loginVo = userService.selectUser(user_id);
+        mav.addObject("user", loginVo);
+        String isLogin;
+        if(loginVo != null) {
+            isLogin = "true";
+        } else {
+            isLogin = "false";
+        }
+        mav.addObject("isLogin",isLogin);
+        mav.setViewName("header/header");
+        return mav;
     }
     @RequestMapping("/header/footer")
     public String footer(Model model) {

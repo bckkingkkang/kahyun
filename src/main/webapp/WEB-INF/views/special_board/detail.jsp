@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -60,15 +61,22 @@
                         </tr>
                         <tr>
                             <th class="text-center">파일</th>
-                            <td><a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getDetailFile.savedName}' /> ">다운로드</a></td>
+                            <c:choose>
+                                <c:when test="${getDetailFile.accept_yn == 'Y' }">
+                                    <td><a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getDetailFile.savedName}'/>"}>다운로드</a></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a class="btn btn-outline-dark mt-auto disabled"}>다운로드</a></td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                         <tr>
                             <th class="text-center">가격</th>
-                            <th>${getDetailBoard.price} 원</th>
+                            <th><fmt:formatNumber value="${getDetailBoard.price}" /> 원</th>
                         </tr>
                         <tr>
                             <th class="text-center">보기</th>
-                            <td><img width="70%" src="/image/${getDetailFile.savedName}" alt=""></td>
+                            <td><img oncontextmenu="return false" width="70%" src="/image/${getDetailFile.savedName}" alt="" ${getDetailFile.accept_yn == 'Y' ? '' : "style='filter: grayscale(100%)'"}></td>
                         </tr>
                     </table>
                 </div>

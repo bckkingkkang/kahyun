@@ -25,50 +25,52 @@
     </div>
 </header>
 <%--h2 class="text-center">게시글 승인 대기 리스트</h2>--%>
-<table class="table text-center">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th hidden>seq</th>
-        <th>제목</th>
-        <th>닉네임</th>
-        <th>아이디</th>
-        <th>파일명</th>
-        <th>가격</th>
-        <th>등록일</th>
-        <th>삭제 여부</th>
-        <th>자세히 보기</th>
-        <th>공개 여부</th>
-        <th>변경</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${list}" var="list">
+<div>
+    <table class="table text-center">
+        <thead>
         <tr>
-            <th>${list.rownum}</th>
-            <th hidden><input type="text" value="${list.seq}"id="seq"></th>
-            <th>${list.title}</th>
-            <th>${list.nickname}</th>
-            <th>${list.user_id}</th>
-            <th>${list.orgName}</th>
-            <th>${list.price}</th>
-            <th>${list.create_dt}</th>
-            <th>${list.status}</th>
-            <th><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/special_board/detail/${list.seq}">자세히 보기</a></th>
-            <c:choose>
-                <c:when test="${list.accept_yn == 'Y'}">
-                    <th>공개</th>
-                    <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePrivate" >비공개로 전환</a></div></th>
-                </c:when>
-                <c:otherwise>
-                    <th>비공개</th>
-                    <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePublic" >공개로 전환</a></div></th>
-                </c:otherwise>
-            </c:choose>
+            <th>No</th>
+            <th hidden>seq</th>
+            <th>제목</th>
+            <th>닉네임</th>
+            <th>아이디</th>
+            <th>파일명</th>
+            <th>가격</th>
+            <th>등록일</th>
+            <th>삭제 여부</th>
+            <th>자세히 보기</th>
+            <th>공개 여부</th>
+            <th>변경</th>
         </tr>
-    </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <c:forEach items="${list}" var="list">
+            <tr>
+                <th>${list.rownum}</th>
+                <th hidden><input type="text" value="${list.seq}"id="seq"></th>
+                <th>${list.title}</th>
+                <th>${list.nickname}</th>
+                <th>${list.user_id}</th>
+                <th>${list.orgName}</th>
+                <th>${list.price}</th>
+                <th>${list.create_dt}</th>
+                <th>${list.status}</th>
+                <th><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/special_board/detail/${list.seq}">자세히 보기</a></th>
+                <c:choose>
+                    <c:when test="${list.accept_yn == 'Y'}">
+                        <th>공개</th>
+                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePrivate" >비공개로 전환</a></div></th>
+                    </c:when>
+                    <c:otherwise>
+                        <th>비공개</th>
+                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePublic" >공개로 전환</a></div></th>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 
 
 
