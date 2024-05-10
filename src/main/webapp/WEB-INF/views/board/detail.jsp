@@ -38,11 +38,13 @@
                 </div>
             </div>
         </header>
-        <div class="text-center">
-            <div>
-                <a class="btn btn-outline-dark mt-auto" href="/board/list">목록</a>
+        <header class="bg-white py-5">
+            <div class="container px-2 px-lg-3 my-3">
+                <div class="text-center text-black">
+                    <a class="btn btn-outline-dark mt-auto" href="/board/list">목록</a>
+                </div>
             </div>
-        </div>
+        </header>
     </c:when>
     <c:otherwise>
         <header class="bg-white py-5">
@@ -56,14 +58,6 @@
             <form action="">
                 <div>
                     <table class="table">
-                        <%--<tr>
-                            <th class="text-center">게시판</th>
-                            <td><c:choose>
-                                <c:when test="${boardDetail.boardOption eq 'boardOption1'}">게시판1</c:when>
-                                <c:when test="${boardDetail.boardOption eq 'boardOption2'}">게시판2</c:when>
-                                <c:otherwise>그냥게시판</c:otherwise>
-                            </c:choose></td>
-                        </tr>--%>
                         <tr>
                             <th class="text-center">작성자</th>
                             <td>${boardDetail.nickname}</td>

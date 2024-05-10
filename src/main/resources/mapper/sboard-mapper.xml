@@ -55,7 +55,7 @@
     <select id="getMainSpecialBoardByDownload">
         SELECT * FROM (
             select sb.*,
-            ROW_NUMBER() over(ORDER BY sb.create_dt desc) AS rownum,
+            ROW_NUMBER() over(ORDER BY sb.download_count desc) AS rownum,
               file.savedName
         FROM s_board AS sb
         INNER JOIN file ON file.savedName = sb.file

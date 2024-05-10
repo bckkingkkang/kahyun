@@ -15,11 +15,12 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Kahyun</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this hompeage template</p>
+            <h1 class="display-4 fw-bolder">KAHYUN</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Main</p>
         </div>
     </div>
 </header>
+<img src="" alt="">
 
 <section class="py-5">
     <div class="text-center text-black-50">
@@ -34,25 +35,25 @@
                 </div>
                 <div class="card h-100">
                     <img class="card-img-top" src="image/${getMainSpecialBoardByDownload.file}" height="150px" alt="..." />
-                    <div class="card-body p-4">
+                    <div class="card-body p-2">
                         <div class="text-center">
                             <!-- Product name-->
                             <h5 class="fw-bolder">${getMainSpecialBoardByDownload.title}</h5>
-                            <fmt:formatNumber value="${getMainSpecialBoardByDownload.price}"/> 원
+                            <i class="bi bi-tag"></i> <fmt:formatNumber value="${getMainSpecialBoardByDownload.price}"/> KRW
                         </div>
                         <div class="text-center">
-                            다운로드 수 : ${getMainSpecialBoardByDownload.download_count}
+                            <i class="bi bi-download"></i> ${getMainSpecialBoardByDownload.download_count}
                         </div>
                     </div>
                     <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div>
-                            <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByDownload.seq}">자세히 보기</a>
+                            <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByDownload.seq}"><i class="bi bi-search"></i> details</a>
                         </div>
                     </div>
                     <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div>
-                            <a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
-                            <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByDownload.savedName}'/>"}>다운로드</a>
+                            <a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-cart-check"></i></a>
+                            <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByDownload.savedName}'/>"}><i class="bi bi-box-arrow-down"></i> download</a>
                         </div>
                     </div>
                 </div>
@@ -76,21 +77,21 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">${getMainSpecialBoardByCreate.title}</h5>
-                                <fmt:formatNumber value="${getMainSpecialBoardByCreate.price}"/> 원
+                                <i class="bi bi-tag"></i> <fmt:formatNumber value="${getMainSpecialBoardByCreate.price}"/> KRW
                             </div>
                             <div class="text-center">
-                                다운로드 수 : ${getMainSpecialBoardByCreate.download_count}
+                                <i class="bi bi-download"></i> ${getMainSpecialBoardByCreate.download_count}
                             </div>
                         </div>
                         <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div>
-                                <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByCreate.seq}">자세히 보기</a>
+                                <a class="btn btn-outline-dark mt-auto" href="/special_board/detail/${getMainSpecialBoardByCreate.seq}"><i class="bi bi-search"></i> details</a>
                             </div>
                         </div>
                         <div class="text-center card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div>
-                                <a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
-                                <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByCreate.savedName}'/>"}>다운로드</a>
+                                <a class="btn btn-outline-dark mt-auto" href="#"><i class="bi bi-cart-check"></i></a>
+                                <a class="btn btn-outline-dark mt-auto" href="<c:url value='/fileDownload/${getMainSpecialBoardByCreate.savedName}'/>"}><i class="bi bi-box-arrow-down"></i> download</a>
                             </div>
                         </div>
                     </div>

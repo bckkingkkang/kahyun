@@ -12,10 +12,27 @@
 </head>
 <body>
 <jsp:include page="/header/header"></jsp:include>
-    로그아웃되었습니다.
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Logout</h1>
+        </div>
+    </div>
+</header>
 
-    <a href="/main">메인으로</a>
-    <a href="/user/login">로그인하기</a>
+<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+    <div class="text-center">
+        <header class="bg-white py-5">
+            <div class="container px-2 px-lg-3 my-3">
+                <div class="text-center text-black">
+                    <h3>로그아웃되었습니다.</h3>
+                </div>
+            </div>
+        </header>
+        <button type="button" class="btn btn-outline-dark mt-auto" onclick="location.href='/main'">메인으로</button>
+        <button type="button" class="btn btn-outline-dark mt-auto" onclick="location.href='/user/login'">로그인하기</button>
+    </div>
+</div>
 
 <jsp:include page="/header/footer"></jsp:include>
 </body>
