@@ -16,8 +16,15 @@
 </style>
 <body>
 <jsp:include page="/header/header"></jsp:include>
-<h2>관리자 리스트</h2>
-<table>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3 class="display-4 fw-bolder">관리자 리스트</h3>
+            <p class="lead fw-normal text-black-50 mb-0">관리자 리스트 관리</p>
+        </div>
+    </div>
+</header>
+<table class="table text-center">
     <thead>
     <tr>
         <th>No</th>
@@ -37,14 +44,18 @@
             <th>${list.user_id}</th>
             <th>${list.nickname}</th>
             <th>${list.reg_date}</th>
-            <th><a href="user_detail/${list.seq}">등록 게시글</a></th>
+            <th><a class="btn btn-outline-dark mt-auto" href="user_detail/${list.seq}">등록 게시글</a></th>
             <th>${list.status == 'N' ? '정상' : '탈퇴'}</th>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-<a href="admin">뒤로가기</a>
+<div class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="admin">뒤로 가기</a></div>
+    </div>
+</div>
 <jsp:include page="/header/footer"></jsp:include>
 </body>
 </html>

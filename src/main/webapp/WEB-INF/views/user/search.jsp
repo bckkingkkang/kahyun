@@ -7,34 +7,70 @@
 </head>
 <body>
 <jsp:include page="/header/header"></jsp:include>
-계정찾기
-<div>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">계정 찾기</h1>
+        </div>
+    </div>
+</header>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">이름과 닉네임을 입력하세요</p>
+        </div>
+    </div>
+</header>
+<div class="container-sm">
     <form action="">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-    <div>
-        이름을 입력하세요
-        <label for="username"></label>
-        <input type="text" id="username">
-    </div>
-    <div>
-        nickname을 입력하세요
-        <label for="nickname"></label>
-        <input type="text" id="nickname">
-    </div>
-    <button id="searchBtn">아이디 찾기</button>
-    <div>
-        검색 결과 :
-        <label for="user_id"></label>
-        <input type="text" id="user_id" readonly>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <button id="copyBtn" hidden>아이디 복사하기</button>
-    </div>
-    <div>
-        <a href="login">로그인</a>
-        <a href="signup">회원가입</a>
-        <a href="/">메인으로</a>
-    </div>
+        <table class="table table-borderless">
+            <tr>
+                <td>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="username" placeholder="이름을 입력하세요">
+                        <label for="username">이름</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="nickname" class="form-control" placeholder="닉네임ㅇ">
+                        <label for="nickname">닉네임</label>
+                    </div>
+                </td>
+            </tr>
+            <tr class="text-center">
+                <td colspan="2"><button class="btn btn-outline-dark mt-auto" id="searchBtn">아이디 찾기</button></td>
+            </tr>
+        </table>
+        <table class="table table-borderless">
+            <header class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <p class="lead fw-normal text-black-50 mb-0">검색 결과</p>
+                    </div>
+                </div>
+            </header>
+            <tr class="text-center">
+                <td colspan="2">
+                    <div>
+                        아이디 :
+                        <label for="user_id"></label>
+                        <input type="text" id="user_id" readonly>
+                        <button class="btn btn-outline-dark mt-auto" id="copyBtn" hidden>아이디 복사하기</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </form>
+</div>
+<div>
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="card-body p-2 text-center">
+            <a class="btn btn-outline-dark mt-auto" href="login">로그인</a>
+            <a class="btn btn-outline-dark mt-auto" href="signup">회원가입</a>
+            <a class="btn btn-outline-dark mt-auto" href="/">메인으로</a>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
@@ -51,7 +87,7 @@
                 alert("아이디 또는 닉네임을 입력하세요");
                 return;
             }
-                $.ajax({
+            $.ajax({
                     url:"search_id_ajax",
                     type : "post",
                     data : {
@@ -70,7 +106,7 @@
                             $("#copyBtn").show();
                         }
                     }
-                })
+            })
 
         })
 

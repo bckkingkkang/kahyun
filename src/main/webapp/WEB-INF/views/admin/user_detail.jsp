@@ -17,8 +17,15 @@
 <body>
 <jsp:include page="/header/header"></jsp:include>
 
-<h3>회원 리스트</h3>
-<table>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <h3 class="display-4 fw-bolder">관리자 리스트</h3>
+            <p class="lead fw-normal text-black-50 mb-0">관리자 등록 게시글 관리</p>
+        </div>
+    </div>
+</header>
+<table class="table text-center">
     <thead>
     <tr>
         <th>No</th>
@@ -36,7 +43,7 @@
                 <tr>
                     <th>${list.rownum}</th>
                     <th>${list.title}</th>
-                    <th><a href="/board/detail/${list.seq}">자세히 보기</a></th>
+                    <th><a class="btn btn-outline-dark mt-auto" href="/board/detail/${list.seq}">자세히 보기</a></th>
                     <th>${list.create_dt}</th>
                     <th>${list.update_dt}</th>
                     <th>${list.view}</th>
@@ -44,7 +51,7 @@
                     <th>
                         <c:choose>
                             <c:when test="${list.status == 'N'}">
-                                <button id="deleteBtn">삭제하기</button>
+                                <button class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제하기</button>
                             </c:when>
                             <c:otherwise>
                                 삭제된 게시글입니다.
@@ -55,7 +62,12 @@
     </tbody>
 
 </table>
-<a href="/admin/user_list">뒤로가기</a>
+<div class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="/admin/user_list">뒤로 가기</a></div>
+    </div>
+</div>
+<jsp:include page="/header/footer"></jsp:include>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">

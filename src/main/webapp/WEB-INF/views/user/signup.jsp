@@ -7,51 +7,112 @@
 </head>
 <body>
 <jsp:include page="/header/header"></jsp:include>
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">회원가입</h1>
+        </div>
+    </div>
+</header>
+<header class="bg-white py-5">
+    <div class="container px-2 px-lg-3 my-3">
+        <div class="text-center text-black">
+            <p class="lead fw-normal text-black-50 mb-0">정보 입력</p>
+        </div>
+    </div>
+</header>
 <div>
-    <h2>회원가입</h2>
+    <div class="container-sm">
+        <form action="">
+            <table class="table table-borderless text-center">
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" id="username" placeholder="이름">
+                            <label for="username">이름</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="email" id="email" placeholder="이메일">
+                            <label for="email">이메일</label>
+                        </div>
+                    </td>
+                    <td class="text-start">
+                        <button class="btn btn-outline-dark mt-auto" type="button" id="sendBtn" name="sendBtn">인증번호 발송</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>인증 번호</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" name="number" id="number" placeholder="인증번호 입력">
+                            <label for="number">인증번호</label>
+                            <input type="text" name="number" id="numberOk" hidden>
+                        </div>
+                    </td>
+                    <td class="text-start">
+                        <button class="btn btn-outline-dark mt-auto" type="button" name="confirmBtn" id="confirmBtn">이메일 인증</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input placeholder="아이디" class="form-control" type="text" id="user_id_check">
+                            <label for="user_id">아이디</label>
+                            <input class="form-control" type="text" id="user_id" style="display:none" readonly>
+                        </div>
+                    </td>
+                    <td class="text-start">
+                        <button class="btn btn-outline-dark mt-auto" type="button" id="idCheckBtn">중복확인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="password" id="password" placeholder="비밀번호">
+                            <label for="password">비밀번호</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>비밀번호 확인</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="password" id="password_check" placeholder="비밀번호 확인">
+                            <label for="password_check">비밀번호 확인</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>닉네임</th>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" type="text" id="nickname" placeholder="닉네임">
+                            <label for="nickname">닉네임</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button class="btn btn-outline-dark mt-auto" type="button" id="signupBtn">회원가입</button>
+            </div>
+        </form>
+    </div>
 </div>
 <div>
-    <form action="">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <table>
-            <tr>
-                <td><label for="username">이름</label></td>
-                <td><input type="text" id="username"></td>
-            </tr>
-            <tr>
-                <td><label for="email">이메일</label></td>
-                <td><input type="text" id="email"> <button type="button" id="sendBtn" name="sendBtn">인증번호 발송</button></td>
-            </tr>
-            <tr>
-                <td><label for="number">인증번호</label></td>
-                <td><input type="text" name="number" id="number" placeholder="인증번호 입력"> <button type="button" name="confirmBtn" id="confirmBtn">이메일 인증</button></td>
-                <input type="text" name="number" id="numberOk" hidden>
-            </tr>
-            <tr>
-                <td><label for="user_id">아이디</label></td>
-                <td><input type="text" id="user_id_check"> <button type="button" id="idCheckBtn">중복확인</button></td>
-                <td><input type="text" id="user_id" style="display:none" readonly></td>
-            </tr>
-            <tr>
-                <td><label for="password">비밀번호</label>
-                <td><input type="password" id="password"></td>
-            </tr>
-            <tr>
-                <td><label for="password_check">비밀번호 확인</label>
-                <td><input type="password" id="password_check"></td>
-            </tr>
-            <tr>
-                <td><label for="nickname">닉네임</label></td>
-                <td><input type="text" id="nickname"></td>
-            </tr>
-
-        </table>
-        <button type="button" id="signupBtn">회원가입</button>
-    </form>
-</div>
-<div>
-    <a href="login">로그인</a>
-    <a href="/">메인으로</a>
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="card-body p-2 text-center">
+            <a class="btn btn-outline-dark mt-auto" href="login">로그인</a>
+            <a class="btn btn-outline-dark mt-auto" href="/">메인으로</a>
+        </div>
+    </div>
 </div>
 <jsp:include page="/header/footer"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
