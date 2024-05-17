@@ -66,7 +66,9 @@
                 </tr>
                 <tr>
                     <th>보유 캐시</th>
-                    <td>  <fmt:formatNumber value="${userInfo.cash}" /> 원</td>
+                    <td>  <fmt:formatNumber value="${userInfo.cash}" /> 원
+                        <a class="btn btn-outline-dark mt-auto" href="/cash/charge">충전하기</a>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -75,8 +77,9 @@
 
 <div class="bg-white py-5">
     <div class="container px-2 px-lg-3 my-3">
-        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="edit">수정하기</a>
-        <a class="btn btn-outline-dark mt-auto" href="/admin/admin">관리자 페이지</a>
+        <div class="text-center">
+            <a class="btn btn-outline-dark mt-auto" href="edit">수정하기</a>
+            <a class="btn btn-outline-dark mt-auto" href="/admin/admin">관리자 페이지</a>
         <%--<a class="btn btn-outline-dark mt-auto" href="/admin/admin">관리자 페이지</a>--%>
         </div>
     </div>
