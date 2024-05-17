@@ -33,7 +33,7 @@
                     <form action="/logout" mehtod="post" class="d-flex">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                             <li class="nav-item collapse navbar-collapse">${user.nickname} 님, 로그인 중입니다.</li>
-                            <li class="nav-item"><span class="badge bg-dark text-white ms-1 rounded-pill"><fmt:formatNumber value="${user.cash}"/> KRW</span></li>
+                            <li class="nav-item"><a href="/cash/charge"><span class="badge bg-dark text-white ms-1 rounded-pill"><fmt:formatNumber value="${user.cash}"/> KRW</span></a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/user/mypage">MyPage</a></li>
                             <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout" type="submit"><i class="bi bi-person-dash-fill"></i> Logout</a></li>
                         </ul>
