@@ -116,7 +116,7 @@
         IMP.request_pay({
             pg: "html5_inicis",                     // PG사 구분 코드
             pay_method: "card",                     // 결제수단 구분 코드
-            merchant_uid: "ORD20180131-0000011",    // 주문번호
+            merchant_uid: "ORD20180131-0000012",    // 주문번호
             name: "결제 대상 제품명",                 // 결제 대상 제품명
             amount: price,                          // 결제 금액
             buyer_email: "gildong@gmail.com",
@@ -131,7 +131,7 @@
             }).done(function(data) {
                 if(rsp.paid_amount === data.response.amount){
                     alert("결제되었습니다.");
-                    /*console.log(data);*/
+                    console.log(data);
                 } else {
                     // 결제 금액
                     console.log(data.response.amount);
