@@ -67,7 +67,7 @@
                 <tr>
                     <th>보유 캐시</th>
                     <td>  <fmt:formatNumber value="${userInfo.cash}" /> 원
-                        <a class="btn btn-outline-dark mt-auto" href="/cash/charge">충전하기</a>
+                        <a class="btn btn-outline-dark mt-auto" href="/payment/charge">충전하기</a>
                     </td>
                 </tr>
             </table>
@@ -86,5 +86,11 @@
 </div>
 
 <jsp:include page="/header/footer"></jsp:include>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script>
+
+</script>
 </body>
 </html>

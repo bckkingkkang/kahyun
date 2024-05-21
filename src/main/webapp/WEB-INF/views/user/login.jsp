@@ -65,6 +65,10 @@
 </div>
 <jsp:include page="/header/footer"></jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="/js/scripts.js"></script>
+<script>
+
+</script>
 </body>
 </html>
