@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.kahyun.mapper.SBoardMapper">
+<mapper namespace="com.example.kahyun.mapper.FileBoardMapper">
 
     <insert id="createsBoard">
-        INSERT INTO s_board
+        INSERT INTO file_board
             (title, nickname, content, create_dt, user_seq, file, price)
         VALUES (#{title}, #{nickname}, #{content}, CURRENT_TIME(), #{user_seq}, #{file}, #{price})
     </insert>
@@ -24,7 +24,7 @@
     <select id="getSBoardList">
         SELECT * ,
                ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum
-        FROM s_board
+        FROM file_board
         WHERE status='N'
         ORDER BY create_dt DESC
     </select>
@@ -35,12 +35,12 @@
             ROW_NUMBER() over(ORDER BY file.seq) AS rownum,
             sb.*
         FROM file file
-        INNER JOIN kahyun.s_board sb ON file.savedName = sb.file
+        INNER JOIN kahyun.file_board sb ON file.savedName = sb.file
     </select>
 
     <select id="getDetailBoard">
         select *
-        FROM s_board
+        FROM file_board
         WHERE seq = #{seq}
     </select>
 
@@ -48,28 +48,28 @@
         select file.*,
                sb.accept_yn
         FROM file
-        INNER JOIN s_board sb ON file.savedName = sb.file
+        INNER JOIN file_board sb ON file.savedName = sb.file
         WHERE file.savedName = #{savedName}
     </select>
 
-    <select id="getMainSpecialBoardByDownload">
+    <select id="getMainFileBoardByDownload">
         SELECT * FROM (
             select sb.*,
             ROW_NUMBER() over(ORDER BY sb.download_count desc) AS rownum,
               file.savedName
-        FROM s_board AS sb
+        FROM file_board AS sb
         INNER JOIN file ON file.savedName = sb.file
         WHERE sb.accept_yn = 'Y'
         ORDER BY sb.download_count desc) as sb
         WHERE 9 > sb.rownum
     </select>
 
-    <select id="getMainSpecialBoardByCreate">
+    <select id="getMainFileBoardByCreate">
         SELECT * FROM (
         select sb.*,
                ROW_NUMBER() over(ORDER BY sb.create_dt desc) AS rownum,
                 file.savedName
-        FROM s_board AS sb
+        FROM file_board AS sb
         INNER JOIN file ON file.savedName = sb.file
         WHERE sb.accept_yn = 'Y'
         ORDER BY sb.create_dt desc) as sb
@@ -78,7 +78,7 @@
 
 
     <update id="downloadCount">
-        update s_board set download_count = download_count+1 where file = #{file}
+        update file_board set download_count = download_count+1 where file = #{file}
 
     </update>
 

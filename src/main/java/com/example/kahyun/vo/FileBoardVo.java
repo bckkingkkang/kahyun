@@ -3,7 +3,7 @@ package com.example.kahyun.vo;
 import lombok.Data;
 
 @Data
-public class SpecialBoardVo {
+public class FileBoardVo {
     private int rownum;
     private String seq;
     private String title;

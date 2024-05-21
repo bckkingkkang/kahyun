@@ -37,7 +37,7 @@
 <div class="container">
     <p></p>
     <div class="text-end">
-        <a class="btn btn-outline-dark mt-auto" href="/special_board/create">등록</a>
+        <a class="btn btn-outline-dark mt-auto" href="/file_board/create">등록</a>
     </div>
     <p></p>
 </div>

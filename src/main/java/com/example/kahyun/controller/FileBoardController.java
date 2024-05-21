@@ -1,11 +1,10 @@
 package com.example.kahyun.controller;
 
-import com.example.kahyun.mapper.SBoardMapper;
+import com.example.kahyun.mapper.FileBoardMapper;
 import com.example.kahyun.service.BoardService;
-import com.example.kahyun.service.SpecialBoardService;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.FileVo;
-import com.example.kahyun.vo.SpecialBoardVo;
+import com.example.kahyun.vo.FileBoardVo;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,45 +26,42 @@ import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
-/*@RequestMapping("special_board/")*/
-public class SpecialBoardController {
+public class FileBoardController {
 
     @Autowired
     private final UserService userService;
     @Value("${file.dir}")
     private String fileDir;
 
-    private final SBoardMapper sboardMapper;
-
-    private final SpecialBoardService specialBoardService;
+    private final FileBoardMapper fileBoardMapper;
 
     private final BoardService boardService;
 
     /* 게시판 화면 */
-    @RequestMapping("special_board/list")
+    @RequestMapping("file_board/list")
     public ModelAndView list(ModelAndView mav) {
 
         File path = new File(fileDir);
         String[] fileList = path.list();
         /*mav.addObject("fileList", fileList);*/
-        mav.addObject("fileList", sboardMapper.getFileList());
-        mav.addObject("sboardList", sboardMapper.getSBoardList());
-        mav.setViewName("special_board/list");
+        mav.addObject("fileList", fileBoardMapper.getFileList());
+        mav.addObject("sboardList", fileBoardMapper.getSBoardList());
+        mav.setViewName("file_board/list");
 
         return mav;
     }
 
     /* 게시글 상세 */
-    @GetMapping("special_board/detail/{seq}")
-    public ModelAndView getDetail(SpecialBoardVo specialBoardVo, FileVo fileVo, ModelAndView mav) {
+    @GetMapping("file_board/detail/{seq}")
+    public ModelAndView getDetail(FileBoardVo fileBoardVo, FileVo fileVo, ModelAndView mav) {
 
-        SpecialBoardVo getDetailBoard = sboardMapper.getDetailBoard(specialBoardVo.getSeq());
-        FileVo getDetailFile = sboardMapper.getDetailFile(getDetailBoard.getFile());
+        FileBoardVo getDetailBoard = fileBoardMapper.getDetailBoard(fileBoardVo.getSeq());
+        FileVo getDetailFile = fileBoardMapper.getDetailFile(getDetailBoard.getFile());
         mav.addObject("getDetailBoard", getDetailBoard);
         mav.addObject("getDetailFile", getDetailFile);
         System.out.println(getDetailBoard);
         System.out.println(getDetailFile);
-        mav.setViewName("special_board/detail");
+        mav.setViewName("file_board/detail");
 
         return mav;
     }
@@ -85,19 +81,19 @@ public class SpecialBoardController {
         fis.close();
         os.close();
         System.out.println(file);
-        sboardMapper.downloadCount(file);
+        fileBoardMapper.downloadCount(file);
     }
 
     /* 게시판 글쓰기 */
-    @RequestMapping("special_board/create")
+    @RequestMapping("file_board/create")
     public String create() {
-        return "special_board/create";
+        return "file_board/create";
     }
 
     /* 파일 저장 */
-    @RequestMapping("special_board/fileForm")
+    @RequestMapping("file_board/fileForm")
     public ModelAndView fileUploadMultiple(@RequestParam("uploadFileMulti")ArrayList<MultipartFile> files,
-                                           ModelAndView mav, String title, String content, SpecialBoardVo specialBoardVo, FileVo fileVo) throws Exception {
+                                           ModelAndView mav, String title, String content, FileBoardVo fileBoardVo, FileVo fileVo) throws Exception {
         String savedFileName = "";
         // 파일 저장 경로 설정
         String uploadPath = fileDir;
@@ -122,17 +118,17 @@ public class SpecialBoardController {
         fileVo.setOrgName(originalFileNameList.get(0));
         fileVo.setSavedName(savedFileName);
         fileVo.setSavedPath(fileDir);
-        sboardMapper.createFile(fileVo);
+        fileBoardMapper.createFile(fileVo);
 
-        specialBoardVo.setTitle(title);
-        specialBoardVo.setContent(content);
-        specialBoardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        specialBoardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
-        specialBoardVo.setFile(savedFileName);
-        sboardMapper.createsBoard(specialBoardVo);
+        fileBoardVo.setTitle(title);
+        fileBoardVo.setContent(content);
+        fileBoardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
+        fileBoardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        fileBoardVo.setFile(savedFileName);
+        fileBoardMapper.createsBoard(fileBoardVo);
 
         mav.addObject("originalFileNameList", originalFileNameList);
-        mav.setView(new RedirectView("/special_board/list"));
+        mav.setView(new RedirectView("/file_board/list"));
 
         return mav;
     }

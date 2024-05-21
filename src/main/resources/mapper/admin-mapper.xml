@@ -56,7 +56,7 @@
                 ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum,
                 file.orgName,
                 users.user_id
-        FROM s_board sb
+        FROM file_board sb
         INNER JOIN file AS file on sb.file = file.savedName
         INNER JOIN users AS users on sb.nickname = users.nickname
         ORDER BY create_dt DESC
@@ -64,13 +64,13 @@
     </select>
 
     <update id="changePublic">
-        update s_board
+        update file_board
         set accept_yn = 'Y'
         WHERE seq = #{seq}
     </update>
 
     <update id="changePrivate">
-        update s_board
+        update file_board
         set accept_yn = 'N'
         WHERE seq = #{seq}
     </update>
