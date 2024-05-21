@@ -55,7 +55,7 @@
                 <th>${list.price}</th>
                 <th>${list.create_dt}</th>
                 <th>${list.status}</th>
-                <th><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/special_board/detail/${list.seq}">자세히 보기</a></th>
+                <th><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/file_board/detail/${list.seq}">자세히 보기</a></th>
                 <c:choose>
                     <c:when test="${list.accept_yn == 'Y'}">
                         <th>공개</th>

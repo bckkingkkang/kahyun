@@ -34,7 +34,7 @@
 </header>
 <div>
     <div class="container">
-        <form id="fileUploadFormMulti" action="/special_board/fileForm" method="post" enctype="multipart/form-data">
+        <form id="fileUploadFormMulti" action="/file_board/fileForm" method="post" enctype="multipart/form-data">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="title" name="title" placeholder="제목">
                 <label for="title">제목</label>
@@ -61,7 +61,7 @@
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="card-body p-2 text-center">
                     <button class="btn btn-outline-dark mt-auto" type="submit" id="saveBtn">저장</button>
-                    <button class="btn btn-outline-dark mt-auto" type="button" onclick="if(confirm('작성을 취소하시겠습니까?')) {location.href='/special_board/list'} else return;">목록</button>
+                    <button class="btn btn-outline-dark mt-auto" type="button" onclick="if(confirm('작성을 취소하시겠습니까?')) {location.href='/file_board/list'} else return;">목록</button>
                 </div>
             </div>
 

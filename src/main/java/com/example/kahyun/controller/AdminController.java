@@ -1,23 +1,15 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.AdminMapper;
-import com.example.kahyun.mapper.BoardMapper;
-import com.example.kahyun.mapper.SBoardMapper;
+import com.example.kahyun.mapper.FileBoardMapper;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.LoginVo;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 @Controller
@@ -25,7 +17,7 @@ import java.util.List;
 public class AdminController {
 
     private final AdminMapper adminMapper;
-    private final SBoardMapper sBoardMapper;
+    private final FileBoardMapper sBoardMapper;
 
     /* 관리자 페이지 */
     @RequestMapping("admin/admin")
