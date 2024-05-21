@@ -98,7 +98,14 @@
    
 ---------------------   
 ## mySQL
-   
+
+### board
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/5306e3a4-d89b-41c9-8c8e-78f5205da722)
+</details>
+
  ```mysql  
 CREATE TABLE kahyun.board
    (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
@@ -111,12 +118,18 @@ CREATE TABLE kahyun.board
    `view` int(10) NOT NULL DEFAULT 0 comment '조회 수',
    user_seq int(10) NOT NULL comment '작성자 번호',
    boardOption enum('boardOption1', 'boardOption2','boardOption3) NOT NULL DEFAULT 'boardOption1', 
-  
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
 
 user_seq, boardOption 추가
 ```
+
+### users
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/a06d31cb-f92a-4ca1-8a69-a6c49eca5d9f)
+</details>
 
 ```mysql
 CREATE TABLE kahyun.users
@@ -132,6 +145,14 @@ CREATE TABLE kahyun.users
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
+
+### comment
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/d0cff691-9de9-4303-a8a7-8344d6494f28)
+</details>
+
 ```mysql
 CREATE TABLE kahyun.comment
    (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
@@ -141,37 +162,109 @@ CREATE TABLE kahyun.comment
    create_dt datetime NULL comment '등록일',
    status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
    board_seq int(10) NOT NULL comment '게시글 seq',
-  
    PRIMARY KEY (seq)
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
+
+### charge_cash
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/8c4a46c0-8eca-46bb-8a70-37813d1c52ef)
+</details>
+
+```mysql
+CREATE TABLE kahyun.charge_cash (
+	seq int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY comment 'PK',
+	buyer_seq int(10) NOT NULL comment '충전 유저 seq',
+	buyer_name varchar(10) NOT NULL comment '충전 유저 이름',
+	price varchar(100) NOT NULL comment '충전 금액',
+	buyer_email varchar(100) comment '충전 유저 이메일',
+	buyer_phone varchar(50) comment '충전 유저 전화 번호',
+	card_name varchar(50) comment '카드사',
+	embPgProvider varchar(50) comment '결제 경로'
+) ENGINE=INNODB DEFAULT charset=utf8
+```
+
+### use_cash
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/6347fd85-f0d1-4e5e-a4c4-6622fe74bf27)
+</details>
+
+```mysql
+CREATE TABLE kahyun.use_cash (
+	seq int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY comment 'PK',
+	buyer_seq int(10) NOT NULL comment '구매 유저 seq',
+	buyer_name varchar(10) NOT NULL comment '구매 유저 이름',
+	price varchar(100) NOT NULL comment '구매 금액',
+	file_board_seq int(10) NOT NULL comment '구매 게시글 번호',
+	file_seq int(10) NOT NULL comment '구매 파일 번호',
+	file varchar(100) NOT NULL comment '구매 파일명'
+) ENGINE=INNODB DEFAULT charset=utf8
+```
+
+### refund_cash
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/593a1dbf-0a82-4d69-93dd-8ef071d2d2b5)
+</details>
+
+```mysql
+CREATE TABLE kahyun.refund_cash (
+	seq int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY comment 'PK',
+	buyer_seq int(10) NOT NULL comment '환불 유저 seq',
+	price varchar(100) NOT NULL comment '환불 금액',
+	buyer_email varchar(100) comment '환불 유저 이메일',
+	buyer_phone varchar(50) comment '환불 유저 전화 번호',
+	card_name varchar(50) comment '카드사',
+	embPgProvider varchar(50) comment '환불 경로',
+	refund_dt datetime comment '환불일자'
+) ENGINE=INNODB DEFAULT charset=utf8
+```
+
+### file
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/0208f128-a288-4bfc-ac06-1cf85859646e)
+</details>
+
 ```mysql
 CREATE TABLE kahyun.file (
 	seq int(10) PRIMARY KEY,
 	orgName varchar(50) NOT NULL,
 	savedName varchar(50) NOT NULL,
 	savedPath varchar(100),
-  s_board_seq varchar(100) NOT NULL comment '게시글 번호',
-  size varchar(100) comment '파일 크기',
-  delete_yn enum('N','Y') NOT NULL default 'N' comment '삭제 여부',
-  create_dt datetime NOT NULL comment '생성 일시', 
+	s_board_seq varchar(100) NOT NULL comment '게시글 번호',
+	size varchar(100) comment '파일 크기',
+	delete_yn enum('N','Y') NOT NULL default 'N' comment '삭제 여부',
+	create_dt datetime NOT NULL comment '생성 일시', 
 ) ENGINE=INNODB DEFAULT charset=utf8
 ```
 
+### file_board
+<details>
+<summary>테이블 보기</summary>
+
+![image](https://github.com/bckkingkkang/kahyun/assets/131218470/e80158a5-c77a-442d-8071-df7938069d45)
+</details>
+
 ```mysql
 CREATE TABLE kahyun.s_board
-  (seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
-  title varchar(50) NOT NULL comment '제목',
-  content varchar(100) NOT NULL comment '내용',
-  nickname varchar(50) NOT NULL,
-  create_dt datetime NOT NULL comment '등록일',
-  update_dt datetime NULL comment '수정일',
-  status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
-  `view` int(10) NOT NULL DEFAULT 0 comment '조회 수',
-  user_seq int(10) NOT NULL comment '등록자 번호',
-  files varchar(100) NULL,
- 
-  PRIMARY KEY (seq)
+	(seq int(10) NOT NULL AUTO_INCREMENT comment 'PK',
+	title varchar(50) NOT NULL comment '제목',
+	content varchar(100) NOT NULL comment '내용',
+	nickname varchar(50) NOT NULL,
+	create_dt datetime NOT NULL comment '등록일',
+	update_dt datetime NULL comment '수정일',
+	status enum('N','D') NOT NULL DEFAULT 'N' comment '상태',
+	`view` int(10) NOT NULL DEFAULT 0 comment '조회 수',
+	user_seq int(10) NOT NULL comment '등록자 번호',
+	files varchar(100) NULL,
+PRIMARY KEY (seq)
   ) ENGINE=INNODB DEFAULT charset=utf8
 ```
 
