@@ -1,15 +1,11 @@
-## check_list
-- [ ] **Filter삽입**
-> 1. [x] html 태그 
-> 2. [ ] multipart/form-data
-> 3. [ ] json
-- [ ] **AOP를 활용한 URL별 권한 체크**
-- [x] **resources 파일 환경 분리**
-- [ ] security 로그인 성공 핸들러
-- [x] 주석 체크
-- [x] 배포
-
 ### 수정사항
+- [ ] 프로필 이미지 추가
+- [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
+- [ ] Controller에서 요청방식(requestMapping, GetMapping, ...) 검토 및 수정
+- [ ] Controller 부분 user_id로 getPrincipal() 가져오는 부분 수정
+- [ ] jsp 페이지 내 _csrf token input -> header
+- [ ] successHandler 추가, failureHandler 수정
+- [ ] AccessDeniedHandler, AuthenticationEntryPointHandler 다른 방향으로 생각 -> 수정
 - [x] null 처리
 - [x] 아이디 찾기 버튼 클릭 시 "null" 로 받아오는 부분 수정
 - [x] SecurityConfig 로그아웃 부분 추가
@@ -19,13 +15,44 @@
 - [x] 불필요한 주석, import 제거
 - [x] header 추가
 - [x] 회원가입 시 메일 인증 추가
-- [ ] 프로필 이미지 추가
-- [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
-- [ ] Controller에서 요청방식(requestMapping, GetMapping, ...) 검토 및 수정
-- [ ] Controller 부분 user_id로 getPrincipal() 가져오는 부분 수정
-- [ ] jsp 페이지 내 _csrf token input -> header
-- [ ] successHandler 추가, failureHandler 수정
-- [ ] AccessDeniedHandler, AuthenticationEntryPointHandler 다른 방향으로 생각 -> 수정
+
+**충전 페이지**
+- [ ] 결제 후 회원 cash 충전
+
+**마이페이지**
+- [ ] 수정하기 버튼 클릭 시 본인 인증 후 edit 페이지로 넘어가게 수정
+- [ ] 닉네임 변경 기능 추가
+- [ ] 비밀번호 변경 페이지 추가
+- [ ] 프로필 이미지 변경 기능 추가
+- [ ] 충전/사용 내역 추가
+
+**장바구니**
+- [ ] 좋아요 기능 추가
+- [ ] 좋아요한 파일 장바구니에서 확인 가능
+- [ ] 장바구니 페이지 추가
+      
+**관리자 페이지**   
+- *회원 리스트*
+- [ ] 회원 상태 변경 기능 추가
+- [ ] 등록 게시글 없을 경우 "등록 게시글이 없습니다." 표시
+- [ ] 등록 게시글 삭제하기 버튼 기능 추가   
+- *관리자 리스트*
+- [ ] 등록 게시글 없을 경우 "등록 게시글이 없습니다." 표시   
+- *게시글 승인 대기 리스트*
+- [ ] 비공개/공개로 전환 기능 수정 
+
+**공지사항**
+- [ ] 공지사항 게시판 추가
+- [ ] 공지사항 게시글 관리자 관리 추가
+- [ ] 게시글 관리에서 선택된 게시글 메인화면에 표시
+
+
+## check_list
+- [ ] **Filter삽입**
+> 1. [ ] multipart/form-data
+> 2. [ ] json
+- [ ] **AOP를 활용한 URL별 권한 체크**
+- [ ] security 로그인 성공 핸들러
 
 ---------------------
 
