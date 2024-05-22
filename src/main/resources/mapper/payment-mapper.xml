@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kahyun.mapper.PaymentMapper">
+
+    <!-- 캐시 충전 -->
+    <insert id="charge_cash" parameterType="PaymentVo">
+        INSERT INTO charge_cash (
+            buyer_seq,
+            buyer_name,
+            price,
+            buyer_email,
+            buyer_phone,
+            card_name,
+            emb_pg_provider,
+            charge_dt,
+            apply_num,
+            card_code,
+            imp_uid,
+            merchant_uid,
+            pay_method
+        ) VALUES(
+             #{buyer_seq},
+             #{buyer_name},
+             #{price},
+             #{buyer_email},
+             #{buyer_phone},
+             #{card_name},
+             #{emb_pg_provider},
+             CURRENT_TIME(),
+             #{apply_num},
+             #{card_code},
+             #{imp_uid},
+             #{merchant_uid},
+             #{pay_method}
+        )
+    </insert>
+
+</mapper>

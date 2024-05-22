@@ -22,21 +22,16 @@ import java.util.List;
 @RequestMapping("board/")
 public class BoardController {
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private BoardService boardService;
-
+    private final UserService userService;
+    private final BoardService boardService;
+    private final BoardMapper boardMapper;
+    private final CommentMapper commentMapper;
     /*
         스프링 의존성 주입 3가지
         1. @Autowired 속성 : 속성에 @Autowired 어노테이션을 적용하여 객체를 주입
         2. 생성자 : 생성자를 작성하여 객체를 주입
         3. Setter : Setter 메소드를 작성하여 객체를 주입 (메소드에 @Autowired 어노테이션 적용이 필요)
     */
-
-    private final BoardMapper boardMapper;
-    private final CommentMapper commentMapper;
 
     /* 게시판 화면 */
     @RequestMapping("list")
