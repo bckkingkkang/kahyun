@@ -26,7 +26,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="/board/list">Community</a></li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/special_board/list">Download</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="/file_board/list">Download</a></li>
             </ul>
             <c:choose>
                 <c:when test="${isLogin == 'true'}">
@@ -40,8 +40,8 @@
                     </form>
                     <form>
                         <button class="btn" type="button">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
+                            <i class="bi bi-heart-fill"></i>
+                            Like
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
