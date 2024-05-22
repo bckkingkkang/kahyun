@@ -57,13 +57,15 @@ public class PaymentController {
 
     @ResponseBody
     @PostMapping("/charge_cash")
-    public int charge_cash(PaymentVo paymentVo) {
+    public void charge_cash(PaymentVo paymentVo) {
         paymentVo.setBuyer_seq(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
         paymentVo.setBuyer_email(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail());
         paymentVo.setBuyer_name(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         paymentVo.setBuyer_phone(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPhone());
         System.out.println(paymentVo);
-        return paymentMapper.charge_cash(paymentVo);
+
+        paymentMapper.user_cash_charge(paymentVo);
+        paymentMapper.charge_cash(paymentVo);
     }
 
 

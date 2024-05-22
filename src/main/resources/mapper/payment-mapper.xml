@@ -36,4 +36,10 @@
         )
     </insert>
 
+    <update id="user_cash_charge" parameterType="PaymentVo">
+        UPDATE users
+        SET cash = cash + #{price}
+        WHERE seq = #{buyer_seq}
+    </update>
+
 </mapper>
