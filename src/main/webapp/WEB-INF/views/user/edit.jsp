@@ -47,7 +47,7 @@
                 </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" value="${userInfo.nickname}"></td>
+                    <td><input type="text" id="nickname" value="${userInfo.nickname}"></td>
                 </tr>
                 <tr>
                     <th>이메일</th>
@@ -71,11 +71,37 @@
     <div class="container px-2 px-lg-3 my-3">
         <div class="text-center">
             <a class="btn btn-outline-dark mt-auto" href="mypage">뒤로 가기</a>
-            <a type="submit" class="btn btn-outline-dark mt-auto">수정하기</a>
+            <a type="button" id="editBtn" class="btn btn-outline-dark mt-auto">수정하기</a>
         </div>
     </div>
 </div>
 
 <jsp:include page="/header/footer"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    const $dom = {};
+
+    $(function () {
+        $dom.editBtn = $("#editBtn");
+
+        $dom.editBtn.on('click', function() {
+            if(confirm("정보를 수정하시겠습니까?")) {
+                $.ajax({
+                    url:"edit_my_page",
+                    type:"post",
+                    data : {
+                        nickname : $("#nickname").val()
+                    },
+                    success:function() {
+                        alert("회원정보가 수정되었습니다.");
+                        location.href="/user/mypage";
+                    }
+                })
+            }
+        })
+    })
+</script>
 </body>
 </html>

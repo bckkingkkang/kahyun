@@ -62,9 +62,11 @@ public class PaymentController {
         paymentVo.setBuyer_email(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail());
         paymentVo.setBuyer_name(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         paymentVo.setBuyer_phone(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPhone());
-        System.out.println(paymentVo);
 
         paymentMapper.user_cash_charge(paymentVo);
+        paymentVo.setUser_cash(String.valueOf(paymentMapper.user_cash(paymentVo.getBuyer_seq())));
+
+        System.out.println(paymentVo);
         paymentMapper.charge_cash(paymentVo);
     }
 
