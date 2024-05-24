@@ -28,4 +28,26 @@
         select * from users where user_id = #{user_id}
     </select>
 
+    <update id="edit_my_page">
+        update users
+        set nickname = #{nickname}
+        WHERE seq = #{seq}
+    </update>
+
+    <!-- 마이페이지 충전내역 -->
+    <select id="charge_cash_list">
+        SELECT
+            ROW_NUMBER() over(ORDER BY charge_dt ASC) AS rownum,
+            merchant_uid,
+            price,
+            emb_pg_provider,
+            pay_method,
+            charge_dt,
+            user_cash
+        FROM charge_cash
+        WHERE buyer_seq = #{buyer_seq}
+        ORDER BY charge_dt DESC
+        LIMIT 5
+    </select>
+
 </mapper>

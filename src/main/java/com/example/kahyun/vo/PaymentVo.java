@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PaymentVo {
     // 캐시 충전
+    private int rownum;
     private int seq;
     private String buyer_seq;
     private String buyer_name;
@@ -23,4 +24,5 @@ public class PaymentVo {
     private String imp_uid;
     private String merchant_uid;
     private String pay_method;
+    private String user_cash;
 }

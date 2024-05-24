@@ -3,6 +3,7 @@ package com.example.kahyun.controller;
 import com.example.kahyun.mapper.LoginMapper;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.LoginVo;
+import com.example.kahyun.vo.PaymentVo;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class LoginController {
     public ModelAndView mypage(ModelAndView mav) {
         mav.addObject("userInfo"
                 ,userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        mav.addObject("charge_cash_list", loginMapper.charge_cash_list(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq()));
         mav.setViewName("user/mypage");
         return mav;
     }
@@ -119,6 +121,14 @@ public class LoginController {
     public int check_id_ajax(String user_id) {
         int count = loginMapper.checkId(user_id);
         return count;
+    }
+
+    /* edit > 닉네임 수정 */
+    @ResponseBody
+    @PostMapping("edit_my_page")
+    public int edit_my_page(LoginVo loginVo) {
+        loginVo.setSeq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        return loginMapper.edit_my_page(loginVo);
     }
 
 }

@@ -18,7 +18,8 @@
             card_code,
             imp_uid,
             merchant_uid,
-            pay_method
+            pay_method,
+            user_cash
         ) VALUES(
              #{buyer_seq},
              #{buyer_name},
@@ -32,7 +33,8 @@
              #{card_code},
              #{imp_uid},
              #{merchant_uid},
-             #{pay_method}
+             #{pay_method},
+             #{user_cash}
         )
     </insert>
 
@@ -41,5 +43,11 @@
         SET cash = cash + #{price}
         WHERE seq = #{buyer_seq}
     </update>
+
+    <select id="user_cash">
+        SELECT cash
+        FROM users
+        WHERE seq = #{buyer_seq}
+    </select>
 
 </mapper>
