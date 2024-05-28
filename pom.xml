@@ -148,11 +148,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
-			<dependency>
-				<groupId>com.github.iamport</groupId>
-				<artifactId>iamport-rest-client-java</artifactId>
-				<version>0.2.23</version>
-			</dependency>
+		<dependency>
+			<groupId>com.github.iamport</groupId>
+			<artifactId>iamport-rest-client-java</artifactId>
+			<version>0.2.23</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<repositories>
@@ -161,8 +175,6 @@
 			<url>https://jitpack.io</url>
 		</repository>
 	</repositories>
-
-
 
 	<profiles>
 		<profile>

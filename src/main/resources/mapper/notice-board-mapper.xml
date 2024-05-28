@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kahyun.mapper.NoticeBoardMapper">
+
+    <!-- 공지사항 등록 -->
+    <insert id="createNoticeBoard" parameterType="NoticeBoardVo">
+        INSERT INTO notice_board (
+            user_seq,
+            title,
+            content,
+            create_dt,
+            importance,
+            board_yn,
+            file_board_yn)
+        VALUES (
+            #{user_seq},
+            #{title},
+            #{content},
+            CURRENT_TIME(),
+            #{importance},
+            #{board_yn},
+            #{file_board_yn}
+        )
+    </insert>
+
+    <select id="selectNoticeBoard" resultType="com.example.kahyun.vo.NoticeBoardVo">
+        SELECT
+            ROW_NUMBER() over(ORDER BY nb.importance, nb.create_dt DESC) AS rownum,
+            nb.*,
+            users.nickname
+        FROM notice_board AS nb
+        INNER JOIN users users ON users.seq = nb.user_seq
+        WHERE nb.delete_yn = 'N'
+        ORDER BY nb.importance, nb.create_dt DESC
+    </select>
+
+
+</mapper>
