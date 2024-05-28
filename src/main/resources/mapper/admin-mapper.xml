@@ -58,7 +58,7 @@
                 users.user_id
         FROM file_board sb
         INNER JOIN file AS file on sb.file = file.savedName
-        INNER JOIN users AS users on sb.nickname = users.nickname
+        INNER JOIN users AS users on sb.user_seq = users.seq
         ORDER BY create_dt DESC
 
     </select>

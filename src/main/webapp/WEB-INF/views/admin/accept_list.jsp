@@ -47,7 +47,6 @@
         <c:forEach items="${list}" var="list">
             <tr>
                 <th>${list.rownum}</th>
-                <th hidden><input type="text" value="${list.seq}"id="seq"></th>
                 <th>${list.title}</th>
                 <th>${list.nickname}</th>
                 <th>${list.user_id}</th>
@@ -59,11 +58,11 @@
                 <c:choose>
                     <c:when test="${list.accept_yn == 'Y'}">
                         <th>공개</th>
-                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePrivate" >비공개로 전환</a></div></th>
+                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePrivate" value="${list.seq}">비공개로 전환</a></div></th>
                     </c:when>
                     <c:otherwise>
                         <th>비공개</th>
-                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePublic" >공개로 전환</a></div></th>
+                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePublic" value="${list.seq}">공개로 전환</a></div></th>
                     </c:otherwise>
                 </c:choose>
             </tr>
