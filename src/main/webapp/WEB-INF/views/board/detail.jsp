@@ -80,11 +80,9 @@
 
             <div class="text-center">
                 <div>
-                    <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
-                    <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
-                        <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
-                        <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
-                    </c:if>
+                    <a class="btn btn-outline-dark mt-auto" id="listBtn" href="javascript:history.back()">뒤로 가기</a>
+                    <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
+                    <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
                 </div>
             </div>
         </div>

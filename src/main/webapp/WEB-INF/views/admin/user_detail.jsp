@@ -20,51 +20,65 @@
 <header class="bg-white py-5">
     <div class="container px-2 px-lg-3 my-3">
         <div class="text-center text-black">
-            <h3 class="display-4 fw-bolder">관리자 리스트</h3>
-            <p class="lead fw-normal text-black-50 mb-0">관리자 등록 게시글 관리</p>
+            <h3 class="display-4 fw-bolder">관리자</h3>
+            <p class="lead fw-normal text-black-50 mb-0">등록 게시글 관리</p>
         </div>
     </div>
 </header>
-<table class="table text-center">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>제목</th>
-        <th>내용</th>
-        <th>등록일</th>
-        <th>수정일</th>
-        <th>조회 수</th>
-        <th>게시글 상태</th>
-        <th>관리</th>
-    </tr>
-    </thead>
-    <tbody>
-            <c:forEach items="${list}" var="list">
-                <tr>
-                    <th>${list.rownum}</th>
-                    <th>${list.title}</th>
-                    <th><a class="btn btn-outline-dark mt-auto" href="/board/detail/${list.seq}">자세히 보기</a></th>
-                    <th>${list.create_dt}</th>
-                    <th>${list.update_dt}</th>
-                    <th>${list.view}</th>
-                    <th>${list.status == 'N' ? '정상' : '삭제'}</th>
-                    <th>
-                        <c:choose>
-                            <c:when test="${list.status == 'N'}">
-                                <button class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제하기</button>
-                            </c:when>
-                            <c:otherwise>
-                                삭제된 게시글입니다.
-                            </c:otherwise>
-                        </c:choose></th>
-                </tr>
-            </c:forEach>
-    </tbody>
 
-</table>
+            <c:choose>
+                <c:when test="${list eq '[]'}">
+                    <div class="bg-white py-5">
+                        <div class="container px-2 px-lg-3 my-3">
+                            <div class="text-center text-black">
+                                <p class="lead fw-normal text-black mb-0">등록된 게시글이 없습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <table class="table text-center">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>제목</th>
+                            <th>내용</th>
+                            <th>등록일</th>
+                            <th>수정일</th>
+                            <th>조회 수</th>
+                            <th>게시글 상태</th>
+                            <th>관리</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${list}" var="list">
+                                <tr>
+                                    <th>${list.rownum}</th>
+                                    <th>${list.title}</th>
+                                    <th><a class="btn btn-outline-dark mt-auto" href="/board/detail/${list.seq}">자세히 보기</a></th>
+                                    <th>${list.create_dt}</th>
+                                    <th>${list.update_dt}</th>
+                                    <th>${list.view}</th>
+                                    <th>${list.status == 'N' ? '정상' : '삭제'}</th>
+                                    <th>
+                                        <c:choose>
+                                            <c:when test="${list.status == 'N'}">
+                                                <button class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제하기</button>
+                                            </c:when>
+                                            <c:otherwise>
+                                                삭제된 게시글입니다.
+                                            </c:otherwise>
+                                        </c:choose></th>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </c:otherwise>
+            </c:choose>
+
 <div class="bg-white py-5">
     <div class="container px-2 px-lg-3 my-3">
-        <div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="/admin/user_list">뒤로 가기</a></div>
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" id="listBtn" href="javascript:history.back()">뒤로 가기</a></div>
     </div>
 </div>
 <jsp:include page="/header/footer"></jsp:include>

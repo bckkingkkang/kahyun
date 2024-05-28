@@ -86,7 +86,7 @@
     <div class="bg-white py-5">
         <div class="container px-2 px-lg-3 my-3">
             <div class="text-center text-black">
-                <h3>캐시 충전 내역</h3>
+                <h3>충전 내역</h3>
                 <div class="text-end"><a class="btn btn-outline-dark mt-auto" id="chargeBtn" href="admin">자세히 보기</a></div>
             </div>
         </div>
@@ -123,7 +123,7 @@
     <div class="bg-white py-5">
         <div class="container px-2 px-lg-3 my-3">
             <div class="text-center text-black">
-                <h3>캐시 사용 내역</h3>
+                <h3>사용 내역</h3>
                 <div class="text-end"><a class="btn btn-outline-dark mt-auto" id="useBtn" href="admin">자세히 보기</a></div>
             </div>
         </div>

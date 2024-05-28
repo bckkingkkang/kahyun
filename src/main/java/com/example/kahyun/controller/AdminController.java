@@ -50,7 +50,7 @@ public class AdminController {
         return "admin/admin_list";
     }
 
-    /* 관리자 리스트 */
+    /* 관리자 게시글 승인 대기 리스트 */
     @GetMapping("admin/accept_list")
     public String getAccept(Model model) {
         model.addAttribute("list", adminMapper.getAdminSBoardList());
