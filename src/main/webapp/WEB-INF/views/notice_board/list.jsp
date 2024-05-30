@@ -32,7 +32,8 @@
     <p></p>
 </div>
 <div class="container">
-    <table class="table table-hover text-center" border="1">
+
+    <table class="table table-hover text-center">
         <thead>
         <tr>
             <th>NO</th>
@@ -64,7 +65,7 @@
         <a href="?pageNum=${pageInfo.prePage}&pageSize=${pageInfo.pageSize}">Previous</a>
         <a href="?pageNum=${pageInfo.nextPage}&pageSize=${pageInfo.pageSize}">Next</a>
 </div>
-<div>
+<div class="container text-end mb-3">
     Page ${pageInfo.pageNum} of ${pageInfo.pages}
 </div>
 

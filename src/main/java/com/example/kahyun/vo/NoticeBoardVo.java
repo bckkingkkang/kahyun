@@ -6,7 +6,7 @@ import lombok.Data;
 public class NoticeBoardVo {
     private int rownum;
 
-    private int seq;
+    private String seq;
     private int user_seq;       // 등록 유저 seq
     private String nickname;
     private String title;       // 공지 사항 제목

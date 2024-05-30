@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kahyun.mapper.LoginMapper">
 
+    <!-- 회원가입 -->
     <insert id="createUser" parameterType="LoginVo">
         INSERT INTO users
             (username, user_id, nickname, password, reg_date, email)
@@ -10,6 +11,7 @@
             (#{username}, #{user_id}, #{nickname}, #{password}, CURRENT_TIME(), #{email})
     </insert>
 
+    <!-- 계정 찾기 -->
     <select id="searchId" parameterType="LoginVo" resultType="String">
         SELECT
             user_id
@@ -17,6 +19,7 @@
         WHERE username = #{username} AND nickname = #{nickname}
     </select>
 
+    <!-- 야이디 중복 체크 -->
     <select id="checkId" parameterType="LoginVo" resultType="int">
         SELECT
             count(user_id)
@@ -24,10 +27,43 @@
         WHERE user_id = #{user_id}
     </select>
 
+    <!-- id로 user 정보 select - 로그인 시 -->
     <select id="selectUser" parameterType="String" resultType="LoginVo">
-        select * from users where user_id = #{user_id}
+        select
+            seq,
+            username,
+            user_id,
+            nickname,
+            password,
+            reg_date,
+            status,
+            auth,
+            email,
+            cash,
+            phone
+        from users
+        where user_id = #{user_id}
     </select>
 
+    <!-- id로 user 정보 select - 비밀번호 제외 -->
+    <select id="loginUser" parameterType="String" resultType="LoginVo">
+        select
+            seq,
+            username,
+            user_id,
+            nickname,
+            reg_date,
+            status,
+            auth,
+            email,
+            cash,
+            phone
+        from users
+        where user_id = #{user_id}
+    </select>
+
+
+    <!-- 개인정보 변경 - 닉네임 -->
     <update id="edit_my_page">
         update users
         set nickname = #{nickname}

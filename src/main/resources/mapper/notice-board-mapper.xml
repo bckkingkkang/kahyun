@@ -35,5 +35,13 @@
         ORDER BY nb.importance, nb.create_dt DESC
     </select>
 
-
+    <!-- 공지사항 글 상세 -->
+    <select id="selectNoticeBoardById">
+        SELECT
+            nb.*,
+            users.nickname
+        FROM notice_board AS nb
+        INNER JOIN users AS users ON users.seq = nb.user_seq
+        WHERE nb.seq = #{seq}
+    </select>
 </mapper>
