@@ -24,7 +24,7 @@ public class NoticeBoardService {
 
     /* 공지사항 글 상세 */
     public NoticeBoardVo selectNoticeBoardById(NoticeBoardVo noticeBoardVo) {
-        return noticeBoardMapper.selectNoticeBoardById(noticeBoardVo);
+        return noticeBoardMapper.selectNoticeBoardBySeq(noticeBoardVo);
     }
 
 }

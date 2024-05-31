@@ -21,5 +21,5 @@ public interface NoticeBoardMapper {
     List<NoticeBoardVo> selectNoticeBoard();
 
     /* 공지사항 상세 */
-    NoticeBoardVo selectNoticeBoardById(NoticeBoardVo noticeBoardVo);
+    NoticeBoardVo selectNoticeBoardBySeq(NoticeBoardVo noticeBoardVo);
 }

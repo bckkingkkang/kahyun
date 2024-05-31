@@ -37,7 +37,7 @@
     </select>
 
     <!-- 공지사항 글 상세 -->
-    <select id="selectNoticeBoardById">
+    <select id="selectNoticeBoardBySeq">
         SELECT
             nb.*,
             users.nickname

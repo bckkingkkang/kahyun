@@ -12,5 +12,8 @@ public class CommentVo {
     private String create_dt;
     private String status;
     private String board_seq;
+    private String delete_yn;
+    private String delete_dt;
+    private String update_dt;
 
 }
