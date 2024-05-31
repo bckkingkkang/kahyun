@@ -31,17 +31,8 @@ public class NoticeBoardController {
 
     /* 공지사항 글 등록 화면 */
     @RequestMapping("notice_board/create")
-    public String createNoticeBoard() {
+    public String CreateNoticeBoard() {
         return "notice_board/create";
-    }
-
-    /* 공지사항 글 등록 ajax */
-    @ResponseBody
-    @PostMapping("notice_board/create_board")
-    public int createBoard(NoticeBoardVo noticeBoardVo) {
-        noticeBoardVo.setUser_seq(Integer.parseInt(userService.selectUser().getSeq()));
-        int result =  noticeBoardMapper.createNoticeBoard(noticeBoardVo);
-        return result;
     }
 
     /* 공지사항 상세 */
@@ -52,5 +43,36 @@ public class NoticeBoardController {
         model.addAttribute("selectNoticeBoard", noticeBoardService.selectNoticeBoardById(noticeBoardVo));
 
         return "notice_board/detail";
+    }
+
+    /* 공지사항 글 수정 화면 */
+    @GetMapping("/notice_board/edit/{seq}")
+    public String EditNoticeBoard(NoticeBoardVo noticeBoardVo, Model model) {
+        model.addAttribute("selectNoticeBoard", noticeBoardService.selectNoticeBoardById(noticeBoardVo));
+        return "notice_board/edit";
+    }
+
+    /* 공지사항 글 등록 ajax */
+    @ResponseBody
+    @PostMapping("notice_board/create_notice")
+    public int createNoticeBoard(NoticeBoardVo noticeBoardVo) {
+        noticeBoardVo.setUser_seq(Integer.parseInt(userService.selectUser().getSeq()));
+        int result =  noticeBoardMapper.createNoticeBoard(noticeBoardVo);
+        return result;
+    }
+
+    /* 공지사항 글 수정 ajax */
+    @ResponseBody
+    @PostMapping("notice_board/edit_notice")
+    public int editNoticeBoard(NoticeBoardVo noticeBoardVo) {
+        int result = noticeBoardMapper.editNoticeBoard(noticeBoardVo);
+        return result;
+    }
+
+    @ResponseBody
+    @PostMapping("notice_board/delete_notice")
+    public int deleteNoticeBoard(NoticeBoardVo noticeBoardVo) {
+        int result = noticeBoardMapper.deleteNoticeBoard(noticeBoardVo);
+        return result;
     }
 }
