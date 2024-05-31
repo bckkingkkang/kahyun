@@ -16,4 +16,11 @@ public class BoardVo {
     private String user_seq;
     private String boardOption;
     private String auth;
+    private String delete_yn;
+
+    /* 공지사항 표시 */
+    private String importance;
+    private String board_yn;
+    private String file_board_yn;
+
 }

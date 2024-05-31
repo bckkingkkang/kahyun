@@ -20,11 +20,8 @@ public class NoticeBoardController {
 
     /* 공지사항 게시판 리스트 화면 */
     @GetMapping("notice_board/list")
-    public String getNoticeBoardList(@RequestParam(defaultValue = "1") int pageNum,
-                                     @RequestParam(defaultValue = "10") int pageSize,
-                                     Model model) {
-        PageInfo<NoticeBoardVo> pageInfo = noticeBoardService.selectNoticeBoard(pageNum, pageSize);
-        model.addAttribute("pageInfo", pageInfo);
+    public String getNoticeBoardList(Model model) {
+        model.addAttribute("noticeBoardList", noticeBoardMapper.selectNoticeBoard());
 
         return "notice_board/list";
     }

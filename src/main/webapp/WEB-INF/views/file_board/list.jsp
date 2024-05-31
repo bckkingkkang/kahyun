@@ -13,18 +13,8 @@
     <title>특별회원 전용</title>
 </head>
 <body>
-<%--<style>
-    table {
-        border: 2px solid; border-collapse: collapse;
-        /*margin-left : auto;
-        margin-right: auto;*/
-    }
-    th, td {
-        border: 1px solid; padding:10px 5px;
-    }
-</style>--%>
-<jsp:include page="/header/header"></jsp:include>
 
+<jsp:include page="/header/header"></jsp:include>
 
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -49,16 +39,28 @@
                     <th>제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
+                    <th>수정일</th>
                     <th>공개여부</th>
                 </tr>
             </thead>
             <tbody>
+            <c:forEach items="${notice_list}" var="notice_list">
+                <tr style="background-color: #fff3cd"}>
+                    <th>공지</th>
+                    <th><a href="/notice_board/detail/${notice_list.seq}" ${notice_list.importance eq 'A' ? 'style="color: red"' : notice_list.importance eq 'B' ? 'style="color: blue"' : 'style="color: black"'}>${notice_list.title}</a></th>
+                    <th>${notice_list.nickname}</th>
+                    <th>${notice_list.create_dt}</th>
+                    <th>${notice_list.update_dt eq null ? '-' : notice_list.update_dt}</th>
+                    <th>-</th>
+                </tr>
+            </c:forEach>
             <c:forEach items="${sboardList}" var="list">
                 <tr>
                     <td>${list.rownum}</td>
-                    <th><a href="detail/${list.seq}">${list.title}</a></th>
+                    <th><a href="detail/${list.seq}" style="color: black">${list.title}</a></th>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
+                    <td>-</td>
                     <td>${list.accept_yn == 'Y' ? '공개' : '비공개'}</td>
                 </tr>
             </c:forEach>

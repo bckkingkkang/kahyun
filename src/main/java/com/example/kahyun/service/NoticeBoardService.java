@@ -14,12 +14,13 @@ public class NoticeBoardService {
     @Autowired
     private NoticeBoardMapper noticeBoardMapper;
 
-    /* 페이징 처리 */
+    /*
+    페이징 처리
     public PageInfo<NoticeBoardVo> selectNoticeBoard(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         List<NoticeBoardVo> notices = noticeBoardMapper.selectNoticeBoard();
         return new PageInfo<>(notices);
-    }
+    }*/
 
     /* 공지사항 글 상세 */
     public NoticeBoardVo selectNoticeBoardById(NoticeBoardVo noticeBoardVo) {

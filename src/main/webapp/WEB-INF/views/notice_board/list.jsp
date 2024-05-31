@@ -44,8 +44,8 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${pageInfo.list}" var="noticeBoardList">
-            <tr>
+        <c:forEach items="${noticeBoardList}" var="noticeBoardList">
+            <tr ${noticeBoardList.importance eq 'A' ? 'style="background-color: #fff3cd"' : ''}>
                 <td>${noticeBoardList.rownum}</td>
                 <c:choose>
                     <c:when test="${noticeBoardList.importance eq 'C'}">
@@ -62,12 +62,8 @@
         </c:forEach>
         </tbody>
     </table>
-        <a href="?pageNum=${pageInfo.prePage}&pageSize=${pageInfo.pageSize}">Previous</a>
-        <a href="?pageNum=${pageInfo.nextPage}&pageSize=${pageInfo.pageSize}">Next</a>
 </div>
-<div class="container text-end mb-3">
-    Page ${pageInfo.pageNum} of ${pageInfo.pages}
-</div>
+
 
 <jsp:include page="/header/footer"></jsp:include>
 </body>

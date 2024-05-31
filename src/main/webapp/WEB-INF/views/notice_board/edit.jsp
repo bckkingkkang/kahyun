@@ -150,7 +150,7 @@
             } else {
                 board_yn = 'N';
             }
-            if($("#board_yn").prop("checked")) {
+            if($("#file_board_yn").prop("checked")) {
                 file_board_yn = 'Y';
             } else {
                 file_board_yn = 'N';
@@ -164,6 +164,8 @@
                 alert("내용을 입력해주세요.");
                 return;
             }
+
+            console.log(board_yn, file_board_yn);
 
             if(confirm("공지사항을 수정합니다.")) {
                 $.ajax({
