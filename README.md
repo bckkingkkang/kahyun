@@ -1,3 +1,5 @@
+https://docs.google.com/spreadsheets/d/1-jm3A68VoKrOF2snpPbtCp1s3VI_Zyy08h_lnXnc9XE/edit?usp=sharing
+
 ### 수정사항
 - [ ] 프로필 이미지 추가
 - [ ] 게시판 multipart/form-data 파일 업로드 부분 추가 -> XSS Filter
@@ -43,7 +45,7 @@
 - [ ] 비공개/공개로 전환 기능 수정 
 
 **공지사항**
-- [ ] 공지사항 게시판 추가
+- [x] 공지사항 게시판 추가 (수정, 삭제, 등록)
 - [ ] 공지사항 게시글 관리자 관리 추가
 - [ ] 게시글 관리에서 선택된 게시글 메인화면에 표시
 
