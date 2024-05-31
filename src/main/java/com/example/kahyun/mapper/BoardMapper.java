@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoardMapper {
 
     /* 게시판 리스트 */
-    List<BoardVo> getBoardList(BoardVo boardVo);
+    List<BoardVo> selectBoard(BoardVo boardVo);
 
     /* 게시판 글 쓰기 */
     int createBoard(BoardVo boardVo);
@@ -19,7 +19,7 @@ public interface BoardMapper {
     int deleteBoard(String seq);
 
     /* 게시글 상세보기 */
-    BoardVo getBoardDetail(BoardVo boardVo);
+    BoardVo selectBoardBySeq(BoardVo boardVo);
 
     /* 게시글 누를 때마다 조회수 증가 */
     int upView(BoardVo boardVo);

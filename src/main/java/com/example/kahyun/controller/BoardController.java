@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor    // final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할
-@RequestMapping("board/")
+/*@RequestMapping("board/")*/
 public class BoardController {
 
     private final UserService userService;
@@ -33,35 +33,28 @@ public class BoardController {
         3. Setter : Setter 메소드를 작성하여 객체를 주입 (메소드에 @Autowired 어노테이션 적용이 필요)
     */
 
-    /* 게시판 화면 */
-    @RequestMapping("list")
-    public String list() {
-        return "board/list";
-    }
-
-
-    /* 게시글 리스트 */
-    @GetMapping("list")
-    public String getBoardList(Model model, BoardVo boardVo) {
+    /* 게시판 리스트 화면 */
+    @RequestMapping("/board/list")
+    public String BoardList(Model model, BoardVo boardVo) {
         /*  Model 객체 사용
             - Controller에서 생성한 데이터를 담아서 View로 전달할 때 사용하는 객체
             - addAttribute("key", "value") 메소드를 사용하여 전달할 데이터 세팅
         */
-        List<BoardVo> list = boardMapper.getBoardList(boardVo);
+        List<BoardVo> list = boardMapper.selectBoard(boardVo);
         model.addAttribute("list", list);
         model.addAttribute("notice_list", boardMapper.selectBoardNotice());
         return "board/list";
     }
 
-    /* 게시글 작성 화면 */
-    @RequestMapping("create")
-    public String createBoardList() {
+    /* 게시글 등록 화면 */
+    @RequestMapping("/board/create")
+    public String CreateBoard() {
         return "board/create";
     }
 
     /* 게시글 상세 화면 */
-    @GetMapping("detail/{seq}")
-    public ModelAndView getBoard(BoardVo boardVo, ModelAndView mav) {
+    @GetMapping("/board/detail/{seq}")
+    public ModelAndView DetailBoard(BoardVo boardVo, ModelAndView mav) {
         /*
             * Model
                 - 메소드에 파라미터로 넣어주고 String 형태로 반환한다.
@@ -71,8 +64,8 @@ public class BoardController {
                 - 화면에 출력할 데이터(Model)을 설정할 수 있고, 어떤 화면(View)로 넘어갈지 경로를 설정할 수 있다.
                 - Model + View, 값을 넣을 때는 addObject를 사용하고, 값을 보낼 View를 세팅할 때는 setViewName()을 사용
         */
-        BoardVo boardDetail = boardMapper.getBoardDetail(boardVo);
-        List<CommentVo> boardComment = commentMapper.getComment(boardVo);
+        BoardVo boardDetail = boardMapper.selectBoardBySeq(boardVo);
+        List<CommentVo> boardComment = commentMapper.selectBoardComment(boardVo);
 
         boardService.upView(boardVo);
 
@@ -85,20 +78,11 @@ public class BoardController {
         return mav;
     }
 
-    /* 댓글 등록 ajax */
-    @ResponseBody
-    @PostMapping("detail/create_comment_ajax")
-    public int create_comment_ajax(CommentVo commentVo) {
-        commentVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        commentVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
-        int result = commentMapper.createComment(commentVo);
-        return result;
-    }
 
-    /* 게시글 저장 ajax */
+    /* 게시글 등록 ajax */
     @ResponseBody
-    @PostMapping("create_board_ajax")
-    public int create_board_ajax(BoardVo boardVo) {
+    @PostMapping("board/create_board")
+    public int createBoard(BoardVo boardVo) {
         boardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
         boardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
         return boardMapper.createBoard(boardVo);
@@ -106,8 +90,8 @@ public class BoardController {
 
     /* 게시글 삭제 ajax */
     @ResponseBody
-    @PostMapping("detail/delete_board_ajax")
-    public int delete_board_ajax(String seq) {
+    @PostMapping("board/delete_board")
+    public int deleteBoard(String seq) {
         int result = boardMapper.deleteBoard(seq);
         return result;
     }

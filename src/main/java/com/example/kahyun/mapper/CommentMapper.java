@@ -9,8 +9,15 @@ import java.util.List;
 @Mapper
 public interface CommentMapper {
 
-    List<CommentVo> getComment(BoardVo boardVo);
+    /* 회원게시판 댓글 리스트 */
+    List<CommentVo> selectBoardComment(BoardVo boardVo);
 
-    int createComment(CommentVo commentVo);
+    /* 회원게시판 댓글 등록 */
+    int createBoardComment(CommentVo commentVo);
 
+    /* 회원게시판 댓글 수정 */
+    int editBoardComment(CommentVo commentVo);
+
+    /* 회원게시판 댓글 삭제 */
+    int deleteBoardComment(CommentVo commentVo);
 }

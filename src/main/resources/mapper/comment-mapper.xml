@@ -3,20 +3,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kahyun.mapper.CommentMapper">
 
-    <!-- 게시글 상세에서 댓글 -->
-    <select id="getComment" parameterType="boardVo">
+    <!-- 회원게시판 상세에서 댓글 -->
+    <select id="selectBoardComment" parameterType="boardVo">
         SELECT *
         FROM comment
         WHERE board_seq = #{seq}
             AND status = 'N'
     </select>
 
-    <!-- 댓글 등록 -->
-    <insert id="createComment" parameterType="CommentVo">
-        INSERT INTO comment
-            (nickname, user_seq, content, create_dt, board_seq)
-        VALUES
-            (#{nickname}, #{user_seq}, #{content}, CURRENT_TIME(), #{seq})
+    <!-- 회원게시판 댓글 등록 -->
+    <insert id="createBoardComment" parameterType="CommentVo">
+        INSERT INTO comment (
+             nickname,
+             user_seq,
+             content,
+             create_dt,
+             board_seq
+        ) VALUES (
+             #{nickname},
+             #{user_seq},
+             #{content},
+             CURRENT_TIME(),
+             #{seq}
+        )
     </insert>
+
+    <!-- 회원게시판 댓글 수정 -->
+    <update id="editBoardComment">
+        UPDATE comment
+        SET
+            content = #{content},
+            update_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
+
+    <!-- 회원게시판 댓글 삭제 -->
+    <update id="deleteBoardComment">
+        UPDATE comment
+        SET
+            delete_yn = 'Y',
+            delete_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
 
 </mapper>

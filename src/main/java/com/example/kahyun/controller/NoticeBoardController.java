@@ -20,7 +20,7 @@ public class NoticeBoardController {
 
     /* 공지사항 게시판 리스트 화면 */
     @GetMapping("notice_board/list")
-    public String getNoticeBoardList(Model model) {
+    public String NoticeBoardList(Model model) {
         model.addAttribute("noticeBoardList", noticeBoardMapper.selectNoticeBoard());
 
         return "notice_board/list";
