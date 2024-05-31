@@ -24,6 +24,7 @@
         )
     </insert>
 
+    <!-- 공지사항 목록 -->
     <select id="selectNoticeBoard" resultType="com.example.kahyun.vo.NoticeBoardVo">
         SELECT
             ROW_NUMBER() over(ORDER BY nb.importance, nb.create_dt DESC) AS rownum,
@@ -44,4 +45,26 @@
         INNER JOIN users AS users ON users.seq = nb.user_seq
         WHERE nb.seq = #{seq}
     </select>
+
+    <!-- 공지사항 글 수정 -->
+    <update id="editNoticeBoard">
+        UPDATE notice_board
+        SET
+            title = #{title},
+            content = #{content},
+            importance = #{importance},
+            board_yn = #{board_yn},
+            file_board_yn = #{file_board_yn},
+            update_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
+
+    <!-- 공지사항 글 삭제 -->
+    <update id="deleteNoticeBoard">
+        UPDATE notice_board
+        SET
+            delete_dt = CURRENT_TIME(),
+            delete_yn = 'Y'
+        WHERE seq = #{seq}
+    </update>
 </mapper>

@@ -11,6 +11,12 @@ public interface NoticeBoardMapper {
     /* 공지사항 글 등록 */
     int createNoticeBoard(NoticeBoardVo noticeBoardVo);
 
+    /* 공지사항 글 수정 */
+    int editNoticeBoard(NoticeBoardVo noticeBoardVo);
+
+    /* 공지사항 글 삭제 */
+    int deleteNoticeBoard(NoticeBoardVo noticeBoardVo);
+
     /* 공지사항 글 리스트 */
     List<NoticeBoardVo> selectNoticeBoard();
 

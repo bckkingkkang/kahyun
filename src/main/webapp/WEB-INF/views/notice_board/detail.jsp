@@ -50,10 +50,10 @@
                     </div>
                 </div>
             </header>
-            <div class="container">
+            <div class="container mb-3">
                 <form action="">
                     <div>
-                        <table class="table" border="1">
+                        <table class="table">
                             <tr>
                                 <th class="text-center">등급</th>
                                 <th>${selectNoticeBoard.importance}</th>
@@ -81,10 +81,10 @@
                     </div>
                 </form>
 
-                <div class="text-center">
+                <div class="text-center mb-3">
                     <div>
                         <a class="btn btn-outline-dark mt-auto" id="listBtn" href="javascript:history.back()">뒤로 가기</a>
-                        <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
+                        <a class="btn btn-outline-dark mt-auto" id="editBtn" href="/notice_board/edit/${selectNoticeBoard.seq}">수정</a>
                         <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
                     </div>
                 </div>
@@ -98,35 +98,29 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
-    const seq = ${boardDetail.seq};
 
     $(function () {
         $dom.createBtn = $("#createBtn");
         $dom.deleteBtn = $("#deleteBtn");
 
-
-        $dom.deleteBtn.on('click', function () {
-            if (confirm("삭제하시겠습니까")) {
+        $dom.deleteBtn.on('click', function() {
+            if(confirm("공지사항을 삭제합니다.")) {
                 $.ajax({
-                    url: "delete_board_ajax",
-                    type: "post",
-                    data: {
-                        'seq': seq
+                    url : "/notice_board/delete_notice",
+                    type : "post",
+                    data : {
+                        seq : ${selectNoticeBoard.seq}
                     },
-                    success: function (result) {
-                        if (result === 1) {
-                            alert("삭제되었습니다.");
-                            location.href = "/board/list";
+                    success : function(result) {
+                        if(result == 1) {
+                            alert("공지사항이 삭제되었습니다.");
+                            location.href="/notice_board/list";
                         } else {
-                            alert("다시 시도해주세요");
-                            return;
+                            alert("잠시 후 시도해주세요");
                         }
-
                     }
                 })
             }
-
-
         })
     })
 

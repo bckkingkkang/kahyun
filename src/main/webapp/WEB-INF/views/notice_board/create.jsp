@@ -125,7 +125,7 @@
 
             if(confirm("공지사항을 등록합니다.")) {
                 $.ajax({
-                    url : "create_board",
+                    url : "create_notice",
                     type : "post",
                     data : {
                         title : $("#title").val(),
