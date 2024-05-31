@@ -33,7 +33,7 @@
         FROM notice_board AS nb
         INNER JOIN users users ON users.seq = nb.user_seq
         WHERE nb.delete_yn = 'N'
-        ORDER BY nb.importance, nb.create_dt DESC
+        ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC
     </select>
 
     <!-- 공지사항 글 상세 -->
