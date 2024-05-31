@@ -82,4 +82,16 @@
 
     </update>
 
+    <!-- 게시판 리스트 상단 공지사항 표시 -->
+    <select id="selectBoardNotice" resultType="com.example.kahyun.vo.NoticeBoardVo">
+        SELECT
+            ROW_NUMBER() over(ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC) AS rownum,
+                nb.*,
+            users.nickname
+        FROM notice_board AS nb
+                 INNER JOIN users users ON users.seq = nb.user_seq
+        WHERE nb.delete_yn = 'N' AND nb.file_board_yn = 'Y'
+        ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC
+    </select>
+
 </mapper>

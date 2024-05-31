@@ -37,7 +37,7 @@ public class FileBoardController {
 
     private final BoardService boardService;
 
-    /* 게시판 화면 */
+    /* 게시판 리스트 화면 */
     @RequestMapping("file_board/list")
     public ModelAndView list(ModelAndView mav) {
 
@@ -46,6 +46,7 @@ public class FileBoardController {
         /*mav.addObject("fileList", fileList);*/
         mav.addObject("fileList", fileBoardMapper.getFileList());
         mav.addObject("sboardList", fileBoardMapper.getSBoardList());
+        mav.addObject("notice_list", fileBoardMapper.selectBoardNotice());
         mav.setViewName("file_board/list");
 
         return mav;

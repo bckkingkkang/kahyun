@@ -27,7 +27,7 @@
     <!-- 공지사항 목록 -->
     <select id="selectNoticeBoard" resultType="com.example.kahyun.vo.NoticeBoardVo">
         SELECT
-            ROW_NUMBER() over(ORDER BY nb.importance, nb.create_dt DESC) AS rownum,
+            ROW_NUMBER() over(ORDER BY nb.importance,nb.update_dt DESC, nb.create_dt DESC) AS rownum,
             nb.*,
             users.nickname
         FROM notice_board AS nb

@@ -49,6 +49,7 @@ public class BoardController {
         */
         List<BoardVo> list = boardMapper.getBoardList(boardVo);
         model.addAttribute("list", list);
+        model.addAttribute("notice_list", boardMapper.selectBoardNotice());
         return "board/list";
     }
 

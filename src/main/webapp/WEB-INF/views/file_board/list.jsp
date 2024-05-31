@@ -49,16 +49,28 @@
                     <th>제목</th>
                     <th>작성자</th>
                     <th>등록일</th>
+                    <th>수정일</th>
                     <th>공개여부</th>
                 </tr>
             </thead>
             <tbody>
+            <c:forEach items="${notice_list}" var="notice_list">
+                <tr ${notice_list.importance eq 'A' || notice_list.importance eq 'B' ? 'style="background-color: #fff3cd"' : ''}>
+                    <th>공지</th>
+                    <th><a href="/notice_board/detail/${notice_list.seq}" ${notice_list.importance eq 'A' ? 'style="color: red"' : ''}>${notice_list.title}</a></th>
+                    <th>${notice_list.nickname}</th>
+                    <th>${notice_list.create_dt}</th>
+                    <th>${notice_list.update_dt eq null ? '-' : notice_list.update_dt}</th>
+                    <th>-</th>
+                </tr>
+            </c:forEach>
             <c:forEach items="${sboardList}" var="list">
                 <tr>
                     <td>${list.rownum}</td>
                     <th><a href="detail/${list.seq}">${list.title}</a></th>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
+                    <td>-</td>
                     <td>${list.accept_yn == 'Y' ? '공개' : '비공개'}</td>
                 </tr>
             </c:forEach>

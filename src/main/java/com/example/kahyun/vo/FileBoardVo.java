@@ -22,4 +22,9 @@ public class FileBoardVo {
     private String orgName;
     private String savedName;
 
+    /* 공지사항 표시 */
+    private String importance;
+    private String board_yn;
+    private String file_board_yn;
+
 }
