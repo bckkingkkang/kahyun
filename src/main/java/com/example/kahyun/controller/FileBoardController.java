@@ -32,14 +32,11 @@ public class FileBoardController {
     private final UserService userService;
     @Value("${file.dir}")
     private String fileDir;
-
     private final FileBoardMapper fileBoardMapper;
-
-    private final BoardService boardService;
 
     /* 게시판 리스트 화면 */
     @RequestMapping("file_board/list")
-    public ModelAndView list(ModelAndView mav) {
+    public ModelAndView FileBoardList(ModelAndView mav) {
 
         File path = new File(fileDir);
         String[] fileList = path.list();
@@ -52,9 +49,9 @@ public class FileBoardController {
         return mav;
     }
 
-    /* 게시글 상세 */
+    /* 자료게시판 상세 화면 */
     @GetMapping("file_board/detail/{seq}")
-    public ModelAndView getDetail(FileBoardVo fileBoardVo, FileVo fileVo, ModelAndView mav) {
+    public ModelAndView DetailFileBoard(FileBoardVo fileBoardVo, ModelAndView mav) {
 
         FileBoardVo getDetailBoard = fileBoardMapper.getDetailBoard(fileBoardVo.getSeq());
         FileVo getDetailFile = fileBoardMapper.getDetailFile(getDetailBoard.getFile());
@@ -67,33 +64,15 @@ public class FileBoardController {
         return mav;
     }
 
-    /* 파일 다운로드 */
-    @RequestMapping("/fileDownload/{file}")
-    public void fileDownload(@PathVariable String file, HttpServletResponse response) throws IOException {
-        File f = new File(fileDir, file);
-        response.setContentType("application/download");
-        response.setContentLength((int)f.length());
-        response.setHeader("Content-disposition", "attachment;filename=\"" + file + "\"");
-        // response 객체를 통해서 서버로부터 파일 다운로드
-        OutputStream os = response.getOutputStream();
-        // 파일 입력 객체 생성
-        FileInputStream fis = new FileInputStream(f);
-        FileCopyUtils.copy(fis, os);
-        fis.close();
-        os.close();
-        System.out.println(file);
-        fileBoardMapper.downloadCount(file);
-    }
-
-    /* 게시판 글쓰기 */
+    /* 자료게시판 글 등록 */
     @RequestMapping("file_board/create")
-    public String create() {
+    public String CreateFileBoard() {
         return "file_board/create";
     }
 
-    /* 파일 저장 */
+    /* 자료게시판 글 등록 및 파일 등록 */
     @RequestMapping("file_board/fileForm")
-    public ModelAndView fileUploadMultiple(@RequestParam("uploadFileMulti")ArrayList<MultipartFile> files,
+    public ModelAndView fileUploadMultiple(@RequestParam("uploadFileMulti") ArrayList<MultipartFile> files,
                                            ModelAndView mav, String title, String content, FileBoardVo fileBoardVo, FileVo fileVo) throws Exception {
         String savedFileName = "";
         // 파일 저장 경로 설정
@@ -133,5 +112,6 @@ public class FileBoardController {
 
         return mav;
     }
+
 
 }
