@@ -12,7 +12,7 @@ public class MailController {
     private final MailService mailService;
 
     @ResponseBody
-    @PostMapping("/mail")
+    @PostMapping("create_user/mail")
     public String mailConfirm(String mail) {
         String data = mailService.sendMail(mail);
         System.out.println(data);

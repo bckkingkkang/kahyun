@@ -3,12 +3,10 @@ package com.example.kahyun.controller;
 import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.service.BoardService;
-import com.example.kahyun.service.UserService;
+import com.example.kahyun.service.LoginService;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
-import com.example.kahyun.vo.LoginVo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +20,7 @@ import java.util.List;
 /*@RequestMapping("board/")*/
 public class BoardController {
 
-    private final UserService userService;
+    private final LoginService loginService;
     private final BoardService boardService;
     private final BoardMapper boardMapper;
     private final CommentMapper commentMapper;
@@ -72,7 +70,7 @@ public class BoardController {
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
 
-        mav.addObject("userDetail", userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        mav.addObject("userDetail", loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         mav.setViewName("board/detail");
 
         return mav;
@@ -83,8 +81,8 @@ public class BoardController {
     @ResponseBody
     @PostMapping("board/create_board")
     public int createBoard(BoardVo boardVo) {
-        boardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        boardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        boardVo.setNickname(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
+        boardVo.setUser_seq(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
         return boardMapper.createBoard(boardVo);
     }
 

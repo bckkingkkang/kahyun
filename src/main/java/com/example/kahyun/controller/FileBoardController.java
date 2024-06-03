@@ -1,26 +1,20 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.FileBoardMapper;
-import com.example.kahyun.service.BoardService;
-import com.example.kahyun.service.UserService;
+import com.example.kahyun.service.LoginService;
 import com.example.kahyun.vo.FileVo;
 import com.example.kahyun.vo.FileBoardVo;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -29,7 +23,7 @@ import java.util.UUID;
 public class FileBoardController {
 
     @Autowired
-    private final UserService userService;
+    private final LoginService loginService;
     @Value("${file.dir}")
     private String fileDir;
     private final FileBoardMapper fileBoardMapper;
@@ -102,8 +96,8 @@ public class FileBoardController {
 
         fileBoardVo.setTitle(title);
         fileBoardVo.setContent(content);
-        fileBoardVo.setNickname(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        fileBoardVo.setUser_seq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        fileBoardVo.setNickname(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
+        fileBoardVo.setUser_seq(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
         fileBoardVo.setFile(savedFileName);
         fileBoardMapper.createsBoard(fileBoardVo);
 

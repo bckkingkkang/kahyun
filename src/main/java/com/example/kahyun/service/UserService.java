@@ -1,34 +1,19 @@
 package com.example.kahyun.service;
 
-import com.example.kahyun.mapper.LoginMapper;
+import com.example.kahyun.mapper.UserMapper;
 import com.example.kahyun.vo.LoginVo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-
-    @Autowired
-    private LoginMapper loginMapper;
-
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    public PasswordEncoder passwordEncoder() {
-        return this.passwordEncoder;
-    }
-
+    private final UserMapper userMapper;
 
     public LoginVo selectUser() {
-        return loginMapper.loginUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return userMapper.userInfoList((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
     }
-
-    public LoginVo selectUser(String user_id) {
-        return loginMapper.selectUser(user_id);
-    }
-
 
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface LoginMapper {
 
     /* 회원가입 */
-    int createUser(LoginVo loginVo);
+    int userSignup(LoginVo loginVo);
 
     /* 계정 아이디 찾기 */
     String searchId(LoginVo loginVo);
@@ -21,12 +21,4 @@ public interface LoginMapper {
     /* id로 user 정보 select - 로그인 시 */
     LoginVo selectUser(String id);
 
-    /* id로 user 정보 select - 비밀번호 제외 */
-    LoginVo loginUser(String id);
-
-    /* 닉네임 변경 */
-    int edit_my_page(LoginVo loginVo);
-
-    /* 마이페이지 충전 내역 */
-    List<PaymentVo> charge_cash_list(String buyer_seq);
 }

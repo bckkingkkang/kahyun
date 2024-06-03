@@ -1,28 +1,19 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.FileBoardMapper;
-import com.example.kahyun.service.UserService;
-import com.example.kahyun.vo.FileBoardVo;
-import com.example.kahyun.vo.FileVo;
+import com.example.kahyun.service.LoginService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,7 +22,7 @@ public class FileController {
     @Value("${file.dir}")
     private String fileDir;
     private final FileBoardMapper fileBoardMapper;
-    private final UserService userService;
+    private final LoginService loginService;
 
     /* 파일 다운로드 */
     @RequestMapping("/fileDownload/{file}")

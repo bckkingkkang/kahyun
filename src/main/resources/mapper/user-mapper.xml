@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kahyun.mapper.UserMapper">
+
+    <!-- id로 user 정보 select - 비밀번호 제외 -->
+    <select id="userInfoList" parameterType="String" resultType="LoginVo">
+        select
+            seq,
+            username,
+            user_id,
+            nickname,
+            reg_date,
+            status,
+            auth,
+            email,
+            cash,
+            phone
+        from users
+        where user_id = #{user_id}
+    </select>
+
+    <!-- 개인정보 변경 - 닉네임 -->
+    <update id="editUserInfo">
+        update users
+        set nickname = #{nickname}
+        WHERE seq = #{seq}
+    </update>
+
+    <!-- 마이페이지 충전내역 -->
+    <select id="chargeCashList">
+        SELECT
+            ROW_NUMBER() over(ORDER BY charge_dt ASC) AS rownum,
+                merchant_uid,
+            price,
+            emb_pg_provider,
+            pay_method,
+            charge_dt,
+            user_cash
+        FROM charge_cash
+        WHERE buyer_seq = #{buyer_seq}
+        ORDER BY charge_dt DESC
+            LIMIT 5
+    </select>
+
+</mapper>

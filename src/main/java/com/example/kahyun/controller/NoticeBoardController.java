@@ -4,7 +4,6 @@ import com.example.kahyun.mapper.NoticeBoardMapper;
 import com.example.kahyun.service.NoticeBoardService;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.NoticeBoardVo;
-import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
