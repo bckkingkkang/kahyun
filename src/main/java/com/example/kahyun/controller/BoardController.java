@@ -4,6 +4,7 @@ import com.example.kahyun.mapper.BoardMapper;
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.service.BoardService;
 import com.example.kahyun.service.LoginService;
+import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.BoardVo;
 import com.example.kahyun.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardMapper boardMapper;
     private final CommentMapper commentMapper;
+    private final UserService userService;
     /*
         스프링 의존성 주입 3가지
         1. @Autowired 속성 : 속성에 @Autowired 어노테이션을 적용하여 객체를 주입
@@ -70,7 +72,7 @@ public class BoardController {
         mav.addObject("boardComment", boardComment);
         mav.addObject("boardDetail", boardDetail);
 
-        mav.addObject("userDetail", loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+        mav.addObject("userDetail", userService.selectUser());
         mav.setViewName("board/detail");
 
         return mav;
@@ -81,8 +83,7 @@ public class BoardController {
     @ResponseBody
     @PostMapping("board/create_board")
     public int createBoard(BoardVo boardVo) {
-        boardVo.setNickname(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        boardVo.setUser_seq(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        boardVo.setUser_seq(userService.selectUser().getSeq());
         return boardMapper.createBoard(boardVo);
     }
 
@@ -91,6 +92,21 @@ public class BoardController {
     @PostMapping("board/delete_board")
     public int deleteBoard(String seq) {
         int result = boardMapper.deleteBoard(seq);
+        return result;
+    }
+
+    /* 게시글 수정 화면 */
+    @GetMapping("board/edit/{seq}")
+    public String EditBoard(BoardVo boardVo, Model model) {
+        model.addAttribute("boardDetail",boardMapper.selectBoardBySeq(boardVo));
+        return "board/edit";
+    }
+
+    /* 게시글 수정 ajax */
+    @ResponseBody
+    @PostMapping("board/edit_board")
+    public int editBoard(BoardVo boardVo) {
+        int result = boardMapper.editBoard(boardVo);
         return result;
     }
 

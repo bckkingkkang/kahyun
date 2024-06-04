@@ -26,4 +26,7 @@ public interface BoardMapper {
 
     /* 게시판 리스트 상단 공지사항 추가 */
     List<NoticeBoardVo> selectBoardNotice();
+
+    /* 게시글 수정 */
+    int editBoard(BoardVo boardVo);
 }

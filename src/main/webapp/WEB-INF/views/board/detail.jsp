@@ -30,7 +30,7 @@
 </header>
 <div>
     <c:choose>
-    <c:when test="${boardDetail.status == 'D'}">
+    <c:when test="${boardDetail.delete_yn == 'Y'}">
         <header class="bg-white py-5">
             <div class="container px-2 px-lg-3 my-3">
                 <div class="text-center text-black">
@@ -81,10 +81,8 @@
             <div class="text-center">
                 <div>
                     <a class="btn btn-outline-dark mt-auto" id="listBtn" href="javascript:history.back()">뒤로 가기</a>
-                    <c:if test="${boardDetail.user_seq == (userDetail.seq || userDetail.auth == 'ADMIN') && boardDetail.status != 'D'}">
-                        <a class="btn btn-outline-dark mt-auto" id="editBtn" href="#">수정</a>
-                        <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
-                    </c:if>
+                    <a class="btn btn-outline-dark mt-auto" id="editBtn" href="/board/edit/${boardDetail.seq}">수정</a>
+                    <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
                 </div>
             </div>
         </div>
@@ -157,13 +155,14 @@
     $(function () {
         $dom.createBtn = $("#createBtn");
         $dom.deleteBtn = $("#deleteBtn");
+        $dom.editBtn = $("#editBtn");
 
         $dom.createBtn.on('click', function () {
             console.log($dom);
             if (confirm("댓글을 등록하시겠습니까")) {
                 /* 댓글 등록 */
                 $.ajax({
-                    url: "create_comment_ajax",
+                    url: "/board/create_comment",
                     type: "post",
                     data: {
                         content: $("#content").val(),
@@ -184,7 +183,7 @@
         $dom.deleteBtn.on('click', function () {
             if (confirm("삭제하시겠습니까")) {
                 $.ajax({
-                    url: "delete_board_ajax",
+                    url: "/board/delete_board",
                     type: "post",
                     data: {
                         'seq': seq

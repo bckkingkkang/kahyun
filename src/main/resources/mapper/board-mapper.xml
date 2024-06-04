@@ -6,25 +6,25 @@
     <!-- 게시판 리스트 -->
     <select id="selectBoard" parameterType="BoardVo" resultType="BoardVo">
         SELECT
-            seq,
-            title,
-            content,
-            nickname,
-            create_dt,
-            update_dt,
-            boardOption,
-            view,
-            ROW_NUMBER() over(ORDER BY create_dt DESC) AS rownum
-        FROM board
-        WHERE status = 'N'
-        ORDER BY create_dt DESC
+            board.seq,
+            board.title,
+            board.content,
+            users.nickname,
+            board.create_dt,
+            board.update_dt,
+            board.boardOption,
+            board.view,
+            ROW_NUMBER() over(ORDER BY board.create_dt DESC) AS rownum
+        FROM board AS board
+        INNER JOIN users AS users ON users.seq = board.user_seq
+        WHERE board.delete_yn = 'N'
+        ORDER BY board.create_dt DESC
     </select>
 
     <!-- 게시판 글 등록 -->
     <insert id="createBoard" parameterType="BoardVo">
         INSERT INTO board(
              title,
-             nickname,
              content,
              create_dt,
              user_seq,
@@ -32,7 +32,6 @@
             )
             VALUES (
                 #{title},
-                #{nickname},
                 #{content},
                 CURRENT_TIME(),
                 #{user_seq},
@@ -43,18 +42,25 @@
     <!-- 게시글 삭제 -->
     <update id="deleteBoard" parameterType="String">
         UPDATE board
-        SET status = 'D'
+        SET
+            delete_yn = 'Y',
+            delete_dt = CURRENT_TIME()
         WHERE seq = #{seq}
     </update>
 
     <!-- 게시글 상세 -->
     <select id="selectBoardBySeq" parameterType="BoardVo" resultType="BoardVo">
-        SELECT * FROM board WHERE seq = #{seq}
+        SELECT *
+        FROM board
+        WHERE seq = #{seq}
     </select>
 
     <!-- 조회수 증가 -->
     <update id="upView" parameterType="BoardVo">
-        update board set view = view+1 where seq = #{seq}
+        UPDATE board
+        SET
+            view = view+1
+        WHERE seq = #{seq}
     </update>
 
     <!-- 게시판 리스트 상단 공지사항 표시 -->
@@ -68,4 +74,15 @@
         WHERE nb.delete_yn = 'N' AND nb.board_yn = 'Y'
         ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC
     </select>
+
+    <!-- 게시글 수정 -->
+    <update id="editBoard">
+        UPDATE board
+        SET
+            title = #{title},
+            boardOption = #{boardOption},
+            content = #{content},
+            update_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
 </mapper>
