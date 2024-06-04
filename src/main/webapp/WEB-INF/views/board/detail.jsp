@@ -80,7 +80,7 @@
 
             <div class="text-center">
                 <div>
-                    <a class="btn btn-outline-dark mt-auto" id="listBtn" href="javascript:history.back()">뒤로 가기</a>
+                    <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
                     <a class="btn btn-outline-dark mt-auto" id="editBtn" href="/board/edit/${boardDetail.seq}">수정</a>
                     <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
                 </div>
