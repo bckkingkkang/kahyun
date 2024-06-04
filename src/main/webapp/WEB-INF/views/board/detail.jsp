@@ -6,14 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>게시글 상세</title>
 </head>
-<%--<style>
-    table {
-        border: 2px solid; border-collapse: collapse;
+<style>
+    tr, td {
+        white-space : pre;
     }
-    th, td {
-        border: 1px solid; padding:10px 5px;
-    }
-</style>--%>
+</style>
 <body>
 <jsp:include page="/header/header"></jsp:include>
 <header class="bg-dark py-5">
@@ -30,118 +27,112 @@
 </header>
 <div>
     <c:choose>
-    <c:when test="${boardDetail.delete_yn == 'Y'}">
-        <header class="bg-white py-5">
-            <div class="container px-2 px-lg-3 my-3">
-                <div class="text-center text-black">
-                    <h3>삭제된 게시글입니다.</h3>
+        <c:when test="${boardDetail.delete_yn == 'Y'}">
+            <div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <h3>삭제된 게시글입니다.</h3>
+                    </div>
                 </div>
             </div>
-        </header>
-        <header class="bg-white py-5">
-            <div class="container px-2 px-lg-3 my-3">
-                <div class="text-center text-black">
-                    <a class="btn btn-outline-dark mt-auto" href="/board/list">목록</a>
+            <div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <a class="btn btn-outline-dark mt-auto" href="/board/list">목록</a>
+                    </div>
                 </div>
             </div>
-        </header>
-    </c:when>
-    <c:otherwise>
-        <header class="bg-white py-5">
-            <div class="container px-2 px-lg-3 my-3">
-                <div class="text-center text-black">
-                    <h3>${boardDetail.title}</h3>
+        </c:when>
+        <c:otherwise>
+            <div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <h3>${boardDetail.title}</h3>
+                    </div>
                 </div>
             </div>
-        </header>
-        <div class="container">
-            <form action="">
-                <div>
-                    <table class="table">
-                        <tr>
-                            <th class="text-center">작성자</th>
-                            <td>${boardDetail.nickname}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-center">작성일</th>
-                            <td>${boardDetail.create_dt}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-center">수정일</th>
-                            <td>${boardDetail.update_dt}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-center">내용</th>
-                            <td>${boardDetail.content}</td>
-                        </tr>
-                    </table>
-                </div>
-            </form>
+            <div class="container">
+                <form action="">
+                    <div>
+                        <table class="table table-borderless">
+                            <tr>
+                                <th class="text-center">작성자</th>
+                                <td>${boardDetail.nickname}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-center">작성일</th>
+                                <td>${boardDetail.create_dt}</td>
+                            </tr>
+                            <c:if test="${boardDetail.update_dt ne null}">
+                                <tr>
+                                    <th class="text-center">수정일</th>
+                                    <td>${boardDetail.update_dt}</td>
+                                </tr>
+                            </c:if>
+                            <tr>
+                                <th class="text-center">내용</th>
+                                <td>${boardDetail.content}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
 
-            <div class="text-center">
-                <div>
-                    <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
-                    <a class="btn btn-outline-dark mt-auto" id="editBtn" href="/board/edit/${boardDetail.seq}">수정</a>
-                    <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
+                <div class="container text-end mb-lg-3">
+                    <div>
+                        <a class="btn btn-outline-dark mt-auto" id="listBtn" href="/board/list">목록</a>
+                        <a class="btn btn-outline-dark mt-auto" id="editBtn" href="/board/edit/${boardDetail.seq}">수정</a>
+                        <a class="btn btn-outline-dark mt-auto" id="deleteBtn">삭제</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <header class="bg-white py-5">
-            <div class="container px-2 px-lg-3 my-3">
-                <div class="text-center text-black">
-                    <p class="lead fw-normal text-black-50 mb-0">댓글 등록</p>
+
+            <div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <p class="lead fw-normal text-black-50 mb-0">댓글</p>
+                    </div>
                 </div>
             </div>
-        </header>
-        <div class="container">
-            <div>
+
+            <div class="container mt-lg-5">
                 <div>
                     <div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="content" placeholder="댓글">
-                            <label for="content">댓글</label>
-                        </div>
-                        <div class="text-center">
-                            <div>
-                                <a class="btn btn-outline-dark mt-auto" id="createBtn">등록</a>
+                        <div>
+                            <div class="container form-floating mb-3">
+                                <div style="height: 200px; width: 60%; margin: auto" class="form-floating mb-7">
+                                    <textarea type="text" style="height: 200px" class="form-control" id="content" placeholder="댓글"></textarea>
+                                    <label for="content">댓글</label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <div>
+                                    <a class="btn btn-outline-dark mt-auto" id="createComment">등록</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <header class="bg-white py-5">
-            <div class="container px-2 px-lg-3 my-3">
-                <div class="text-center text-black">
-                    <p class="lead fw-normal text-black-50 mb-0">댓글</p>
-                </div>
-            </div>
-        </header>
-        <div class="container">
-            <div>
-                <c:forEach items="${boardComment}" var="boardComment">
-                    <div>
-                        <table class="table table-borderless">
+            <div class="container bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <c:forEach items="${boardComment}" var="boardComment">
+                        <table style="width: 60%; margin: auto" class="table table-borderless mb-3">
                             <tr>
-                                <th class="text-center"<%-- style="width: 100px"--%>>내용</th>
-                                <td<%-- style="width: 500px"--%>>${boardComment.content}</td>
+                                <th id="comment_content${boardComment.seq}">${boardComment.content}</th>
+                                <td class="text-end">${boardComment.nickname} ${boardComment.create_dt}</td>
                             </tr>
                             <tr>
-                                <th class="text-center">작성자</th>
-                                <td>${boardComment.nickname}</td>
-                            </tr>
-                            <tr>
-                                <th class="text-center">작성일</th>
-                                <td>${boardComment.create_dt}</td>
+                                <td colspan="2" class="text-end">
+                                    <a class="btn btn-outline-dark" value="${boardComment.seq}" id="editComment${boardComment.seq}" onclick="editComment(${boardComment.seq});">수정</a> <a class="btn btn-outline-dark" id="deleteComment" onclick="deleteComment(${boardComment.seq});">삭제</a>
+                                </td>
                             </tr>
                         </table>
-                        <br>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
-        </div>
-    </c:otherwise>
+        </c:otherwise>
     </c:choose>
 </div>
 
@@ -150,14 +141,43 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     const $dom = {};
-    const seq = ${boardDetail.seq};
+
+    $dom.createComment = $("#createComment");
+    $dom.deleteBtn = $("#deleteBtn");
+    $dom.editBtn = $("#editBtn");
+
+
+    // 댓글 수정
+    function editComment(seq) {
+        console.log(seq);
+        document.getElementById('comment_content'+seq).innerText='';
+
+    }
+
+    // 댓글 삭제
+    function deleteComment(seq) {
+        console.log(seq);
+        if(confirm("댓글을 삭제하시겠습니까?")) {
+            $.ajax({
+                url : "/board/delete_comment",
+                type : "post",
+                data : { seq : seq},
+                success : function (result) {
+                    if(result===1) {
+                        alert("댓글이 삭제되었습니다.");
+                        location.reload();
+                    } else {
+                        alert("잠시 후 시도해주세요.");
+                    }
+                }
+            })
+        }
+    }
 
     $(function () {
-        $dom.createBtn = $("#createBtn");
-        $dom.deleteBtn = $("#deleteBtn");
-        $dom.editBtn = $("#editBtn");
 
-        $dom.createBtn.on('click', function () {
+
+        $dom.createComment.on('click', function () {
             console.log($dom);
             if (confirm("댓글을 등록하시겠습니까")) {
                 /* 댓글 등록 */
@@ -166,7 +186,7 @@
                     type: "post",
                     data: {
                         content: $("#content").val(),
-                        seq: seq
+                        seq: ${boardDetail.seq}
                     },
                     success: function (result) {
                         if (result === 1) {

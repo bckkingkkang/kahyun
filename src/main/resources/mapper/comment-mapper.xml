@@ -5,22 +5,22 @@
 
     <!-- 회원게시판 상세에서 댓글 -->
     <select id="selectBoardComment" parameterType="boardVo">
-        SELECT *
-        FROM comment
-        WHERE board_seq = #{seq}
-            AND status = 'N'
+        SELECT bc.*,
+               users.nickname
+        FROM board_comment AS bc
+        INNER JOIN users AS users ON users.seq = bc.user_seq
+        WHERE bc.board_seq = #{seq}
+            AND bc.delete_yn = 'N'
     </select>
 
     <!-- 회원게시판 댓글 등록 -->
     <insert id="createBoardComment" parameterType="CommentVo">
-        INSERT INTO comment (
-             nickname,
+        INSERT INTO board_comment (
              user_seq,
              content,
              create_dt,
              board_seq
         ) VALUES (
-             #{nickname},
              #{user_seq},
              #{content},
              CURRENT_TIME(),
@@ -30,7 +30,7 @@
 
     <!-- 회원게시판 댓글 수정 -->
     <update id="editBoardComment">
-        UPDATE comment
+        UPDATE board_comment
         SET
             content = #{content},
             update_dt = CURRENT_TIME()
@@ -39,7 +39,7 @@
 
     <!-- 회원게시판 댓글 삭제 -->
     <update id="deleteBoardComment">
-        UPDATE comment
+        UPDATE board_comment
         SET
             delete_yn = 'Y',
             delete_dt = CURRENT_TIME()

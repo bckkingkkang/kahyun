@@ -10,7 +10,6 @@ public class CommentVo {
     private String user_seq;
     private String content;
     private String create_dt;
-    private String status;
     private String board_seq;
     private String delete_yn;
     private String delete_dt;

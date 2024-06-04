@@ -2,6 +2,7 @@ package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.service.LoginService;
+import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.CommentVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,14 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CommentController {
 
     private final CommentMapper commentMapper;
-    private final LoginService loginService;
+    private final UserService userService;
 
     /* 회원게시판 댓글 등록 ajax */
     @ResponseBody
     @PostMapping("board/create_comment")
     public int createBoardComment(CommentVo commentVo) {
-        commentVo.setNickname(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getNickname());
-        commentVo.setUser_seq(loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
+        commentVo.setUser_seq(userService.selectUser().getSeq());
         int result = commentMapper.createBoardComment(commentVo);
         return result;
     }
