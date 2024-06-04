@@ -65,6 +65,7 @@ https://docs.google.com/spreadsheets/d/1-jm3A68VoKrOF2snpPbtCp1s3VI_Zyy08h_lnXnc
 **공지사항**
 - [x] 공지사항 게시판 추가 (수정, 삭제, 등록)
 - [ ] 공지사항 게시글 관리자 관리 추가
+- [ ] 공지사항 게시글 댓글 기능 추가
 - [ ] 게시글 관리에서 선택된 게시글 메인화면에 표시
 
 
