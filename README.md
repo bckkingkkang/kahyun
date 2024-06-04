@@ -168,7 +168,7 @@ CREATE TABLE kahyun.users
    ) ENGINE=INNODB DEFAULT charset=utf8
 ```
 
-### comment
+### board_comment
 <details>
 <summary>테이블 보기</summary>
 
