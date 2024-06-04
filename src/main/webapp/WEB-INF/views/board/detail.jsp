@@ -121,6 +121,15 @@
                         <table style="width: 60%; margin: auto" class="table table-borderless mb-3">
                             <tr>
                                 <th id="comment_content${boardComment.seq}">${boardComment.content}</th>
+                                <th id="comment_editcontent${boardComment.seq}" style="display: none">
+                                    <div class="container form-floating mb-3">
+                                        <div style="height: 200px; width: 60%; margin: auto" class="form-floating mb-7">
+                                            <textarea type="text" style="height: 200px" class="form-control" id="editContent" placeholder="댓글">${boardComment.content}</textarea>
+                                            <label for="editContent">댓글</label>
+                                        </div>
+                                    </div>
+                                </th>
+                                <%-- 저장 취소 버튼 추가 --%>
                                 <td class="text-end">${boardComment.nickname} ${boardComment.create_dt}</td>
                             </tr>
                             <tr>
@@ -150,7 +159,9 @@
     // 댓글 수정
     function editComment(seq) {
         console.log(seq);
-        document.getElementById('comment_content'+seq).innerText='';
+        document.getElementById('comment_content'+seq).style = 'display:none';
+        document.getElementById('comment_editcontent'+seq).style = 'display';
+
 
     }
 
