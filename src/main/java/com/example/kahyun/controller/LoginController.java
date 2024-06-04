@@ -1,34 +1,31 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.LoginMapper;
+import com.example.kahyun.mapper.UserMapper;
+import com.example.kahyun.service.LoginService;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.LoginVo;
-import com.example.kahyun.vo.PaymentVo;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("user/")
+/*@RequestMapping("user/")*/
 public class LoginController {
 
     private final LoginMapper loginMapper;
-    private final UserService userService;
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     /* 로그인 화면 */
-    @RequestMapping("login")
-    public String login(@RequestParam(value="error", required = false)String error,
+    @RequestMapping("user/login")
+    public String UserLogin(@RequestParam(value="error", required = false)String error,
                         @RequestParam(value="exception", required = false)String exception, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -41,51 +38,35 @@ public class LoginController {
        return "main";
     }
 
-    @RequestMapping("logout")
-    public String logout() {
+    /* 로그아웃 화면 */
+    @RequestMapping("user/logout")
+    public String UserLogout() {
         return "user/logout";
     }
 
     /* 회원가입 화면 */
-    @RequestMapping("signup")
+    @RequestMapping("user/signup")
     public String signup() {
         return "user/signup";
     }
 
     /* 회원가입 완료 화면 */
-    @RequestMapping("complete")
-    public String complete() {
+    @RequestMapping("user/complete")
+    public String SignupComplete() {
         return "user/complete";
     }
 
     /* 계정 찾기 화면 */
-    @RequestMapping("search")
-    public String search() {
+    @RequestMapping("user/search")
+    public String UserSearch() {
         return "user/search";
     }
 
-    /* 마이페이지 */
-    @RequestMapping("mypage")
-    public ModelAndView mypage(ModelAndView mav) {
-        mav.addObject("userInfo"
-                ,userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
-        mav.addObject("charge_cash_list", loginMapper.charge_cash_list(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq()));
-        mav.setViewName("user/mypage");
-        return mav;
-    }
-
-    @RequestMapping("edit")
-    public ModelAndView edit(ModelAndView mav) {
-        mav.addObject("userInfo"
-                ,userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
-
-        return mav;
-    }
 
     /* 회원가입 ajax */
     @ResponseBody
-    @PostMapping("signup_ajax")
-    public int create_ajax(LoginVo loginVo) {
+    @PostMapping("user/signup")
+    public int userSignup(LoginVo loginVo) {
         /*
             비밀번호 암호화
             ( BCrypt : 단방향 암호화를 위해 만들어진 해시 함수,
@@ -98,15 +79,15 @@ public class LoginController {
         */
         loginVo.setPassword(bCryptPasswordEncoder.encode(loginVo.getPassword()));
 
-        int result = loginMapper.createUser(loginVo);
+        int result = loginMapper.userSignup(loginVo);
 
         return result;
     }
 
     /* 아이디 찾기 버튼 ajax */
     @ResponseBody
-    @PostMapping("search_id_ajax")
-    public String search_id_ajax(LoginVo loginVo) {
+    @PostMapping("user/search_id")
+    public String searchId(LoginVo loginVo) {
         String result = loginMapper.searchId(loginVo);
         // 검색 결과가 없는 경우 null
         if(null == (result)) {
@@ -117,18 +98,11 @@ public class LoginController {
 
     /* 아이디 중복 체크 버튼 ajax */
     @ResponseBody
-    @PostMapping("check_id_ajax")
-    public int check_id_ajax(String user_id) {
+    @PostMapping("user/check_id")
+    public int checkId(String user_id) {
         int count = loginMapper.checkId(user_id);
         return count;
     }
 
-    /* edit > 닉네임 수정 */
-    @ResponseBody
-    @PostMapping("edit_my_page")
-    public int edit_my_page(LoginVo loginVo) {
-        loginVo.setSeq(userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
-        return loginMapper.edit_my_page(loginVo);
-    }
 
 }

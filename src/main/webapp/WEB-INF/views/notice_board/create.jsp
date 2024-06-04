@@ -30,14 +30,6 @@
 <div>
     <div class="container">
         <form action="" id="saveForm" method="post">
-            <%--<div class="form-floating mb-3">
-                중요도 :
-                <select name="importance" id="importance">
-                    <option value="A" default>A 높음</option>
-                    <option value="B">B 보통</option>
-                    <option value="C">C 낮음</option>
-                </select>
-            </div>--%>
             <div class="form-floating mb-3">
                 <div class="form mb-3">
                     <input type="radio" class="btn-check" name="importance" id="A" value="A" autocomplete="off" checked>

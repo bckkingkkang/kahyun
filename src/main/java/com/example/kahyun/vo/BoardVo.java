@@ -11,12 +11,12 @@ public class BoardVo {
     private String nickname;
     private String create_dt;
     private String update_dt;
-    private String status;
+    private String delete_dt;
+    private String delete_yn;
     private String view;
     private String user_seq;
     private String boardOption;
     private String auth;
-    private String delete_yn;
 
     /* 공지사항 표시 */
     private String importance;

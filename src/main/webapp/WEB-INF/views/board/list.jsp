@@ -59,7 +59,7 @@
             <c:forEach items="${list}" var="list">
                 <tr>
                     <td>${list.rownum}</td>
-                    <th><a style="color: black" href="detail/${list.seq}">${list.title}</a></th>
+                    <td><a style="color: black" href="detail/${list.seq}">${list.title}</a></td>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
                     <td>${list.update_dt}</td>

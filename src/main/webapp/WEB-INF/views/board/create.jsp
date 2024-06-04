@@ -29,12 +29,17 @@
     <div class="container">
         <form action="" id="saveForm" method="post">
             <div class="form-floating mb-3">
-                분류 :
-                <select name="" id="boardOption">
-                    <option value="boardOption1" default>그냥게시판</option>
-                    <option value="boardOption2">게시판1</option>
-                    <option value="boardOption3">게시판2</option>
-                </select>
+                <div class="form mb-3">
+                    <input type="radio" class="btn-check" name="boardOption" id="boardOption3" value="boardOption3" autocomplete="off" checked>
+                    <label class="btn btn-outline-dark mt-auto" for="boardOption3">그냥 게시판</label>
+
+                    <input type="radio" class="btn-check" name="boardOption" id="boardOption1" value="boardOption1" autocomplete="off">
+                    <label class="btn btn-outline-dark mt-auto" for="boardOption1">게시판 1</label>
+
+                    <input type="radio" class="btn-check" name="boardOption" id="boardOption2" value="boardOption2" autocomplete="off">
+                    <label class="btn btn-outline-dark mt-auto" for="boardOption2">게시판 2</label>
+                </div>
+
             </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="title" placeholder="제목">
@@ -47,7 +52,7 @@
             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="card-body p-2 text-center">
                     <button class="btn btn-outline-dark mt-auto" type="submit" id="createBtn">저장</button>
-                    <button class="btn btn-outline-dark mt-auto" type="button" onclick="if(confirm('작성을 취소하시겠습니까?')) {location.href='list'} else return;">목록</button>
+                    <button class="btn btn-outline-dark mt-auto" type="button" onclick="if(confirm('작성을 취소하시겠습니까?')) {location.href='javascript:history.back()'} else return;">목록</button>
                 </div>
             </div>
         </form>
@@ -63,6 +68,14 @@
         $dom.createBtn = $("#createBtn");
 
         $dom.createBtn.on('click', function () {
+            var boardOption = '';
+            const option = document.getElementsByName('boardOption');
+            option.forEach((e)=>{
+                if(e.checked) {
+                    boardOption = e.value;
+                }
+            })
+
             if ($("#title").val() == "") {
                 alert("제목을 입력해주세요");
                 return;
@@ -73,12 +86,12 @@
             }
             if (confirm("글을 저장하시겠습니까?")) {
                 $.ajax({
-                    url: "create_board_ajax",
+                    url: "/board/create_board",
                     type: "post",
                     data: {
                         title: $("#title").val(),
                         content: $("#content").val(),
-                        boardOption: $("#boardOption").val()
+                        boardOption: boardOption
                     },
                     success: function () {
                         location.href = "list";

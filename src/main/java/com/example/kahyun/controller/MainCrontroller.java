@@ -1,7 +1,7 @@
 package com.example.kahyun.controller;
 
 import com.example.kahyun.mapper.FileBoardMapper;
-import com.example.kahyun.service.UserService;
+import com.example.kahyun.service.LoginService;
 import com.example.kahyun.vo.LoginVo;
 import com.example.kahyun.vo.FileBoardVo;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.List;
 public class MainCrontroller {
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
     private final FileBoardMapper fileBoardMapper;
 
@@ -40,7 +40,7 @@ public class MainCrontroller {
     @RequestMapping("/main")
     public ModelAndView HomeTest(ModelAndView model) {
        /* String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        LoginVo loginVo = userService.selectUser(user_id);
+        LoginVo loginVo = loginService.selectUser(user_id);
         model.addObject("user", loginVo);
         String isLogin;
         if(loginVo != null) {
@@ -63,7 +63,7 @@ public class MainCrontroller {
 
     @RequestMapping("/header/header")
     public ModelAndView header(ModelAndView mav) {
-        /*LoginVo loginVo = userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        /*LoginVo loginVo = loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("user", loginVo);
         String isLogin;
         if(loginVo != null) {
@@ -74,7 +74,7 @@ public class MainCrontroller {
 
         model.addAttribute("isLogin",isLogin);*/
         String user_id = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        LoginVo loginVo = userService.selectUser(user_id);
+        LoginVo loginVo = loginService.selectUser(user_id);
         mav.addObject("user", loginVo);
         String isLogin;
         if(loginVo != null) {
@@ -88,7 +88,7 @@ public class MainCrontroller {
     }
     @RequestMapping("/header/footer")
     public String footer(Model model) {
-        /*LoginVo loginVo = userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        /*LoginVo loginVo = loginService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("user", loginVo);
         String isLogin;
         if(loginVo != null) {

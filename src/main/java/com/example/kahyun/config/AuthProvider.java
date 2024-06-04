@@ -1,6 +1,6 @@
 package com.example.kahyun.config;
 
-import com.example.kahyun.service.UserService;
+import com.example.kahyun.service.LoginService;
 import com.example.kahyun.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class AuthProvider implements AuthenticationProvider {
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
 
     /*
@@ -35,11 +35,11 @@ public class AuthProvider implements AuthenticationProvider {
         String user_id = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
-        PasswordEncoder passwordEncoder = userService.passwordEncoder();
+        PasswordEncoder passwordEncoder = loginService.passwordEncoder();
         UsernamePasswordAuthenticationToken token;
 
         /* 입력받은 user_id로 회원 정보 SELECT */
-        LoginVo loginVo = userService.selectUser(user_id);
+        LoginVo loginVo = loginService.selectUser(user_id);
 
         /* 조회된 회원정보가 있고 비밀번호가 matches  */
         if(loginVo != null && passwordEncoder.matches(password, loginVo.getPassword())) {

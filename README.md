@@ -450,7 +450,7 @@ spring security의 인증 방식 : credential 기반 인증 (사용자명과 비
 AuthenticationProvider를 상속한 AuthProvider 클래스
 1. UserDetailsService의 loadByUsername을 이용하지 않고 DB의 user 정보를 가져온다.
 2. login.jsp 페이지의 로그인 버튼을 눌렀을 때 POST로 전송되는 user_id, password를 이용하여 사용자 인증
-3. 입력받은 user_id로 회원정보 select (userService.selectUser(user_id)
+3. 입력받은 user_id로 회원정보 select (loginService.selectUser(user_id)
 4. 조회된 회원정보와 (암호화된) 비밀번호가 일치하는 경우 users 권한에 따라 SYS_ADMIN, NOR_ADMIN 권한을 부여한다.
 5. 인증된 user인 경우 정보를 담아 SecurityContextHolder에 저장되는 token을 생성한다.
 ```

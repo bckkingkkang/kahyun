@@ -4,7 +4,7 @@
 <mapper namespace="com.example.kahyun.mapper.LoginMapper">
 
     <!-- 회원가입 -->
-    <insert id="createUser" parameterType="LoginVo">
+    <insert id="userSignup" parameterType="LoginVo">
         INSERT INTO users
             (username, user_id, nickname, password, reg_date, email)
         VALUES
@@ -46,7 +46,7 @@
     </select>
 
     <!-- id로 user 정보 select - 비밀번호 제외 -->
-    <select id="loginUser" parameterType="String" resultType="LoginVo">
+    <select id="userInfoList" parameterType="String" resultType="LoginVo">
         select
             seq,
             username,
@@ -64,14 +64,14 @@
 
 
     <!-- 개인정보 변경 - 닉네임 -->
-    <update id="edit_my_page">
+    <update id="editUserInfo">
         update users
         set nickname = #{nickname}
         WHERE seq = #{seq}
     </update>
 
     <!-- 마이페이지 충전내역 -->
-    <select id="charge_cash_list">
+    <select id="chargeCashList">
         SELECT
             ROW_NUMBER() over(ORDER BY charge_dt ASC) AS rownum,
             merchant_uid,

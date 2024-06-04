@@ -1,6 +1,6 @@
 package com.example.kahyun.controller;
 
-import com.example.kahyun.mapper.PaymentMapper;
+import com.example.kahyun.service.PaymentService;
 import com.example.kahyun.service.UserService;
 import com.example.kahyun.vo.PaymentVo;
 import com.siot.IamportRestClient.IamportClient;
@@ -10,11 +10,7 @@ import com.siot.IamportRestClient.response.Payment;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +23,8 @@ import java.io.IOException;
 public class PaymentController {
 
     private IamportClient iamportClient;
-    private final PaymentMapper paymentMapper;
     private final UserService userService;
+    private final PaymentService paymentService;
 
     @Value("${imp.api.key}")
     private String apiKey;
@@ -36,9 +32,10 @@ public class PaymentController {
     @Value("${imp.api.secretkey}")
     private String secretKey;
 
+    /* 캐시 충전 화면 */
     @RequestMapping("payment/charge")
-    public String list(Model model) {
-        model.addAttribute("user",userService.selectUser((String) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
+    public String Charge(Model model) {
+        model.addAttribute("user",userService.selectUser());
         return "payment/charge";
     }
 
@@ -51,23 +48,14 @@ public class PaymentController {
     @ResponseBody
     @RequestMapping("/charge/{imp_uid}")
     public IamportResponse<Payment> paymentByImpUid(@PathVariable("imp_uid") String imp_uid) throws IamportResponseException, IOException {
-        System.out.println(imp_uid);
         return iamportClient.paymentByImpUid(imp_uid);
     }
 
+    /* 충전 */
     @ResponseBody
-    @PostMapping("/charge_cash")
-    public void charge_cash(PaymentVo paymentVo) {
-        paymentVo.setBuyer_seq(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getSeq());
-        paymentVo.setBuyer_email(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail());
-        paymentVo.setBuyer_name(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
-        paymentVo.setBuyer_phone(userService.selectUser((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getPhone());
-
-        paymentMapper.user_cash_charge(paymentVo);
-        paymentVo.setUser_cash(String.valueOf(paymentMapper.user_cash(paymentVo.getBuyer_seq())));
-
-        System.out.println(paymentVo);
-        paymentMapper.charge_cash(paymentVo);
+    @PostMapping("/payment/charge_cash")
+    public void chargeCash(PaymentVo paymentVo) {
+        paymentService.chargeCash(paymentVo);
     }
 
 

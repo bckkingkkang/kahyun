@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface PaymentMapper {
-    int charge_cash(PaymentVo paymentVo);
-    int user_cash_charge(PaymentVo paymentVo);
-    String user_cash(String buyer_seq);
+    int chargeCash(PaymentVo paymentVo);
+    int userCashCharge(PaymentVo paymentVo);
+    String selectUserCash(String buyer_seq);
 }

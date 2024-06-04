@@ -4,7 +4,7 @@
 <mapper namespace="com.example.kahyun.mapper.PaymentMapper">
 
     <!-- 캐시 충전 -->
-    <insert id="charge_cash" parameterType="PaymentVo">
+    <insert id="chargeCash" parameterType="PaymentVo">
         INSERT INTO charge_cash (
             buyer_seq,
             buyer_name,
@@ -38,13 +38,13 @@
         )
     </insert>
 
-    <update id="user_cash_charge" parameterType="PaymentVo">
+    <update id="userCashCharge" parameterType="PaymentVo">
         UPDATE users
         SET cash = cash + #{price}
         WHERE seq = #{buyer_seq}
     </update>
 
-    <select id="user_cash">
+    <select id="selectUserCash">
         SELECT cash
         FROM users
         WHERE seq = #{buyer_seq}
