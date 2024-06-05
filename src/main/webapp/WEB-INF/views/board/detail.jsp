@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container form-floating" style="width: 60%; margin: auto">
                 <form action="">
                     <div>
                         <table class="table table-borderless">
@@ -89,7 +89,7 @@
             <div class="bg-white py-5">
                 <div class="container px-2 px-lg-3 my-3">
                     <div class="text-center text-black">
-                        <p class="lead fw-normal text-black-50 mb-0">댓글</p>
+                        <p class="lead fw-normal text-black-50 mb-0">댓글 등록</p>
                     </div>
                 </div>
             </div>
@@ -114,21 +114,57 @@
                     </div>
                 </div>
             </div>
+            <div class="bg-white py-5">
+                <div class="container px-2 px-lg-3 my-3">
+                    <div class="text-center text-black">
+                        <p class="lead fw-normal text-black-50 mb-0">댓글 목록</p>
+                    </div>
+                </div>
+            </div>
 
             <div class="container bg-white py-5">
                 <div class="container px-2 px-lg-3 my-3">
                     <c:forEach items="${boardComment}" var="boardComment">
-                        <table style="width: 60%; margin: auto" class="table table-borderless mb-3">
-                            <tr>
-                                <th id="comment_content${boardComment.seq}">${boardComment.content}</th>
-                                <td class="text-end">${boardComment.nickname} ${boardComment.create_dt}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="text-end">
-                                    <a class="btn btn-outline-dark" value="${boardComment.seq}" id="editComment${boardComment.seq}" onclick="editComment(${boardComment.seq});">수정</a> <a class="btn btn-outline-dark" id="deleteComment" onclick="deleteComment(${boardComment.seq});">삭제</a>
-                                </td>
-                            </tr>
-                        </table>
+                        <div id="boardComment${boardComment.seq}">
+                            <table style="width: 60%; margin: auto" class="table table-borderless mb-3">
+                                <tr>
+                                    <th id="comment_content${boardComment.seq}">${boardComment.content}</th>
+                                    <c:choose>
+                                        <c:when test="${boardComment.update_dt eq null}">
+                                            <td class="text-end">${boardComment.nickname} ${boardComment.create_dt}</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td class="text-end">${boardComment.nickname} 수정됨 ${boardComment.update_dt}</td>
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-end">
+                                        <a class="btn btn-outline-dark" value="${boardComment.seq}" id="editComment${boardComment.seq}" onclick="editComment(${boardComment.seq});">수정</a> <a class="btn btn-outline-dark" id="deleteComment" onclick="deleteComment(${boardComment.seq});">삭제</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="editBoardComment${boardComment.seq}" style="display: none">
+                            <table style="width: 60%; margin: auto" class="table table-borderless">
+                                <tr>
+                                    <th id="comment_editcontent${boardComment.seq}">
+                                        <div class="container mb-3">
+                                            <div style="height: 200px;" class="form-floating">
+                                                <textarea type="text" style="height: 200px" class="form-control" id="editContent${boardComment.seq}" placeholder="댓글">${boardComment.content}</textarea>
+                                                <label for="editContent${boardComment.seq}">댓글 수정</label>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="text-end">
+                                        <a class="btn btn-outline-dark" onclick="saveEditComment(${boardComment.seq});">저장</a> <a class="btn btn-outline-dark" onclick="cancelEdit(${boardComment.seq});">취소</a> <a class="btn btn-outline-dark" id="editDeleteComment" onclick="deleteComment(${boardComment.seq});">삭제</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </c:forEach>
                 </div>
             </div>
@@ -149,9 +185,13 @@
 
     // 댓글 수정
     function editComment(seq) {
-        console.log(seq);
-        document.getElementById('comment_content'+seq).innerText='';
-
+        document.getElementById('boardComment'+seq).style = 'display:none';
+        document.getElementById('editBoardComment'+seq).style = 'display';
+    }
+    // 댓글 수정 취소
+    function cancelEdit(seq) {
+        document.getElementById('boardComment'+seq).style = 'display';
+        document.getElementById('editBoardComment'+seq).style = 'display:none';
     }
 
     // 댓글 삭제
@@ -174,8 +214,29 @@
         }
     }
 
-    $(function () {
+    /* 수정 댓글 저장 */
+    function saveEditComment(seq) {
+        if(confirm("댓글을 수정하시겠습니까?")) {
+            $.ajax({
+                url:"/board/edit_comment",
+                type:"post",
+                data : {
+                    content : document.getElementById('editContent'+seq).value,
+                    seq : seq
+                },
+                success : function(result) {
+                    if(result===1) {
+                        alert("댓글이 수정되었습니다.");
+                        location.reload();
+                    } else {
+                        alert("잠시 후 시도해주세요.");
+                    }
+                }
+            })
+        }
+    }
 
+    $(function () {
 
         $dom.createComment.on('click', function () {
             console.log($dom);
@@ -190,7 +251,7 @@
                     },
                     success: function (result) {
                         if (result === 1) {
-                            location.href = seq;
+                            location.reload();
                         } else {
                             alert("다시 시도해주세요");
                         }
