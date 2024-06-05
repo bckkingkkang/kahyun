@@ -33,8 +33,8 @@ https://docs.google.com/spreadsheets/d/1-jm3A68VoKrOF2snpPbtCp1s3VI_Zyy08h_lnXnc
 **회원게시판**   
 - [x] 게시글 수정
 - [x] 게시글 삭제
-- [ ] 회원 게시판 댓글 수정
-- [ ] 회원 게시판 댓글 삭제
+- [x] 회원 게시판 댓글 수정
+- [x] 회원 게시판 댓글 삭제
 
 **자료게시판**    
 - [ ] 게시글 수정
@@ -43,6 +43,7 @@ https://docs.google.com/spreadsheets/d/1-jm3A68VoKrOF2snpPbtCp1s3VI_Zyy08h_lnXnc
 - [ ] 자료게시판 댓글 기능 추가
 - [ ] 자료게시판 댓글 수정
 - [ ] 자료게시판 댓글 삭제
+- [ ] 자료게시판 리스트에서 댓글 수 표시
 
 **장바구니**
 - [ ] 좋아요 기능 추가
@@ -67,6 +68,7 @@ https://docs.google.com/spreadsheets/d/1-jm3A68VoKrOF2snpPbtCp1s3VI_Zyy08h_lnXnc
 - [ ] 공지사항 게시글 관리자 관리 추가
 - [ ] 공지사항 게시글 댓글 기능 추가
 - [ ] 게시글 관리에서 선택된 게시글 메인화면에 표시
+- [ ] 공지사항 리스트에서 댓글 수 표시
 
 
 ## check_list
