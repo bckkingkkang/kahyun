@@ -1,5 +1,6 @@
 package com.example.kahyun.controller;
 
+import com.example.kahyun.mapper.CommentMapper;
 import com.example.kahyun.mapper.NoticeBoardMapper;
 import com.example.kahyun.service.NoticeBoardService;
 import com.example.kahyun.service.UserService;
@@ -16,6 +17,7 @@ public class NoticeBoardController {
     private final UserService userService;
     private final NoticeBoardMapper noticeBoardMapper;
     private final NoticeBoardService noticeBoardService;
+    private final CommentMapper commentMapper;
 
     /* 공지사항 게시판 리스트 화면 */
     @GetMapping("notice_board/list")
@@ -31,12 +33,13 @@ public class NoticeBoardController {
         return "notice_board/create";
     }
 
-    /* 공지사항 상세 */
+    /* 공지사항 상세 화면 */
     @GetMapping("notice_board/detail/{seq}")
     public String DetailNoticeBoard(NoticeBoardVo noticeBoardVo, Model model) {
 
         model.addAttribute("userDetail", userService.selectUser());
         model.addAttribute("selectNoticeBoard", noticeBoardService.selectNoticeBoardById(noticeBoardVo));
+        model.addAttribute("NoticeBoardComment", commentMapper.selectNoticeBoardComment(noticeBoardVo));
 
         return "notice_board/detail";
     }
@@ -65,6 +68,7 @@ public class NoticeBoardController {
         return result;
     }
 
+    /* 공지사항 글 삭제 */
     @ResponseBody
     @PostMapping("notice_board/delete_notice")
     public int deleteNoticeBoard(NoticeBoardVo noticeBoardVo) {

@@ -18,4 +18,5 @@ public class NoticeBoardVo {
     private String board_yn;
     private String file_board_yn;
     private String delete_yn;
+    private String comment_count;   // 댓글 수
 }

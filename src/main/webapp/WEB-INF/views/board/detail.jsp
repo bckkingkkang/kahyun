@@ -237,9 +237,11 @@
     }
 
     $(function () {
-
         $dom.createComment.on('click', function () {
-            console.log($dom);
+            if($("#content").val() == "") {
+                alert("댓글 내용을 입력해주세요.");
+                return;
+            }
             if (confirm("댓글을 등록하시겠습니까")) {
                 /* 댓글 등록 */
                 $.ajax({
@@ -251,6 +253,7 @@
                     },
                     success: function (result) {
                         if (result === 1) {
+                            alert("댓글이 등록되었습니다.");
                             location.reload();
                         } else {
                             alert("다시 시도해주세요");

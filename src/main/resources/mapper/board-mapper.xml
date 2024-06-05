@@ -76,10 +76,21 @@
     <select id="selectBoardNotice" resultType="com.example.kahyun.vo.NoticeBoardVo">
         SELECT
             ROW_NUMBER() over(ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC) AS rownum,
-                nb.*,
-            users.nickname
+            nb.*,
+            users.nickname,
+            cc.comment_count
         FROM notice_board AS nb
                  INNER JOIN users users ON users.seq = nb.user_seq
+                 LEFT JOIN (
+                    SELECT
+                        notice_board.seq,
+                        COUNT(nc.seq) AS comment_count
+                    FROM notice_comment AS nc
+                             INNER JOIN notice_board AS notice_board ON notice_board.seq = nc.board_seq
+                    WHERE nc.delete_yn = 'N'
+                    GROUP BY notice_board.seq
+                    ORDER BY notice_board.seq
+                ) AS cc ON cc.seq = nb.seq
         WHERE nb.delete_yn = 'N' AND nb.board_yn = 'Y'
         ORDER BY nb.importance, nb.update_dt DESC, nb.create_dt DESC
     </select>
