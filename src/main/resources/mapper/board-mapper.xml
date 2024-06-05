@@ -14,9 +14,18 @@
             board.update_dt,
             board.boardOption,
             board.view,
-            ROW_NUMBER() over(ORDER BY board.create_dt DESC) AS rownum
+            ROW_NUMBER() over(ORDER BY board.create_dt DESC) AS rownum,
+            cc.comment_count
         FROM board AS board
-        INNER JOIN users AS users ON users.seq = board.user_seq
+                INNER JOIN users AS users ON users.seq = board.user_seq
+                LEFT JOIN (
+                        SELECT board.seq, COUNT(bc.seq) AS comment_count
+                        FROM board_comment AS bc
+                        INNER JOIN board AS board ON board.seq = bc.board_seq
+                        WHERE bc.delete_yn = 'N'
+                        GROUP BY board.seq
+                        ORDER BY board.seq
+                        ) AS cc ON cc.seq = board.seq
         WHERE board.delete_yn = 'N'
         ORDER BY board.create_dt DESC
     </select>

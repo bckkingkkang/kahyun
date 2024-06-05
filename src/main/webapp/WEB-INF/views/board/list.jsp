@@ -59,7 +59,7 @@
             <c:forEach items="${list}" var="list">
                 <tr>
                     <td>${list.rownum}</td>
-                    <td><a style="color: black" href="detail/${list.seq}">${list.title}</a></td>
+                    <td><a style="color: black" href="detail/${list.seq}">${list.title}</a> <c:if test="${list.comment_count ne null}">(${list.comment_count})</c:if></td>
                     <td>${list.nickname}</td>
                     <td>${list.create_dt}</td>
                     <td>${list.update_dt}</td>
