@@ -74,4 +74,11 @@
         set accept_yn = 'N'
         WHERE seq = #{seq}
     </update>
+
+    <update id="deleteFileBoard">
+        update file_board
+        set
+            delete_yn = 'Y'
+        WHERE seq = #{seq}
+    </update>
 </mapper>

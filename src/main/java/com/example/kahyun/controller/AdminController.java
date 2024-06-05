@@ -57,16 +57,27 @@ public class AdminController {
         return "admin/accept_list";
     }
 
+    /* 관리자 > 게시글 승인 대기 리스트 > 공개로 변경 */
     @ResponseBody
-    @PostMapping("admin/changeOpen")
-    public int changeOpen(String seq) {
-        return adminMapper.changePublic(seq);
+    @PostMapping("admin/accept_list/change_public")
+    public int changePublic(String seq) {
+        int result = adminMapper.changePublic(seq);
+        return result;
+    }
+
+    /* 관리자 > 게시글 승인 대기 리스트 > 비공개로 변경 */
+    @ResponseBody
+    @PostMapping("admin/accept_list/change_private")
+    public int changePrivate(String seq) {
+        int result = adminMapper.changePrivate(seq);
+        return result;
     }
 
     @ResponseBody
-    @PostMapping("admin/changePrivate")
-    public int changePrivate(String seq) {
-        return adminMapper.changePrivate(seq);
+    @PostMapping("admin/accept_list/delete")
+    public int deleteFileBoard(String seq) {
+        int result = adminMapper.deleteFileBoard(seq);
+        return result;
     }
 }
 

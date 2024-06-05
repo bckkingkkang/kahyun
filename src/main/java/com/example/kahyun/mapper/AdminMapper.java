@@ -23,4 +23,5 @@ public interface AdminMapper {
 
     int changePublic(String seq);
     int changePrivate(String seq);
+    int deleteFileBoard(String seq);
 }
