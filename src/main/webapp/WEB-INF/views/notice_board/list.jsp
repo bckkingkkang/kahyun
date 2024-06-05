@@ -49,10 +49,10 @@
                 <td>${noticeBoardList.rownum}</td>
                 <c:choose>
                     <c:when test="${noticeBoardList.importance eq 'C'}">
-                        <td><a href="detail/${noticeBoardList.seq}" style="color:#000;">${noticeBoardList.title} </a></td>
+                        <td><a href="detail/${noticeBoardList.seq}" style="color:#000;">${noticeBoardList.title}</a>  <c:if test="${noticeBoardList.comment_count ne null}"><i class="bi bi-chat-left-text"></i></c:if></td>
                     </c:when>
                     <c:otherwise>
-                        <th><a href="detail/${noticeBoardList.seq}" ${noticeBoardList.importance eq 'A' ? 'style="color: red"' : ''}>${noticeBoardList.title} </a></th>
+                        <th><a href="detail/${noticeBoardList.seq}" ${noticeBoardList.importance eq 'A' ? 'style="color: red"' : ''}>${noticeBoardList.title}</a>  <c:if test="${noticeBoardList.comment_count ne null}"><i class="bi bi-chat-left-text"></i></c:if></th>
                     </c:otherwise>
                 </c:choose>
                 <td>${noticeBoardList.nickname}</td>

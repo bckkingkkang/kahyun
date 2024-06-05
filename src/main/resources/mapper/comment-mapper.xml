@@ -46,4 +46,47 @@
         WHERE seq = #{seq}
     </update>
 
+    <!-- 공지사항 상세에서 댓글 -->
+    <select id="selectNoticeBoardComment" parameterType="NoticeBoardVo">
+        SELECT nc.*,
+               users.nickname
+        FROM notice_comment AS nc
+                 INNER JOIN users AS users ON users.seq = nc.user_seq
+        WHERE nc.board_seq = #{seq}
+          AND nc.delete_yn = 'N'
+    </select>
+
+    <!-- 공지사항 댓글 등록 -->
+    <insert id="createNoticeBoardComment" parameterType="CommentVo">
+        INSERT INTO notice_comment (
+            user_seq,
+            content,
+            create_dt,
+            board_seq
+        ) VALUES (
+                 #{user_seq},
+                 #{content},
+                 CURRENT_TIME(),
+                 #{seq}
+        )
+    </insert>
+
+    <!-- 공지사항 게시판 댓글 수정 -->
+    <update id="editNoticeBoardComment" parameterType="CommentVo">
+        UPDATE notice_comment
+        SET
+            content = #{content},
+            update_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
+
+    <!-- 공지사항 게시판 댓글 삭제 -->
+    <update id="deleteNoticeBoardComment">
+        UPDATE notice_comment
+        SET
+            delete_yn = 'Y',
+            delete_dt = CURRENT_TIME()
+        WHERE seq = #{seq}
+    </update>
+
 </mapper>
