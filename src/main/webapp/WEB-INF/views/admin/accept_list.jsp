@@ -8,10 +8,7 @@
 </head>
 <style>
     table {
-        border: 2px solid; border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid; padding:10px 5px;
+        border: 1px solid; border-collapse: collapse;
     }
 </style>
 <body>
@@ -25,8 +22,8 @@
     </div>
 </header>
 <%--h2 class="text-center">게시글 승인 대기 리스트</h2>--%>
-<div>
-    <table class="table text-center">
+<div style="width: 80%; margin: auto" >
+    <table class="table text-center table-borderless">
         <thead>
         <tr>
             <th>No</th>
@@ -38,33 +35,42 @@
             <th>가격</th>
             <th>등록일</th>
             <th>삭제 여부</th>
-            <th>자세히 보기</th>
             <th>공개 여부</th>
             <th>변경</th>
+            <th>자세히 보기</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${list}" var="list">
             <tr>
-                <th>${list.rownum}</th>
-                <th>${list.title}</th>
-                <th>${list.nickname}</th>
-                <th>${list.user_id}</th>
-                <th>${list.orgName}</th>
-                <th>${list.price}</th>
-                <th>${list.create_dt}</th>
-                <th>${list.status}</th>
-                <th><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/file_board/detail/${list.seq}">자세히 보기</a></th>
+                <td>${list.rownum}</td>
+                <td>${list.title}</td>
+                <td>${list.nickname}</td>
+                <td>${list.user_id}</td>
+                <td>${list.orgName}</td>
+                <td>${list.price}</td>
+                <td>${list.create_dt}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${list.delete_yn eq 'N' }">
+                        <a class="btn btn-outline-dark mt-auto" onclick="deleteBtn(${list.seq})">삭제</a>
+                        </c:when>
+                        <c:otherwise>
+                            삭제
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <c:choose>
                     <c:when test="${list.accept_yn == 'Y'}">
-                        <th>공개</th>
-                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePrivate" value="${list.seq}">비공개로 전환</a></div></th>
+                        <td>공개</td>
+                        <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="changePrivate(${list.seq})" value="${list.seq}">비공개로 전환</a></div></td>
                     </c:when>
                     <c:otherwise>
-                        <th>비공개</th>
-                        <th><div class="text-center"><a class="btn btn-outline-dark mt-auto" id="changePublic" value="${list.seq}">공개로 전환</a></div></th>
+                        <td>비공개</td>
+                        <td><div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="changePublic(${list.seq})" value="${list.seq}">공개로 전환</a></div></td>
                     </c:otherwise>
                 </c:choose>
+                <td><a class="btn btn-outline-dark mt-auto" value="${list.seq}" href="/file_board/detail/${list.seq}">자세히 보기</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -85,47 +91,59 @@
 
     const $dom = {};
 
-    $(function() {
-        $dom.seq = $("#seq").val();
-        $dom.changePublic = $("#changePublic");
-        $dom.changePrivate = $("#changePrivate");
-
-        $dom.changePublic.on('click', function () {
-            if(confirm('해당 파일을 공개로 전환하시겠습니까?')) {
-                $.ajax({
-                    url : "/admin/changeOpen",
-                    type : "post",
-                    data : {seq : $("#seq").val()},
-                    success : function(result) {
-                        if(result===1) {
-                            alert("파일이 공개로 전환되었습니다.");
-                            location.reload();
-                        } else {
-                            alert("잠시 후 다시 시도해주세요");
-                        }
+   function changePublic(seq) {
+        if(confirm("해당 파일 게시글을 공개로 전환하시겠습니까?")) {
+            $.ajax({
+                url : "/admin/accept_list/change_public",
+                type : "post",
+                data : {seq : seq},
+                success : function(result) {
+                    if(result===1) {
+                        alert("해당 파일 게시글이 공개로 전환되었습니다.");
+                        location.reload();
+                    } else{
+                        alert("잠시 후 시도해주세요");
                     }
-                })
-            }
-        })
-
-        $dom.changePrivate.on('click', function () {
-            if(confirm('해당 파일을 비공개로 전환하시겠습니까?')) {
-                $.ajax({
-                    url : "/admin/changePrivate",
-                    type : "post",
-                    data : {seq : $("#seq").val()},
-                    success : function(result) {
-                        if(result===1) {
-                            alert("파일이 비공개로 전환되었습니다.");
-                            location.reload();
-                        } else {
-                            alert("잠시 후 다시 시도해주세요");
-                        }
+                }
+            })
+        }
+   }
+    function changePrivate(seq) {
+        if(confirm("해당 파일 게시글을 비공개로 전환하시겠습니까?")) {
+            $.ajax({
+                url : "/admin/accept_list/change_private",
+                type : "post",
+                data : {seq : seq},
+                success : function(result) {
+                    if(result===1) {
+                        alert("해당 파일 게시글이 비공개로 전환되었습니다.");
+                        location.reload();
+                    } else{
+                        alert("잠시 후 시도해주세요");
                     }
-                })
-            }
-        })
-    })
+                }
+            })
+        }
+    }
+
+    function deleteBtn(seq) {
+       if(confirm("해당 파일 게시글을 삭제하시겠습니까?")) {
+           $.ajax({
+               url : "/admin/accept_list/delete",
+               type : "post",
+               data : {seq : seq},
+               success : function(result) {
+                   if(result===1) {
+                       alert("해당 파일 게시글이 삭제되었습니다.");
+                       location.reload();
+                   } else {
+                       alert("잠시 후 시도해주세요.");
+                   }
+               }
+           })
+       }
+    }
+
 </script>
 </body>
 </html>

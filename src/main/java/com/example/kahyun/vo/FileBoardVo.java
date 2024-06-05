@@ -21,6 +21,7 @@ public class FileBoardVo {
     private int download_count;
     private String orgName;
     private String savedName;
+    private String delete_yn;
 
     /* 공지사항 표시 */
     private String importance;
