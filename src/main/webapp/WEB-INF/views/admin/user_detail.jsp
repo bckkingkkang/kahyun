@@ -59,7 +59,7 @@
                                     <th>${list.create_dt}</th>
                                     <th>${list.update_dt}</th>
                                     <th>${list.view}</th>
-                                    <th>${list.status == 'N' ? '정상' : '삭제'}</th>
+                                    <th>${list.delete_yn == 'N' ? '정상' : '삭제'}</th>
                                     <th>
                                         <c:choose>
                                             <c:when test="${list.status == 'N'}">
