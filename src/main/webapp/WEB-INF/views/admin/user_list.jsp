@@ -34,7 +34,7 @@
         <th>닉네임</th>
         <th>가입일자</th>
         <th>게시글 관리</th>
-        <th colspan="2">회원 상태</th>
+        <th<%-- colspan="2"--%>>회원 상태</th>
     </tr>
     </thead>
     <tbody>
@@ -46,8 +46,7 @@
             <th>${list.nickname}</th>
             <th>${list.reg_date}</th>
             <th><a class="btn btn-outline-dark mt-auto" href="user_detail/${list.seq}">등록 게시글</a></th>
-            <th>${list.status == 'N' ? '정상' : '탈퇴'}</th>
-            <th><a class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">회원 상태 변경</a></th>
+            <th><a class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">${list.status}</a></th>
         </tr>
     </c:forEach>
     </tbody>

@@ -30,7 +30,7 @@
             update_dt,
             view,
             ROW_NUMBER() over(ORDER BY seq) AS rownum,
-            status,
+            delete_yn,
             boardOption
         FROM board
         WHERE user_seq = #{seq}
@@ -40,7 +40,7 @@
     <select id="getAdmin">
         SELECT
             ROW_NUMBER() over(ORDER BY seq) AS rownum,
-                seq,
+            seq,
             username,
             user_id,
             nickname,

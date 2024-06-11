@@ -18,6 +18,7 @@ public class BoardVo {
     private String boardOption;
     private String auth;
     private String comment_count;
+    private String status;
 
     /* 공지사항 표시 */
     private String importance;
