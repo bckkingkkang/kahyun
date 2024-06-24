@@ -156,7 +156,7 @@
             }
             if(confirm("가입하시겠습니까")) {
                 $.ajax({
-                    url:"signup_ajax",
+                    url:"/user/signup",
                     type : "post",
                     data : {
                         username : $("#username").val(),
